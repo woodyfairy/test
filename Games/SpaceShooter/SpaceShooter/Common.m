@@ -10,3 +10,7 @@
 
 @implementation Common
 @end
+
+float getRandom(){
+    return (float)random()/RAND_MAX;
+}

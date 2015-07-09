@@ -63,6 +63,8 @@
     node.physicsBody.contactTestBitMask = PhysicType_enermy;
     
     node.fireInterval = 0.1f;
+    node.fireLevel = 0;
+    node.fireDamage = 1;
     
     return node;
 }

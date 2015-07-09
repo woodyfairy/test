@@ -10,7 +10,8 @@
 #import <UIKit/UIKit.h>
 
 enum PhysicType{
-    PhysicType_edge = 1 << 0,
+    PhysicType_none = 0,
+    PhysicType_edge = 1, //边界
     PhysicType_player = 1 << 1,
     PhysicType_bullet = 1 << 2,
     PhysicType_enermy = 1 << 3,
@@ -19,3 +20,5 @@ enum PhysicType{
 @interface Common : NSObject
 
 @end
+
+float getRandom();

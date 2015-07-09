@@ -16,4 +16,6 @@
 @property (assign, nonatomic) int maxLight;
 @property (strong, nonatomic) SKEmitterNode *emitter;
 @property (assign, nonatomic) float fireInterval;
+@property (assign, nonatomic) int fireLevel;
+@property (assign, nonatomic) int fireDamage;
 @end

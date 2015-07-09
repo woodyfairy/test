@@ -8,13 +8,12 @@
 
 #import "GameScene.h"
 #import "Common.h"
+#import "DataController.h"
+#import "PlayerSprite.h"
+#import "SpawnController.h"
+#import "EnemyBase.h"
 
 @implementation GameScene
-
-static GameScene *instance = nil;
-+(GameScene *)instance{
-    return instance;
-}
 
 -(void)didMoveToView:(SKView *)view {
     self.physicsWorld.contactDelegate = self;
@@ -58,11 +57,16 @@ static GameScene *instance = nil;
     [gird setZPosition:-1];
     [gird setPosition:CGPointMake(-self.worldSize.width/2, -self.worldSize.height/2)];
     
+    //玩家
     self.player = [PlayerSprite create];
     [self.player setZPosition:0];
     [self.worldPanel addChild:self.player];
     [self.player setPosition:CGPointZero];
     [self.player.emitter setTargetNode:self.worldPanel];
+    
+    //敌人控制
+    self.spawnController = [[SpawnController alloc] initWithLevel:0 Scene:self];
+    self.arrayEnemies = [[NSMutableArray alloc] init];
     
     /* Setup your scene here */
 //    SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -149,20 +153,28 @@ CFTimeInterval countTime = 0;
         countTime += delta;
         if (countTime >= self.player.fireInterval) {
             countTime = 0;
-            float angRange = 0.03f;
+            //玩家子弹
+            int bulletNum = 1;
+            float angRange = 0;
+            if (self.player.fireLevel == 1) {
+                bulletNum = 3;
+                angRange = 0.03f;
+            }
             float anguler = self.player.zRotation - angRange/2;
             if (self.rightController.isTouching) {
                 anguler = -self.rightController.arc - angRange/2;
             }else{
                 self.rightController.arc = -anguler;
             }
-            for (int i = 0; i < 3; i ++) {
+            for (int i = 0; i < bulletNum; i ++) {
                 SKSpriteNode *bullet = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImage:[UIImage imageNamed:@"fire"]]];
+                [bullet setColorBlendFactor:1];
+                [bullet setColor:[UIColor colorWithRed:1 green:1 blue:0.9 alpha:1]];
                 CGMutablePathRef path = CGPathCreateMutable();
                 CGPathMoveToPoint(path, NULL, -7, 0);
                 CGPathAddLineToPoint(path, NULL, -2, 4);
-                CGPathAddLineToPoint(path, NULL, 0, 5);
-                CGPathAddLineToPoint(path, NULL, 2, 4);
+                CGPathAddLineToPoint(path, NULL, 5, 0);
+                CGPathAddLineToPoint(path, NULL, -2, -4);
                 CGPathMoveToPoint(path, NULL, -7, 0);
                 bullet.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
                 bullet.physicsBody.categoryBitMask = PhysicType_bullet;
@@ -177,6 +189,17 @@ CFTimeInterval countTime = 0;
                 anguler += angRange/2;
             }
         }
+        //敌人控制
+        if (self.spawnController) {
+            [self.spawnController updateWithDelta:delta];
+        }
+        for (EnemyBase *enemy in self.arrayEnemies) {
+            if ([enemy respondsToSelector:@selector(updateWithDelta:)]) {
+                [enemy updateWithDelta:delta];
+            }
+        }
+        //test
+        //NSLog(@"dataController:%@", [[DataController instance] log]);
     }
     
     preTime = currentTime;
