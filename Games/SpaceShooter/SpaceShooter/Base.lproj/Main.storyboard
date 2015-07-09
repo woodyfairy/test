@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Game View Controller-->
+        <scene sceneID="tXr-a1-R10">
+            <objects>
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="maK-i9-Uhn"/>
+                        <viewControllerLayoutGuide type="bottom" id="khH-OB-KpY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTu-w1-9c4">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nc0-AN-w4L" customClass="GameControllerView">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckb-jP-cZs" customClass="GameControllerView">
+                                        <rect key="frame" x="300" y="0.0" width="300" height="600"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ckb-jP-cZs" secondAttribute="trailing" id="0fu-JU-Zmc"/>
+                                    <constraint firstItem="ckb-jP-cZs" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" id="HqO-kc-vMn"/>
+                                    <constraint firstItem="nc0-AN-w4L" firstAttribute="leading" secondItem="XTu-w1-9c4" secondAttribute="leading" id="Nu4-gN-G6W"/>
+                                    <constraint firstItem="nc0-AN-w4L" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" id="f0P-ag-dgp"/>
+                                    <constraint firstAttribute="bottom" secondItem="nc0-AN-w4L" secondAttribute="bottom" id="i1e-UD-Q0z"/>
+                                    <constraint firstAttribute="width" secondItem="ckb-jP-cZs" secondAttribute="width" multiplier="2" id="mqN-gX-Fco"/>
+                                    <constraint firstAttribute="width" secondItem="nc0-AN-w4L" secondAttribute="width" multiplier="2" id="qjZ-KZ-5oH"/>
+                                    <constraint firstAttribute="bottom" secondItem="ckb-jP-cZs" secondAttribute="bottom" id="syO-VS-irB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XTu-w1-9c4" secondAttribute="trailing" id="5Ew-gc-LgL"/>
+                            <constraint firstItem="XTu-w1-9c4" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="Sjj-oy-xbS"/>
+                            <constraint firstItem="khH-OB-KpY" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="bottom" id="XUS-pG-DCy"/>
+                            <constraint firstItem="XTu-w1-9c4" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="drR-sj-dVn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="LeftControllerView" destination="nc0-AN-w4L" id="thh-hD-Pc3"/>
+                        <outlet property="RightControllerView" destination="ckb-jP-cZs" id="FOE-ed-4hF"/>
+                        <outlet property="ViewUI" destination="XTu-w1-9c4" id="Dtw-y9-KKb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="25" y="408"/>
+        </scene>
+    </scenes>
+</document>
