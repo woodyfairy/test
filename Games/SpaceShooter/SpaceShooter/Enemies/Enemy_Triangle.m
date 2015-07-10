@@ -36,12 +36,14 @@
     
     CGPathRelease(path);
     
-    //自定义
-    self.physicsBody.angularVelocity = getRandom() + 1.5f;
+    //自定义部分
+    [self initData];
 }
 -(void)initData{
     self.score = 1;
     self.health = 1;
+    self.type = EnemyType_Triangle;
+    self.physicsBody.angularVelocity = getRandom() + 1.5f;
 }
 -(void)updateWithDelta:(NSTimeInterval)delta{
     if (self.isActive) {

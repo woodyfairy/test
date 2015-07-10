@@ -9,12 +9,20 @@
 #import <SpriteKit/SpriteKit.h>
 #import "GameScene.h"
 
+typedef enum {
+    EnemyType_Triangle = 1,
+    EnemyType_Box = 2,
+    EnemyType_Circle = 3,
+}EnemyType;
+
+
 @interface EnemyBase : SKSpriteNode
 @property (assign, readonly) BOOL isActive;//是否激活？（在刷新阶段、组群中不激活）
 @property (assign) float moveSpeed;
 @property (assign) float moveAngular;
 @property (assign) int score;
 @property (assign) int health;
+@property (assign) EnemyType type;
 //刷在场景中
 @property (weak, nonatomic) GameScene *currentScene;
 -(void) spawnInScene:(GameScene *) scene onPosition:(CGPoint) pos;

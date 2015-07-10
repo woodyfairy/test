@@ -36,7 +36,6 @@
 
 
 -(void)spawn{
-    [self initData];
     [self setAlpha:0];
     float timeInterval = 0.1f;
     float count = 5;
