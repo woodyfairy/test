@@ -27,6 +27,7 @@
     self.physicsBody.categoryBitMask = PhysicType_enermy;
     self.physicsBody.collisionBitMask = PhysicType_edge;
     self.physicsBody.contactTestBitMask = PhysicType_player | PhysicType_bullet;
+    self.physicsBody.fieldBitMask = FieldType_all - FieldType_player;
 }
 -(void)initData{
     self.score = 1;

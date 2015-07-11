@@ -45,7 +45,7 @@
     //等级增长
     self.mainTimer += delta;
     //NSLog(@"timer:%f",self.timer);
-    if (self.mainTimer >= 60) {
+    if (self.mainTimer >= 30) {
         //NSLog(@"spawn!!!");
         self.mainTimer = 0;
         if (_currentLevel < _maxLevel) {
@@ -76,7 +76,7 @@
         }
         else if (i == 2){
             //第二种刷新:四个角刷新大量的一种
-            float freshTime = 20;
+            float freshTime = 15;
             if (timerValue >= freshTime) {
                 timerValue = 0;
                 

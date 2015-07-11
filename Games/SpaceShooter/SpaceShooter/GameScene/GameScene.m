@@ -67,6 +67,8 @@
     //敌人控制
     self.spawnController = [[SpawnController alloc] initWithLevel:1 Scene:self];
     self.arrayEnemies = [[NSMutableArray alloc] init];
+    self.arrayPoints = [[NSMutableArray alloc] init];
+    self.arrayGolds = [[NSMutableArray alloc] init];
     
     //UI
     self.score = 0;
@@ -186,6 +188,7 @@ CFTimeInterval countTime = 0;
                 bullet.physicsBody.categoryBitMask = PhysicType_bullet;
                 bullet.physicsBody.collisionBitMask = 0;
                 bullet.physicsBody.contactTestBitMask = PhysicType_edge | PhysicType_enermy;
+                bullet.physicsBody.fieldBitMask = FieldType_all - FieldType_player;
                 CGPathRelease(path);
                 bullet.zRotation = anguler;
                 bullet.position = CGPointMake(self.player.position.x + 15*cos(anguler), self.player.position.y + 15*sin(anguler));
@@ -213,21 +216,45 @@ CFTimeInterval countTime = 0;
 
 -(void)didBeginContact:(SKPhysicsContact *)contact{
     if (contact.bodyA.categoryBitMask == PhysicType_player || contact.bodyB.categoryBitMask == PhysicType_player) {
-        //玩家碰撞，死掉
-        for (int i = (int)self.arrayEnemies.count - 1; i >= 0; i --) {
-            EnemyBase *enemy = [self.arrayEnemies objectAtIndex:i];
-            SKEmitterNode *emitter = [SKEmitterNode nodeWithFileNamed:@"EnemyExplode"];
-            emitter.position = [self.worldPanel convertPoint:contact.contactPoint fromNode:self];
-            [emitter setParticleColorSequence:nil];
-            [emitter setParticleColor:enemy.color];
-            [self.worldPanel addChild:emitter];
-            [emitter runAction:[SKAction waitForDuration:0.5f] completion:^{
-                [emitter removeFromParent];
-            }];
-            [self.arrayEnemies removeObject:enemy];
-            [enemy removeFromParent];
+        SKPhysicsBody *player = nil;
+        SKPhysicsBody *other = nil;
+        if (contact.bodyA.categoryBitMask == PhysicType_player) {
+            player = contact.bodyA;
+            other = contact.bodyB;
+        }else if (contact.bodyB.categoryBitMask == PhysicType_player) {
+            player = contact.bodyB;
+            other = contact.bodyA;
         }
-        self.lives --;
+        if (other == nil) {
+            return;
+        }
+        if (other.node.physicsBody.categoryBitMask == PhysicType_enermy) {
+            //玩家碰撞，死掉
+            for (int i = (int)self.arrayEnemies.count - 1; i >= 0; i --) {
+                EnemyBase *enemy = [self.arrayEnemies objectAtIndex:i];
+                SKEmitterNode *emitter = [SKEmitterNode nodeWithFileNamed:@"EnemyExplode"];
+                emitter.position = [self.worldPanel convertPoint:enemy.position fromNode:enemy.parent];
+                [emitter setParticleColorSequence:nil];
+                [emitter setParticleColor:enemy.color];
+                [self.worldPanel addChild:emitter];
+                [emitter runAction:[SKAction waitForDuration:0.5f] completion:^{
+                    [emitter removeFromParent];
+                }];
+                [self.arrayEnemies removeObject:enemy];
+                [enemy removeFromParent];
+            }
+            for (int i = (int)self.arrayPoints.count - 1; i >= 0; i --) {
+                SKSpriteNode *point = [self.arrayPoints objectAtIndex:i];
+                [point removeFromParent];
+                [self.arrayPoints removeObject:point];
+            }
+            self.lives --;
+        }else if (other.node.physicsBody.categoryBitMask == PhysicType_point){
+            //拾取点点
+            [other.node removeFromParent];
+            self.multiple ++;
+        }
+        
         [self updateUI];
         return;
     }
@@ -269,6 +296,7 @@ CFTimeInterval countTime = 0;
             //NSLog(@"empty");
             return;
         }
+        [bullet.node removeFromParent];
         if (enemy.group) {
             //在组中
             SKNode *group = enemy.group;
@@ -283,7 +311,7 @@ CFTimeInterval countTime = 0;
         enemy.health -= self.player.fireDamage;
         if (enemy.health <= 0) {
             //击破
-            self.score += enemy.score;
+            self.score += enemy.score * self.multiple;
             [self updateUI];
             SKEmitterNode *emitter = [SKEmitterNode nodeWithFileNamed:@"EnemyExplode"];
             emitter.position = [self.worldPanel convertPoint:contact.contactPoint fromNode:self];
@@ -294,13 +322,41 @@ CFTimeInterval countTime = 0;
                 [emitter removeFromParent];
             }];
             
+            //掉落点点
+            SKSpriteNode *point = [SKSpriteNode spriteNodeWithImageNamed:@"star5S"];
+            [self.worldPanel addChild:point];
+            [self.arrayPoints addObject:point];
+            [point setPosition:enemy.position];
+            [point setColorBlendFactor:1];
+            [point setColor:[UIColor colorWithRed:1 green:1 blue:0.8f alpha:1]];
+            [point setBlendMode:SKBlendModeAdd];
+            [point setAnchorPoint:CGPointMake(0.447f, 0.5f)];
+            point.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:80];
+            point.physicsBody.restitution = 0;
+            point.physicsBody.linearDamping = 0;
+            point.physicsBody.angularDamping = 0;
+            point.physicsBody.friction = 0;
+            point.physicsBody.categoryBitMask = PhysicType_point;
+            point.physicsBody.collisionBitMask = PhysicType_edge;
+            point.physicsBody.contactTestBitMask = PhysicType_player;
+            point.physicsBody.fieldBitMask = FieldType_player;
+            point.physicsBody.angularVelocity = getRandom() * 0.5f;
+            [point setScale:0.2f];
+            SKAction *flash = [SKAction sequence:@[[SKAction fadeAlphaTo:0.35f duration:0.25f], [SKAction fadeAlphaTo:1 duration:0.25f]]];
+            SKAction *repeat = [SKAction repeatAction:flash count:6];
+            [point runAction:[SKAction sequence:@[repeat, [SKAction fadeOutWithDuration:1]]] completion:^{
+                [point removeFromParent];
+                [self.arrayPoints removeObject:point];
+            }];
+            
+            //移除
             [self.arrayEnemies removeObject:enemy];
             [enemy removeFromParent];
+            
         }else{
+            //bullet已删
             //[enemy.physicsBody applyImpulse:CGVectorMake(bullet.node.physicsBody.velocity.dx * 0.001, bullet.node.physicsBody.velocity.dy * 0.001) atPoint:[self.worldPanel convertPoint:contact.contactPoint fromNode:self]];
         }
-        [bullet.node removeFromParent];
-        
         
     }
 }

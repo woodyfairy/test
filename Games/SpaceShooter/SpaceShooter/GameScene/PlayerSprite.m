@@ -60,12 +60,21 @@
     [node.emitter setPosition:CGPointMake(-15, 0)];
     node.physicsBody.categoryBitMask = PhysicType_player;
     node.physicsBody.collisionBitMask = PhysicType_edge;
-    node.physicsBody.contactTestBitMask = PhysicType_enermy;
+    node.physicsBody.contactTestBitMask = PhysicType_enermy | PhysicType_point | PhysicType_gold;
+    node.physicsBody.fieldBitMask = FieldType_all - FieldType_player;
     
     node.fireInterval = 0.1f;
     node.fireLevel = 0;
     node.fireLevel = 1;//test
     node.fireDamage = 1;
+    
+    //加一个引力吸收
+    SKFieldNode *field = [SKFieldNode radialGravityField];
+    [node addChild:field];
+    field.region = [[SKRegion alloc] initWithRadius:75];
+    field.falloff = 3;
+    field.strength = 1;
+    field.categoryBitMask = FieldType_player;
     
     return node;
 }

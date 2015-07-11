@@ -28,12 +28,14 @@
     self.physicsBody.categoryBitMask = PhysicType_enermy;
     self.physicsBody.collisionBitMask = 0;
     self.physicsBody.contactTestBitMask = PhysicType_player | PhysicType_bullet;
+    self.physicsBody.fieldBitMask = FieldType_all - FieldType_player;
 }
 -(void)initData{
     self.score = 1;
     self.health = 1;
     
     self.physicsBody.restitution = 1;
+    self.physicsBody.angularVelocity = getRandom() * 0.5f;
     self.moveSpeed = 100 + getRandom() * 100;
     self.moveAngular = getRandom() * M_PI * 2;
     self.physicsBody.velocity = CGVectorMake(cosf(self.moveAngular) * self.moveSpeed, sinf(self.moveAngular) * self.moveSpeed);

@@ -7,6 +7,7 @@
 //
 
 #import "EnemyBase.h"
+#import "Common.h"
 
 @implementation EnemyBase
 -(void)spawnInScene:(GameScene *)scene onPosition:(CGPoint)pos{
@@ -33,7 +34,7 @@
     [self setPosition:pos];
     _isActive = YES;
     [self initData];
-    self.physicsBody.fieldBitMask = 1;
+    self.physicsBody.fieldBitMask = FieldType_all - FieldType_player;
     SKAction *action = [SKAction moveBy:CGVectorMake(toPos.x - pos.x, toPos.y - pos.y) duration:0.8f];
     action.timingMode = SKActionTimingEaseOut;
     [self runAction:action];
@@ -55,7 +56,7 @@
             _isActive = YES;
             [self initData];
         }else{
-            self.physicsBody.fieldBitMask = 0;
+            self.physicsBody.fieldBitMask = FieldType_none;
         }
     }];
     

@@ -173,10 +173,10 @@
 				884982ED1B4EBFE800C5EBB9 /* GameScene.h */,
 				884982EE1B4EBFE800C5EBB9 /* GameScene.m */,
 				884982EF1B4EBFE800C5EBB9 /* GameScene.sks */,
-				884982F01B4EBFE800C5EBB9 /* PlayerSprite.h */,
-				884982F11B4EBFE800C5EBB9 /* PlayerSprite.m */,
 				884982F51B4EC3FD00C5EBB9 /* SpawnController.h */,
 				884982F61B4EC3FD00C5EBB9 /* SpawnController.m */,
+				884982F01B4EBFE800C5EBB9 /* PlayerSprite.h */,
+				884982F11B4EBFE800C5EBB9 /* PlayerSprite.m */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
