@@ -193,7 +193,12 @@ CFTimeInterval countTime = 0;
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact{
+    if (contact.bodyA == nil || contact.bodyB == nil) {
+        //同时有1对n的碰撞已经删掉了
+        return;
+    }
     if (contact.bodyA.categoryBitMask == PhysicType_player || contact.bodyB.categoryBitMask == PhysicType_player) {
+        //玩家碰撞
         SKPhysicsBody *player = nil;
         SKPhysicsBody *other = nil;
         if (contact.bodyA.categoryBitMask == PhysicType_player) {
@@ -281,109 +286,121 @@ CFTimeInterval countTime = 0;
         }
         
         [self updateUI];
-        return;
-    }
-    
-    SKPhysicsBody *bullet = nil;
-    SKPhysicsBody *other = nil;
-    if (contact.bodyA.categoryBitMask == PhysicType_bullet) {
-        bullet = contact.bodyA;
-        other = contact.bodyB;
-    }else if (contact.bodyB.categoryBitMask == PhysicType_bullet){
-        bullet = contact.bodyB;
-        other = contact.bodyA;
-    }
-    //NSLog(@"bulletNode:%@", bullet.node);
-    if (other.categoryBitMask == PhysicType_edge) {
-        SKEmitterNode *emitter = [SKEmitterNode nodeWithFileNamed:@"BulletFlash"];
-        emitter.position = [self.worldPanel convertPoint:contact.contactPoint fromNode:self];
-        [self.worldPanel addChild:emitter];
-        int inset = 10;
-        float angular = bullet.node.zRotation;
-        if (emitter.position.x < -self.worldSize.width/2 + inset || emitter.position.x > self.worldSize.width/2 - inset) {
-            angular = M_PI - angular;
+    }else if (contact.bodyA.categoryBitMask == PhysicType_bullet || contact.bodyB.categoryBitMask == PhysicType_bullet) {
+        //子弹碰撞
+        SKPhysicsBody *bullet = nil;
+        SKPhysicsBody *other = nil;
+        if (contact.bodyA.categoryBitMask == PhysicType_bullet) {
+            bullet = contact.bodyA;
+            other = contact.bodyB;
+        }else if (contact.bodyB.categoryBitMask == PhysicType_bullet){
+            bullet = contact.bodyB;
+            other = contact.bodyA;
         }
-        if (emitter.position.y < -self.worldSize.height/2 + inset || emitter.position.y > self.worldSize.height/2 - inset) {
-            angular = - angular;
-        }
-//        NSLog(@"pos:%f,%f", emitter.position.x, emitter.position.y);
-//        NSLog(@"bulletRotation:%f",bullet.node.zRotation);
-//        NSLog(@"angular:%f", angular);
-        [emitter setEmissionAngle:angular];
-        [emitter runAction:[SKAction waitForDuration:0.5f] completion:^{
-            [emitter removeFromParent];
-        }];
-        [bullet.node removeFromParent];
-    }else if (other.categoryBitMask == PhysicType_enermy){
-        EnemyBase *enemy = (EnemyBase *)other.node;
-        if (enemy == nil) {
-            //碰撞前已经有其他子弹碰撞掉了
-            //NSLog(@"empty");
-            return;
-        }
-        [bullet.node removeFromParent];
-        if (enemy.group) {
-            //在组中
-            SKNode *group = enemy.group;
-            for (EnemyBase *child in group.children) {
-                if ([child.class isSubclassOfClass:[EnemyBase class]]) {
-                    [child breakInGroup:enemy.group toScene:self];
-                }
-            }
-            [group removeFromParent];
-            return;
-        }
-        enemy.health -= self.player.fireDamage;
-        if (enemy.health <= 0) {
-            //击破
-            self.score += enemy.score * self.multiple;
-            [self updateUI];
-            SKEmitterNode *emitter = [SKEmitterNode nodeWithFileNamed:@"EnemyExplode"];
+        //NSLog(@"bulletNode:%@", bullet.node);
+        if (other.categoryBitMask == PhysicType_edge) {
+            //边界
+            SKEmitterNode *emitter = [SKEmitterNode nodeWithFileNamed:@"BulletFlash"];
             emitter.position = [self.worldPanel convertPoint:contact.contactPoint fromNode:self];
-            [emitter setParticleColorSequence:nil];
-            [emitter setParticleColor:enemy.color];
             [self.worldPanel addChild:emitter];
+            int inset = 10;
+            float angular = bullet.node.zRotation;
+            if (emitter.position.x < -self.worldSize.width/2 + inset || emitter.position.x > self.worldSize.width/2 - inset) {
+                angular = M_PI - angular;
+            }
+            if (emitter.position.y < -self.worldSize.height/2 + inset || emitter.position.y > self.worldSize.height/2 - inset) {
+                angular = - angular;
+            }
+            //        NSLog(@"pos:%f,%f", emitter.position.x, emitter.position.y);
+            //        NSLog(@"bulletRotation:%f",bullet.node.zRotation);
+            //        NSLog(@"angular:%f", angular);
+            [emitter setEmissionAngle:angular];
             [emitter runAction:[SKAction waitForDuration:0.5f] completion:^{
                 [emitter removeFromParent];
             }];
-            
-            //掉落点点
-            SKSpriteNode *point = [SKSpriteNode spriteNodeWithImageNamed:@"star5S"];
-            [self.worldPanel addChild:point];
-            [self.arrayPoints addObject:point];
-            [point setPosition:enemy.position];
-            [point setColorBlendFactor:1];
-            [point setColor:[UIColor colorWithRed:1 green:1 blue:0.8f alpha:1]];
-            [point setBlendMode:SKBlendModeAdd];
-            [point setAnchorPoint:CGPointMake(0.447f, 0.5f)];
-            point.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:80];
-            point.physicsBody.restitution = 0;
-            point.physicsBody.linearDamping = 0;
-            point.physicsBody.angularDamping = 0;
-            point.physicsBody.friction = 0;
-            point.physicsBody.categoryBitMask = PhysicType_point;
-            point.physicsBody.collisionBitMask = PhysicType_edge;
-            point.physicsBody.contactTestBitMask = PhysicType_player;
-            point.physicsBody.fieldBitMask = FieldType_player;
-            point.physicsBody.angularVelocity = getRandom() * 0.5f;
-            [point setScale:0.2f];
-            SKAction *flash = [SKAction sequence:@[[SKAction fadeAlphaTo:0.35f duration:0.25f], [SKAction fadeAlphaTo:1 duration:0.25f]]];
-            SKAction *repeat = [SKAction repeatAction:flash count:6];
-            [point runAction:[SKAction sequence:@[repeat, [SKAction fadeOutWithDuration:1]]] completion:^{
-                [point removeFromParent];
-                [self.arrayPoints removeObject:point];
-            }];
-            
-            //移除
-            [self.arrayEnemies removeObject:enemy];
-            [enemy removeFromParent];
-            
-        }else{
-            //bullet已删
-            //[enemy.physicsBody applyImpulse:CGVectorMake(bullet.node.physicsBody.velocity.dx * 0.001, bullet.node.physicsBody.velocity.dy * 0.001) atPoint:[self.worldPanel convertPoint:contact.contactPoint fromNode:self]];
+            [bullet.node removeFromParent];
+        }else if (other.categoryBitMask == PhysicType_enermy){
+            EnemyBase *enemy = (EnemyBase *)other.node;
+            if (enemy == nil) {
+                //碰撞前已经有其他子弹碰撞掉了
+                //NSLog(@"empty");
+                return;
+            }
+            [bullet.node removeFromParent];
+            if (enemy.group) {
+                //在组中
+                SKNode *group = enemy.group;
+                for (EnemyBase *child in group.children) {
+                    if ([child.class isSubclassOfClass:[EnemyBase class]]) {
+                        [child breakInGroup:enemy.group toScene:self];
+                    }
+                }
+                [group removeFromParent];
+                return;
+            }
+            enemy.health -= self.player.fireDamage;
+            if (enemy.health <= 0) {
+                //击破
+                self.score += enemy.score * self.multiple;
+                [self updateUI];
+                SKEmitterNode *emitter = [SKEmitterNode nodeWithFileNamed:@"EnemyExplode"];
+                emitter.position = [self.worldPanel convertPoint:contact.contactPoint fromNode:self];
+                [emitter setParticleColorSequence:nil];
+                [emitter setParticleColor:enemy.color];
+                [self.worldPanel addChild:emitter];
+                [emitter runAction:[SKAction waitForDuration:0.5f] completion:^{
+                    [emitter removeFromParent];
+                }];
+                
+                //掉落点点
+                SKSpriteNode *point = [SKSpriteNode spriteNodeWithImageNamed:@"star5S"];
+                [self.worldPanel addChild:point];
+                [self.arrayPoints addObject:point];
+                [point setPosition:enemy.position];
+                [point setColorBlendFactor:1];
+                [point setColor:[UIColor colorWithRed:1 green:1 blue:0.8f alpha:1]];
+                [point setBlendMode:SKBlendModeAdd];
+                [point setAnchorPoint:CGPointMake(0.447f, 0.5f)];
+                point.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:80];
+                point.physicsBody.restitution = 0;
+                point.physicsBody.linearDamping = 0;
+                point.physicsBody.angularDamping = 0;
+                point.physicsBody.friction = 0;
+                point.physicsBody.categoryBitMask = PhysicType_point;
+                point.physicsBody.collisionBitMask = PhysicType_edge;
+                point.physicsBody.contactTestBitMask = PhysicType_player;
+                point.physicsBody.fieldBitMask = FieldType_player;
+                point.physicsBody.angularVelocity = getRandom() * 0.5f;
+                [point setScale:0.2f];
+                SKAction *flash = [SKAction sequence:@[[SKAction fadeAlphaTo:0.35f duration:0.25f], [SKAction fadeAlphaTo:1 duration:0.25f]]];
+                SKAction *repeat = [SKAction repeatAction:flash count:6];
+                [point runAction:[SKAction sequence:@[repeat, [SKAction fadeOutWithDuration:1]]] completion:^{
+                    [point removeFromParent];
+                    [self.arrayPoints removeObject:point];
+                }];
+                
+                //移除
+                [self.arrayEnemies removeObject:enemy];
+                [enemy removeFromParent];
+                
+            }else{
+                //bullet已删
+                //[enemy.physicsBody applyImpulse:CGVectorMake(bullet.node.physicsBody.velocity.dx * 0.001, bullet.node.physicsBody.velocity.dy * 0.001) atPoint:[self.worldPanel convertPoint:contact.contactPoint fromNode:self]];
+            }
         }
-        
     }
+//    else if (contact.bodyA.categoryBitMask == PhysicType_ || contact.bodyB.categoryBitMask == PhysicType_bullet) {
+//        //黑洞碰撞
+//        SKPhysicsBody *bullet = nil;
+//        SKPhysicsBody *other = nil;
+//        if (contact.bodyA.categoryBitMask == PhysicType_bullet) {
+//            bullet = contact.bodyA;
+//            other = contact.bodyB;
+//        }else if (contact.bodyB.categoryBitMask == PhysicType_bullet){
+//            bullet = contact.bodyB;
+//            other = contact.bodyA;
+//        }
+//    }
 }
 
 @end
