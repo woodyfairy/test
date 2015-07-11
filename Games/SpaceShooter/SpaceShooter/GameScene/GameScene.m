@@ -9,13 +9,13 @@
 #import "GameScene.h"
 #import "Common.h"
 #import "DataController.h"
-#import "PlayerSprite.h"
 #import "SpawnController.h"
 #import "EnemyBase.h"
 
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
+    [self setBackgroundColor:[UIColor colorWithWhite:0.2 alpha:1]];
     self.physicsWorld.contactDelegate = self;
     self.worldSize = CGSizeMake(1500, 800);
     self.worldPanel = [SKShapeNode shapeNodeWithRectOfSize:self.worldSize];
@@ -51,7 +51,7 @@
     }
     SKShapeNode *gird = [SKShapeNode shapeNodeWithPath:path];
     [gird setLineWidth:0.5f];
-    [gird setStrokeColor:[UIColor colorWithWhite:1 alpha:0.2f]];
+    [gird setStrokeColor:[UIColor colorWithWhite:0 alpha:0.2f]];
     CGPathRelease(path);
     [self.worldPanel addChild:gird];
     [gird setZPosition:-1];
@@ -65,15 +65,21 @@
     [self.player.emitter setTargetNode:self.worldPanel];
     
     //敌人控制
-    self.spawnController = [[SpawnController alloc] initWithLevel:0 Scene:self];
+    self.spawnController = [[SpawnController alloc] initWithLevel:1 Scene:self];
     self.arrayEnemies = [[NSMutableArray alloc] init];
     
-    /* Setup your scene here */
-//    SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-//    myLabel.text = @"Hello, World!";
-//    myLabel.fontSize = 65;
-//    myLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-//    [self addChild:myLabel];
+    //UI
+    self.score = 0;
+    self.multiple = 1;
+    self.lives = 1;
+    self.bombs = 1;
+    [self updateUI];
+}
+-(void)updateUI{
+    [self.scoreLabel setText:[NSString stringWithFormat:@"Score:%ld", self.score]];
+    [self.multipleLabel setText:[NSString stringWithFormat:@"x%d", self.multiple]];
+    [self.livesLabel setText:[NSString stringWithFormat:@"x%d", self.lives]];
+    [self.bombsLabel setText:[NSString stringWithFormat:@"x%d", self.bombs]];
 }
 //-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 //    /* Called when a touch begins */
@@ -119,7 +125,7 @@ CFTimeInterval countTime = 0;
         [self.player.emitter setParticleBirthRate:shouldBirth];
     }
     //NSLog(@"brithRage:%f", self.player.emitter.particleBirthRate);
-    self.player.emitter.particleRotation = self.player.zRotation + M_PI/2;
+    self.player.emitter.particleRotation = self.player.zRotation + M_PI_2;
     self.player.emitter.emissionAngle = self.player.zRotation + M_PI;
     //NSLog(@"speed:%f,%f", self.player.physicsBody.velocity.dx, self.player.physicsBody.velocity.dy);
 //    if (self.player.position.x < -self.worldSize.width/2) {
@@ -169,7 +175,7 @@ CFTimeInterval countTime = 0;
             for (int i = 0; i < bulletNum; i ++) {
                 SKSpriteNode *bullet = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImage:[UIImage imageNamed:@"fire"]]];
                 [bullet setColorBlendFactor:1];
-                [bullet setColor:[UIColor colorWithRed:1 green:1 blue:0.9 alpha:1]];
+                [bullet setColor:[UIColor colorWithRed:1 green:1 blue:0.75 alpha:1]];
                 CGMutablePathRef path = CGPathCreateMutable();
                 CGPathMoveToPoint(path, NULL, -7, 0);
                 CGPathAddLineToPoint(path, NULL, -2, 4);
@@ -206,6 +212,26 @@ CFTimeInterval countTime = 0;
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact{
+    if (contact.bodyA.categoryBitMask == PhysicType_player || contact.bodyB.categoryBitMask == PhysicType_player) {
+        //玩家碰撞，死掉
+        for (int i = (int)self.arrayEnemies.count - 1; i >= 0; i --) {
+            EnemyBase *enemy = [self.arrayEnemies objectAtIndex:i];
+            SKEmitterNode *emitter = [SKEmitterNode nodeWithFileNamed:@"EnemyExplode"];
+            emitter.position = [self.worldPanel convertPoint:contact.contactPoint fromNode:self];
+            [emitter setParticleColorSequence:nil];
+            [emitter setParticleColor:enemy.color];
+            [self.worldPanel addChild:emitter];
+            [emitter runAction:[SKAction waitForDuration:0.5f] completion:^{
+                [emitter removeFromParent];
+            }];
+            [self.arrayEnemies removeObject:enemy];
+            [enemy removeFromParent];
+        }
+        self.lives --;
+        [self updateUI];
+        return;
+    }
+    
     SKPhysicsBody *bullet = nil;
     SKPhysicsBody *other = nil;
     if (contact.bodyA.categoryBitMask == PhysicType_bullet) {
@@ -236,6 +262,46 @@ CFTimeInterval countTime = 0;
             [emitter removeFromParent];
         }];
         [bullet.node removeFromParent];
+    }else if (other.categoryBitMask == PhysicType_enermy){
+        EnemyBase *enemy = (EnemyBase *)other.node;
+        if (enemy == nil) {
+            //碰撞前已经有其他子弹碰撞掉了
+            //NSLog(@"empty");
+            return;
+        }
+        if (enemy.group) {
+            //在组中
+            SKNode *group = enemy.group;
+            for (EnemyBase *child in group.children) {
+                if ([child.class isSubclassOfClass:[EnemyBase class]]) {
+                    [child breakInGroup:enemy.group toScene:self];
+                }
+            }
+            [group removeFromParent];
+            return;
+        }
+        enemy.health -= self.player.fireDamage;
+        if (enemy.health <= 0) {
+            //击破
+            self.score += enemy.score;
+            [self updateUI];
+            SKEmitterNode *emitter = [SKEmitterNode nodeWithFileNamed:@"EnemyExplode"];
+            emitter.position = [self.worldPanel convertPoint:contact.contactPoint fromNode:self];
+            [emitter setParticleColorSequence:nil];
+            [emitter setParticleColor:enemy.color];
+            [self.worldPanel addChild:emitter];
+            [emitter runAction:[SKAction waitForDuration:0.5f] completion:^{
+                [emitter removeFromParent];
+            }];
+            
+            [self.arrayEnemies removeObject:enemy];
+            [enemy removeFromParent];
+        }else{
+            //[enemy.physicsBody applyImpulse:CGVectorMake(bullet.node.physicsBody.velocity.dx * 0.001, bullet.node.physicsBody.velocity.dy * 0.001) atPoint:[self.worldPanel convertPoint:contact.contactPoint fromNode:self]];
+        }
+        [bullet.node removeFromParent];
+        
+        
     }
 }
 

@@ -14,5 +14,9 @@
 @property (weak, nonatomic) IBOutlet UIView *ViewUI;
 @property (weak, nonatomic) IBOutlet GameControllerView *LeftControllerView;
 @property (weak, nonatomic) IBOutlet GameControllerView *RightControllerView;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *multipleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *livesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bombsLabel;
 
 @end

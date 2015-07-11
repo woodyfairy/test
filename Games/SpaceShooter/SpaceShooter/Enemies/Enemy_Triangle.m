@@ -12,10 +12,11 @@
 @implementation Enemy_Triangle
 +(instancetype)create{
     Enemy_Triangle *node = [Enemy_Triangle spriteNodeWithImageNamed:@"triangle"]; //[[Enemy_Triangle alloc] initWithTexture:[SKTexture textureWithImageNamed:@"triangle"]];
+    node.type = EnemyType_Triangle;
     [node setColorBlendFactor:1];
     [node setColor:[UIColor yellowColor]];
+    [node setBlendMode:SKBlendModeAdd];
     [node setAnchorPoint:CGPointMake(0.334f, 0.5f)];
-    [node setZRotation:getRandom() * M_PI * 2];
     return node;
 }
 -(void)createPhysicBody{
@@ -35,20 +36,16 @@
     self.physicsBody.contactTestBitMask = PhysicType_player | PhysicType_bullet;
     
     CGPathRelease(path);
-    
-    //自定义部分
-    [self initData];
 }
 -(void)initData{
     self.score = 1;
     self.health = 1;
-    self.type = EnemyType_Triangle;
     self.physicsBody.angularVelocity = getRandom() + 1.5f;
 }
 -(void)updateWithDelta:(NSTimeInterval)delta{
-    if (self.isActive) {
-        
-    }
+//    if (self.isActive) {
+//        
+//    }
 }
 
 @end

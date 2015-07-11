@@ -7,10 +7,14 @@
 //
 
 #import "Common.h"
+#define ARC4RANDOM_MAX      0x100000000
 
 @implementation Common
 @end
 
 float getRandom(){
-    return (float)random()/RAND_MAX;
+    return (float)arc4random()/ARC4RANDOM_MAX;
+}
+int getIntRadom(int max){
+    return arc4random() % (max + 1);
 }

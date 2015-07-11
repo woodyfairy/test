@@ -10,9 +10,10 @@
 #import "GameScene.h"
 
 typedef enum {
-    EnemyType_Triangle = 1,
-    EnemyType_Box = 2,
-    EnemyType_Circle = 3,
+    EnemyType_Triangle = 1, //固定不动
+    EnemyType_Box = 2, //向玩家移动
+    EnemyType_Circle = 3, //向玩家加速
+    EnemyType_5Side = 4, //向一个方向
 }EnemyType;
 
 

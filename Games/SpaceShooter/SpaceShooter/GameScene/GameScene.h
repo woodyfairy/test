@@ -8,7 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "GameControllerView.h"
-@class PlayerSprite;
+#import "PlayerSprite.h"
 @class SpawnController;
 
 @interface GameScene : SKScene <GameControllerDelegate, SKPhysicsContactDelegate>
@@ -16,6 +16,15 @@
 @property (strong, nonatomic) SKShapeNode *worldPanel;
 @property (weak, nonatomic) GameControllerView *leftController;
 @property (weak, nonatomic) GameControllerView *rightController;
+@property (weak, nonatomic) UILabel *scoreLabel;
+@property (weak, nonatomic) UILabel *multipleLabel;
+@property (weak, nonatomic) UILabel *livesLabel;
+@property (weak, nonatomic) UILabel *bombsLabel;
+-(void) updateUI;
+@property (assign, nonatomic) long score;
+@property (assign, nonatomic) int multiple;
+@property (assign, nonatomic) short lives;
+@property (assign, nonatomic) short bombs;
 
 @property (strong, nonatomic) PlayerSprite *player;
 @property (strong, nonatomic) SpawnController *spawnController;

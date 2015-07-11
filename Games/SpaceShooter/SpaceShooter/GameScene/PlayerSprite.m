@@ -64,6 +64,7 @@
     
     node.fireInterval = 0.1f;
     node.fireLevel = 0;
+    node.fireLevel = 1;//test
     node.fireDamage = 1;
     
     return node;

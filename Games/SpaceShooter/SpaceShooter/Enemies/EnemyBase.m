@@ -11,25 +11,30 @@
 @implementation EnemyBase
 -(void)spawnInScene:(GameScene *)scene onPosition:(CGPoint)pos{
     self.currentScene = scene;
+    self.group = nil;
     [self setPosition:pos];
-    [self spawn];
     _isActive = NO;
+    [self spawn];
 }
 -(void)spawnInGroup:(SKNode *)group onPosition:(CGPoint)pos{
+    self.currentScene = nil;
     self.group = group;
     [self setPosition:pos];
-    [self spawn];
     _isActive = NO;
+    [self spawn];
 }
 -(void)breakInGroup:(SKNode *)group toScene:(GameScene *)scene{
     CGPoint pos = [self.group convertPoint:self.position toNode:scene];
-    CGPoint toPos = [self.group convertPoint:CGPointMake(self.position.x * 10, self.position.y * 10) toNode:scene];
+    CGPoint toPos = [self.group convertPoint:CGPointMake(self.position.x * 12, self.position.y * 12) toNode:scene];
     self.group = nil;
     self.currentScene = scene;
-    [self.currentScene addChild:self];
+    [self removeFromParent];
+    [self.currentScene.worldPanel addChild:self];
     [self setPosition:pos];
     _isActive = YES;
-    SKAction *action = [SKAction moveBy:CGVectorMake(toPos.x - pos.x, toPos.y - pos.y) duration:0.2f];
+    [self initData];
+    self.physicsBody.fieldBitMask = 1;
+    SKAction *action = [SKAction moveBy:CGVectorMake(toPos.x - pos.x, toPos.y - pos.y) duration:0.8f];
     action.timingMode = SKActionTimingEaseOut;
     [self runAction:action];
 }
@@ -43,22 +48,26 @@
     SKAction *repeat = [SKAction repeatAction:spawnAction count:count];
     [self runAction:repeat];
     
-    SKAction *activeAction = [SKAction sequence:@[[SKAction waitForDuration:timeInterval * count + 0.5f], [SKAction fadeInWithDuration:0.1f]]];
+    SKAction *activeAction = [SKAction sequence:@[[SKAction waitForDuration:timeInterval * count + 0.5f], [SKAction fadeInWithDuration:0.2f]]];
     [self runAction:activeAction completion:^{
-        if (self.scene) {
+        [self createPhysicBody];
+        if (self.currentScene) {
             _isActive = YES;
-            [self createPhysicBody];
+            [self initData];
+        }else{
+            self.physicsBody.fieldBitMask = 0;
         }
     }];
     
 }
 -(void)newSprite{
     float time1 = 0.5f;
-    float time2 = 0.3f;
+    float time2 = 0.2f;
     SKSpriteNode *node = [[SKSpriteNode alloc] initWithTexture:self.texture];
     [node setAnchorPoint:self.anchorPoint];
     [node setColorBlendFactor:self.colorBlendFactor];
     [node setColor:self.color];
+    [node setBlendMode:self.blendMode];
     [node setZRotation:self.zRotation];
     [node setAlpha:0];
     [node setScale:4];

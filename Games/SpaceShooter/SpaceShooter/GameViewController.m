@@ -65,6 +65,10 @@
     // Present the scene.
     scene.leftController = self.LeftControllerView;
     scene.rightController = self.RightControllerView;
+    scene.scoreLabel = self.scoreLabel;
+    scene.multipleLabel = self.multipleLabel;
+    scene.livesLabel = self.livesLabel;
+    scene.bombsLabel = self.bombsLabel;
     [scene.leftController setDelegate:scene];
     [scene.rightController setDelegate:scene];
     [skView presentScene:scene];

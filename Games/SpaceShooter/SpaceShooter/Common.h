@@ -21,4 +21,5 @@ enum PhysicType{
 
 @end
 
-float getRandom();
+float getRandom(); //0-1
+int getIntRadom(int max); //0-max
