@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import "Common.h"
 #import "GameScene.h"
 #import "GameControllerView.h"
 
@@ -66,6 +67,10 @@
     // Present the scene.
     scene.leftController = self.LeftControllerView;
     scene.rightController = self.RightControllerView;
+    [self.scoreLabel setFont:[UIFont fontWithName:UIFontName size:17]];
+    [self.multipleLabel setFont:[UIFont fontWithName:UIFontName size:12]];
+    [self.livesLabel setFont:[UIFont fontWithName:UIFontName size:17]];
+    [self.bombsLabel setFont:[UIFont fontWithName:UIFontName size:17]];
     scene.scoreLabel = self.scoreLabel;
     scene.multipleLabel = self.multipleLabel;
     scene.livesLabel = self.livesLabel;

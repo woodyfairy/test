@@ -79,32 +79,10 @@
 }
 -(void)updateUI{
     [self.scoreLabel setText:[NSString stringWithFormat:@"Score:%ld", self.score]];
-    [self.multipleLabel setText:[NSString stringWithFormat:@"x%d", self.multiple]];
-    [self.livesLabel setText:[NSString stringWithFormat:@"x%d", self.lives]];
-    [self.bombsLabel setText:[NSString stringWithFormat:@"x%d", self.bombs]];
+    [self.multipleLabel setText:[NSString stringWithFormat:@"X%d", self.multiple]];
+    [self.livesLabel setText:[NSString stringWithFormat:@"X%d", self.lives]];
+    [self.bombsLabel setText:[NSString stringWithFormat:@"X%d", self.bombs]];
 }
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    /* Called when a touch begins */
-//    
-//    for (UITouch *touch in touches) {
-//        CGPoint location = [touch locationInNode:self];
-//        
-//        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-//        
-//        sprite.xScale = 0.5;
-//        sprite.yScale = 0.5;
-//        sprite.position = location;
-//        
-//        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-//        
-//        [sprite runAction:[SKAction repeatActionForever:action]];
-//        
-//        [self addChild:sprite];
-//    }
-//    
-//    NSLog(@"pos:%f,%f", self.position.x, self.position.y);
-//    NSLog(@"size:%f,%f", self.size.width, self.size.height);
-//}
 
 -(void)GameControllerBeginTouch:(GameControllerView *)controller{
 }
@@ -253,6 +231,53 @@ CFTimeInterval countTime = 0;
             //拾取点点
             [other.node removeFromParent];
             self.multiple ++;
+            //现实倍数奖励
+            BOOL showMutiple = NO;
+            if (self.multiple < 150) {
+                if (self.multiple % 10 == 0) {
+                    showMutiple = YES;
+                }
+            }else if (self.multiple < 500){
+                if (self.multiple % 50 == 0) {
+                    showMutiple = YES;
+                }
+            }else{
+                if (self.multiple % 100 == 0) {
+                    showMutiple = YES;
+                }
+            }
+            
+            if (showMutiple) {
+                SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:UIFontName];
+                [label setFontSize:20];
+                [label setColorBlendFactor:1];
+                [label setColor:[UIColor yellowColor]];
+                [label setText:[NSString stringWithFormat:@"X%d", self.multiple]];
+                label.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+                label.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+                SKSpriteNode *node = [SKSpriteNode spriteNodeWithImageNamed:@"star5S"];
+                [node setZRotation:M_PI_2];
+                [node setScale:0.5f];
+                [node setPosition:CGPointMake(-10, -1)];
+                [node setAnchorPoint:CGPointMake(0.447f, 0.5f)];
+                [node setColorBlendFactor:1];
+                [node setColor:[UIColor yellowColor]];
+                [label addChild:node];
+                [label setZPosition:2];
+                [self addChild:label];
+                //[label setPosition:CGPointMake(self.size.width/2, self.size.height/2)];
+                CGPoint pos = [self convertPoint:self.player.position fromNode:self.worldPanel];
+                [label setPosition:CGPointMake(pos.x, pos.y + 50)];
+                [label setScale:1.5f];
+                [label setAlpha:0];
+                SKAction *show = [SKAction group:@[[SKAction moveBy:CGVectorMake(0, 100) duration:1], [SKAction fadeInWithDuration:1.5f]]];
+                [show setTimingMode:SKActionTimingEaseOut];
+                SKAction *hide = [SKAction group:@[[SKAction moveTo:CGPointMake(10, self.size.height - 50) duration:0.35f], [SKAction fadeOutWithDuration:0.35f], [SKAction scaleTo:0.1 duration:0.35f]]];
+                //[hide setTimingMode:SKActionTimingEaseInEaseOut];
+                [label runAction:[SKAction sequence:@[show, hide]] completion:^{
+                    [label removeFromParent];
+                }];
+            }
         }
         
         [self updateUI];

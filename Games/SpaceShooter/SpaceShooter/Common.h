@@ -29,6 +29,8 @@ enum FieldType{
     FieldType_all = UINT32_MAX,
 };
 
+#define UIFontName @"STHeitiTC-Light"// @"Verdana"//
+
 @interface Common : NSObject
 
 @end
