@@ -60,7 +60,7 @@
     [node.emitter setPosition:CGPointMake(-15, 0)];
     node.physicsBody.categoryBitMask = PhysicType_player;
     node.physicsBody.collisionBitMask = PhysicType_edge;
-    node.physicsBody.contactTestBitMask = PhysicType_enermy | PhysicType_point | PhysicType_gold;
+    node.physicsBody.contactTestBitMask = PhysicType_enermy | PhysicType_point | PhysicType_gold | PhysicType_blackHole;
     node.physicsBody.fieldBitMask = FieldType_all - FieldType_player;
     
     node.fireInterval = 0.1f;

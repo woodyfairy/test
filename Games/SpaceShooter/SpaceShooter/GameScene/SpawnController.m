@@ -8,6 +8,7 @@
 
 #import "SpawnController.h"
 #import "Common.h"
+#import "BlackHole.h"
 #import "EnemyBase.h"
 #import "Enemy_Triangle.h"
 #import "Enemy_Box.h"
@@ -28,7 +29,7 @@
 -(instancetype)initWithLevel:(int)level Scene:(GameScene *)scene{
     if ([self init]) {
         _currentLevel = level;
-        _maxLevel = 3;
+        _maxLevel = 4;
         _currentScene = scene;
         _arrayTimers = [[NSMutableArray alloc] init];
         _arrayRefreshNeed = [[NSMutableArray alloc] init];
@@ -49,11 +50,13 @@
 -(void) resetRefreshTimeForLevel:(NSUInteger)level{
     float value;
     if (level == 1) {
-        value = 1 + self.currentLevel/2;
+        value = 1 + self.currentLevel/2;//单体
     }else if (level == 2){
-        value = self.currentLevel + getIntRadom(3);
+        value = self.currentLevel + getIntRadom(3); //组
     }else if (level == 3){
-        value = 10 + _maxLevel - self.currentLevel + getIntRadom(10);
+        value = 10 + _maxLevel - self.currentLevel + getIntRadom(10); //四角或者四边
+    }else if (level == 4){
+        value = 10 + getIntRadom(10); //黑洞
     }
     [self.arrayRefreshNeed replaceObjectAtIndex:level-1 withObject:[NSNumber numberWithFloat:value]];
 }
@@ -106,22 +109,22 @@
                 }
                 if (random % 2 == 0){
                     //四边刷新
-                    int startEdge = getIntRadom(3); //0-3 初试边是哪个
+                    int freshEdge = getIntRadom(3); //0-3 出现的边是哪个
                     for (int i = 0; i < 4; i ++) {
                         BOOL spawn = getIntRadom(1);//0/1这边是否刷新
                         if (i == 0) {
                             spawn = YES;//第1条边肯定刷新
                         }else if (i == 1 && _currentLevel < 4) {
                             spawn = NO;//第2条边在等级小于4时不会刷
-                        }else if (i == 2 && _currentLevel < 4) {
+                        }else if (i == 2 && _currentLevel < 5) {
                             spawn = NO;//第3条边在等级小于4时不会刷
-                        }else if (i == 3 && _currentLevel < 5) {
+                        }else if (i == 3 && _currentLevel < 6) {
                             spawn = NO;//第4条边在等级小于5时不会刷
                         }
                         if (spawn) {
                             float inset = 30;
                             float step = 50;
-                            if (startEdge == 0 || startEdge == 2) {
+                            if (freshEdge == 0 || freshEdge == 2) {
                                 //上下两边刷新
                                 float startX, endX, x;
                                 int rangeRand = getIntRadom(2);
@@ -139,7 +142,7 @@
                                 while (x <= endX) {
                                     CGPoint pos;
                                     float angular;
-                                    if (startEdge == 0) {
+                                    if (freshEdge == 0) {
                                         pos = CGPointMake(x, self.currentScene.worldSize.height/2 - inset);
                                         angular = -M_PI_2;
                                     }else{
@@ -169,7 +172,7 @@
                                 while (y <= endY) {
                                     CGPoint pos;
                                     float angular;
-                                    if (startEdge == 1) {
+                                    if (freshEdge == 1) {
                                         pos = CGPointMake(-self.currentScene.worldSize.width/2 + inset, y);
                                         angular = 0;
                                     }else{
@@ -182,6 +185,11 @@
                                     y += step;
                                 }
                             }
+                        }
+                        
+                        freshEdge ++;
+                        if (freshEdge >= 4) {
+                            freshEdge = 0;
                         }
                     }
                 }
@@ -199,7 +207,24 @@
                 }
             }
         }else if (i == 3) {
-            //第三种刷新：
+            //第4种刷新：黑洞
+            if (timerValue >= freshTime) {
+                timerValue = 0;
+                [self resetRefreshTimeForLevel:i+1];
+                int maxCount = MIN(self.currentLevel - 2, 6);
+                if (self.currentScene.arrayBlackHoles.count >= maxCount) {
+                    return;
+                }
+                BlackHole *bh = [BlackHole create];
+                [bh spawnInScene:self.currentScene withStrength:(0.5f + getRandom()*0.5f)];
+                for (BlackHole *oldHole in self.currentScene.arrayBlackHoles) {
+                    while ( sqrtf((bh.position.x - oldHole.position.x)*(bh.position.x - oldHole.position.x) + (bh.position.y - oldHole.position.y)*(bh.position.y - oldHole.position.y)) < 300 ) {
+                        [bh setPosition:[bh getRandomPos]];
+                    }
+                }
+                [self.currentScene.worldPanel addChild:bh];
+                [self.currentScene.arrayBlackHoles addObject:bh];
+            }
         }
         [self.arrayTimers replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:timerValue]];
     }

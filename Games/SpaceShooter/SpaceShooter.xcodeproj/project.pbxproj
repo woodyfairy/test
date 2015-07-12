@@ -29,6 +29,9 @@
 		16EAD7801B5137470057390E /* Enemy_5Side.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EAD77F1B5137470057390E /* Enemy_5Side.m */; };
 		881A17211B45882E007AE66A /* ControllerCircle_arrowCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 881A171F1B45882E007AE66A /* ControllerCircle_arrowCircle.png */; };
 		881A17221B45882E007AE66A /* ControllerCircle_backCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 881A17201B45882E007AE66A /* ControllerCircle_backCircle.png */; };
+		881BDEDE1B52BF8D00B74D9B /* BlackHole.m in Sources */ = {isa = PBXBuildFile; fileRef = 881BDEDD1B52BF8D00B74D9B /* BlackHole.m */; };
+		881BDEE61B52CDCC00B74D9B /* BlackHole.sks in Resources */ = {isa = PBXBuildFile; fileRef = 881BDEE51B52CDCC00B74D9B /* BlackHole.sks */; };
+		881BDEE91B52F77D00B74D9B /* Enemy_Black.m in Sources */ = {isa = PBXBuildFile; fileRef = 881BDEE81B52F77D00B74D9B /* Enemy_Black.m */; };
 		884982EB1B4EBFDF00C5EBB9 /* GameControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884982EA1B4EBFDF00C5EBB9 /* GameControllerView.m */; };
 		884982F21B4EBFE800C5EBB9 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 884982EE1B4EBFE800C5EBB9 /* GameScene.m */; };
 		884982F31B4EBFE800C5EBB9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 884982EF1B4EBFE800C5EBB9 /* GameScene.sks */; };
@@ -89,6 +92,11 @@
 		16EAD77F1B5137470057390E /* Enemy_5Side.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_5Side.m; sourceTree = "<group>"; };
 		881A171F1B45882E007AE66A /* ControllerCircle_arrowCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ControllerCircle_arrowCircle.png; sourceTree = "<group>"; };
 		881A17201B45882E007AE66A /* ControllerCircle_backCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ControllerCircle_backCircle.png; sourceTree = "<group>"; };
+		881BDEDC1B52BF8D00B74D9B /* BlackHole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackHole.h; sourceTree = "<group>"; };
+		881BDEDD1B52BF8D00B74D9B /* BlackHole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackHole.m; sourceTree = "<group>"; };
+		881BDEE51B52CDCC00B74D9B /* BlackHole.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlackHole.sks; sourceTree = "<group>"; };
+		881BDEE71B52F77D00B74D9B /* Enemy_Black.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Black.h; sourceTree = "<group>"; };
+		881BDEE81B52F77D00B74D9B /* Enemy_Black.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Black.m; sourceTree = "<group>"; };
 		884982E91B4EBFDF00C5EBB9 /* GameControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameControllerView.h; sourceTree = "<group>"; };
 		884982EA1B4EBFDF00C5EBB9 /* GameControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameControllerView.m; sourceTree = "<group>"; };
 		884982ED1B4EBFE800C5EBB9 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -149,6 +157,7 @@
 			children = (
 				884982FC1B4EDA7D00C5EBB9 /* Shapes */,
 				881A171F1B45882E007AE66A /* ControllerCircle_arrowCircle.png */,
+				881BDEE51B52CDCC00B74D9B /* BlackHole.sks */,
 				881A17201B45882E007AE66A /* ControllerCircle_backCircle.png */,
 				889DAE501B4797BE0041D0D7 /* playerLight.png */,
 				889DAE521B4797EF0041D0D7 /* light1.sks */,
@@ -187,6 +196,8 @@
 		884982F81B4EC6B200C5EBB9 /* Enemies */ = {
 			isa = PBXGroup;
 			children = (
+				881BDEDC1B52BF8D00B74D9B /* BlackHole.h */,
+				881BDEDD1B52BF8D00B74D9B /* BlackHole.m */,
 				884982F91B4ECAA200C5EBB9 /* EnemyBase.h */,
 				884982FA1B4ECAA200C5EBB9 /* EnemyBase.m */,
 				884982FF1B4EDAA200C5EBB9 /* Enemy_Triangle.h */,
@@ -199,6 +210,8 @@
 				16EAD77F1B5137470057390E /* Enemy_5Side.m */,
 				16BD162C1B5233BA00932BF1 /* Enemy_Arrow.h */,
 				16BD162D1B5233BA00932BF1 /* Enemy_Arrow.m */,
+				881BDEE71B52F77D00B74D9B /* Enemy_Black.h */,
+				881BDEE81B52F77D00B74D9B /* Enemy_Black.m */,
 			);
 			path = Enemies;
 			sourceTree = "<group>";
@@ -376,6 +389,7 @@
 				16EAD7701B50FBA60057390E /* star5E.png in Resources */,
 				16EAD7671B50FBA60057390E /* 5side.png in Resources */,
 				16EAD76D1B50FBA60057390E /* circle.png in Resources */,
+				881BDEE61B52CDCC00B74D9B /* BlackHole.sks in Resources */,
 				16EAD76F1B50FBA60057390E /* star3R.png in Resources */,
 				16EAD7721B50FBA60057390E /* star5S.png in Resources */,
 				16EAD76B1B50FBA60057390E /* box.png in Resources */,
@@ -415,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				881BDEE91B52F77D00B74D9B /* Enemy_Black.m in Sources */,
 				8895A90D1B42E18D007A54CE /* GameViewController.m in Sources */,
 				884982F71B4EC3FD00C5EBB9 /* SpawnController.m in Sources */,
 				8895A9051B42E18D007A54CE /* AppDelegate.m in Sources */,
@@ -426,6 +441,7 @@
 				16EAD7801B5137470057390E /* Enemy_5Side.m in Sources */,
 				884982F21B4EBFE800C5EBB9 /* GameScene.m in Sources */,
 				16EAD7581B50FB7F0057390E /* Enemy_Box.m in Sources */,
+				881BDEDE1B52BF8D00B74D9B /* BlackHole.m in Sources */,
 				16EAD7771B50FD2C0057390E /* Enemy_Circle.m in Sources */,
 				889DAE5A1B4B02140041D0D7 /* Common.m in Sources */,
 				884983011B4EDAA200C5EBB9 /* Enemy_Triangle.m in Sources */,

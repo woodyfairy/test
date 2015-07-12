@@ -16,7 +16,8 @@ enum PhysicType{
     PhysicType_bullet = 1 << 2, //子弹
     PhysicType_enermy = 1 << 3, //敌人
     PhysicType_point = 1 << 4, //拾取的点，增长倍数
-    PhysicType_gold = 1 << 5, //拾取金币
+    PhysicType_gold = 1 << 5, //拾取金币 暂时不用
+    PhysicType_blackHole = 1 << 6, //黑洞中心
     
     PhysicType_all = UINT32_MAX,
 };

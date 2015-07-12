@@ -29,6 +29,7 @@
 @property (strong, nonatomic) PlayerSprite *player;
 @property (strong, nonatomic) SpawnController *spawnController;
 @property (strong, nonatomic) NSMutableArray *arrayEnemies;
+@property (strong, nonatomic) NSMutableArray *arrayBlackHoles;
 @property (strong, nonatomic) NSMutableArray *arrayPoints;
 @property (strong, nonatomic) NSMutableArray *arrayGolds;
 

@@ -11,6 +11,8 @@
 #import "DataController.h"
 #import "SpawnController.h"
 #import "EnemyBase.h"
+#import "BlackHole.h"
+#import "Enemy_Black.h"
 
 //test
 int startLevel = 1;
@@ -70,6 +72,7 @@ int startLevel = 1;
     //敌人控制
     self.spawnController = [[SpawnController alloc] initWithLevel:startLevel Scene:self];
     self.arrayEnemies = [[NSMutableArray alloc] init];
+    self.arrayBlackHoles = [[NSMutableArray alloc] init];
     self.arrayPoints = [[NSMutableArray alloc] init];
     self.arrayGolds = [[NSMutableArray alloc] init];
     
@@ -168,7 +171,7 @@ CFTimeInterval countTime = 0;
                 bullet.physicsBody = [SKPhysicsBody bodyWithPolygonFromPath:path];
                 bullet.physicsBody.categoryBitMask = PhysicType_bullet;
                 bullet.physicsBody.collisionBitMask = 0;
-                bullet.physicsBody.contactTestBitMask = PhysicType_edge | PhysicType_enermy;
+                bullet.physicsBody.contactTestBitMask = PhysicType_edge | PhysicType_enermy | PhysicType_blackHole;
                 bullet.physicsBody.fieldBitMask = FieldType_all - FieldType_player;
                 CGPathRelease(path);
                 bullet.zRotation = anguler;
@@ -214,10 +217,23 @@ CFTimeInterval countTime = 0;
         if (other == nil) {
             return;
         }
-        if (other.node.physicsBody.categoryBitMask == PhysicType_enermy) {
+        if (other.node.physicsBody.categoryBitMask == PhysicType_enermy || other.node.physicsBody.categoryBitMask == PhysicType_blackHole) {
             //玩家碰撞，死掉
             for (int i = (int)self.arrayEnemies.count - 1; i >= 0; i --) {
                 EnemyBase *enemy = [self.arrayEnemies objectAtIndex:i];
+                if (enemy.group) {
+                    SKNode *group = enemy.group;
+                    for (EnemyBase *child in group.children) {
+                        if ([child.class isSubclassOfClass:[EnemyBase class]]) {
+                            CGPoint pos = [self.worldPanel convertPoint:child.position fromNode:group];
+                            child.group = nil;
+                            [child removeFromParent];
+                            [self.worldPanel addChild:child];
+                            [child setPosition:pos];
+                        }
+                    }
+                    [group removeFromParent];
+                }
                 SKEmitterNode *emitter = [SKEmitterNode nodeWithFileNamed:@"EnemyExplode"];
                 emitter.position = [self.worldPanel convertPoint:enemy.position fromNode:enemy.parent];
                 [emitter setParticleColorSequence:nil];
@@ -233,6 +249,11 @@ CFTimeInterval countTime = 0;
                 SKSpriteNode *point = [self.arrayPoints objectAtIndex:i];
                 [point removeFromParent];
                 [self.arrayPoints removeObject:point];
+            }
+            for (int i = (int)self.arrayBlackHoles.count - 1; i >= 0; i --) {
+                BlackHole *bh = [self.arrayBlackHoles objectAtIndex:i];
+                [bh destroy];
+                [self.arrayBlackHoles removeObject:bh];
             }
             self.lives --;
         }else if (other.node.physicsBody.categoryBitMask == PhysicType_point){
@@ -390,20 +411,93 @@ CFTimeInterval countTime = 0;
                 //bullet已删
                 //[enemy.physicsBody applyImpulse:CGVectorMake(bullet.node.physicsBody.velocity.dx * 0.001, bullet.node.physicsBody.velocity.dy * 0.001) atPoint:[self.worldPanel convertPoint:contact.contactPoint fromNode:self]];
             }
+        }else if (other.node.physicsBody.categoryBitMask == PhysicType_blackHole){
+            //子弹打黑洞
+            BlackHole *blackHole = (BlackHole *)other.node;
+            if (blackHole == nil) {
+                //碰撞前已经有其他子弹碰撞掉了
+                //NSLog(@"empty");
+                return;
+            }
+            [bullet.node removeFromParent];
+            
+            if (blackHole.strength > 0.2) {
+                blackHole.strength -= 0.005;
+            }
+            if (![blackHole hasActions]) {
+                SKAction *seq = [SKAction sequence:@[[SKAction scaleTo:blackHole.strength - 0.03f duration:0.02f], [SKAction scaleTo:blackHole.strength duration:0.07f]]];
+                [blackHole runAction:seq];
+            }
+            blackHole.getDamage += self.player.fireDamage;
+            if (blackHole.getDamage >= blackHole.health + blackHole.absorbedEnemies) {
+                [self blackHoleExplode:blackHole];
+            }
+            
+            self.score += blackHole.score * self.multiple;
+            [self updateUI];
         }
     }
-//    else if (contact.bodyA.categoryBitMask == PhysicType_ || contact.bodyB.categoryBitMask == PhysicType_bullet) {
-//        //黑洞碰撞
-//        SKPhysicsBody *bullet = nil;
-//        SKPhysicsBody *other = nil;
-//        if (contact.bodyA.categoryBitMask == PhysicType_bullet) {
-//            bullet = contact.bodyA;
-//            other = contact.bodyB;
-//        }else if (contact.bodyB.categoryBitMask == PhysicType_bullet){
-//            bullet = contact.bodyB;
-//            other = contact.bodyA;
-//        }
-//    }
+    else if (contact.bodyA.categoryBitMask == PhysicType_blackHole || contact.bodyB.categoryBitMask == PhysicType_blackHole) {
+        //黑洞碰撞与敌人碰撞
+        BlackHole *blackHole = nil;
+        SKPhysicsBody *other = nil;
+        if (contact.bodyA.categoryBitMask == PhysicType_blackHole) {
+            blackHole = (BlackHole *)contact.bodyA.node;
+            other = contact.bodyB;
+        }else if (contact.bodyB.categoryBitMask == PhysicType_blackHole){
+            blackHole = (BlackHole *)contact.bodyB.node;
+            other = contact.bodyA;
+        }
+        EnemyBase *enemy = (EnemyBase *)other.node;
+        if (enemy.group) {
+            //在组中
+            SKNode *group = enemy.group;
+            for (EnemyBase *child in group.children) {
+                if ([child.class isSubclassOfClass:[EnemyBase class]]) {
+                    [child breakInGroup:enemy.group toScene:self];
+                }
+            }
+            [group removeFromParent];
+        }
+        
+        if (blackHole.strength < 1) {
+            blackHole.strength += 0.05;
+        }
+        if (![blackHole hasActions]) {
+            SKAction *seq = [SKAction sequence:@[[SKAction scaleTo:blackHole.strength + 0.03f duration:0.02f], [SKAction scaleTo:blackHole.strength duration:0.07f]]];
+            [blackHole runAction:seq];
+        }
+        blackHole.absorbedEnemies += enemy.health * 5;
+        if (blackHole.absorbedEnemies >= blackHole.health) {
+            [self blackHoleExplode:blackHole];
+        }
+        
+        [self.arrayEnemies removeObject:enemy];
+        [enemy removeFromParent];
+    }
+}
+-(void)blackHoleExplode:(BlackHole *)blackHole{
+    for (int i = 0 ; i < blackHole.absorbedEnemies/5; i ++) {
+        //NSLog(@"holePos:%f,%f", blackHole.position.x, blackHole.position.y);
+        //刷新黑洞产物
+        Enemy_Black *enemy = [Enemy_Black create];
+        enemy.currentScene = self;
+        [self.arrayEnemies addObject:enemy];
+        [self.worldPanel addChild:enemy];
+        [enemy setPosition:blackHole.position];
+        [enemy createPhysicBody];//加到场景后再加物理，否则进不来边界
+        [enemy setScale:0.6f];
+        //NSLog(@"enemyPos:%f,%f", enemy.position.x, enemy.position.y);
+        
+        enemy.moveAngular = getRandom() * M_PI * 2;
+        enemy.moveSpeed = 0;
+        int dis = 200 + getIntRadom(300);
+        SKAction *action = [SKAction moveBy:CGVectorMake(cosf(enemy.moveAngular) * dis, sinf(enemy.moveAngular) * dis) duration:2];
+        action.timingMode = SKActionTimingEaseOut;
+        [enemy runAction:action];
+    }
+    [blackHole destroy];
+    [self.arrayBlackHoles removeObject:blackHole];
 }
 
 @end
