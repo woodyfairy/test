@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16BD162E1B5233BA00932BF1 /* Enemy_Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BD162D1B5233BA00932BF1 /* Enemy_Arrow.m */; };
 		16EAD7581B50FB7F0057390E /* Enemy_Box.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EAD7571B50FB7F0057390E /* Enemy_Box.m */; };
 		16EAD7671B50FBA60057390E /* 5side.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EAD7591B50FBA60057390E /* 5side.png */; };
 		16EAD7681B50FBA60057390E /* 6side.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EAD75A1B50FBA60057390E /* 6side.png */; };
@@ -62,6 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		16BD162C1B5233BA00932BF1 /* Enemy_Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Arrow.h; sourceTree = "<group>"; };
+		16BD162D1B5233BA00932BF1 /* Enemy_Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Arrow.m; sourceTree = "<group>"; };
 		16EAD7561B50FB7F0057390E /* Enemy_Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Box.h; sourceTree = "<group>"; };
 		16EAD7571B50FB7F0057390E /* Enemy_Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Box.m; sourceTree = "<group>"; };
 		16EAD7591B50FBA60057390E /* 5side.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5side.png; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 				16EAD7761B50FD2C0057390E /* Enemy_Circle.m */,
 				16EAD77E1B5137470057390E /* Enemy_5Side.h */,
 				16EAD77F1B5137470057390E /* Enemy_5Side.m */,
+				16BD162C1B5233BA00932BF1 /* Enemy_Arrow.h */,
+				16BD162D1B5233BA00932BF1 /* Enemy_Arrow.m */,
 			);
 			path = Enemies;
 			sourceTree = "<group>";
@@ -413,6 +418,7 @@
 				8895A90D1B42E18D007A54CE /* GameViewController.m in Sources */,
 				884982F71B4EC3FD00C5EBB9 /* SpawnController.m in Sources */,
 				8895A9051B42E18D007A54CE /* AppDelegate.m in Sources */,
+				16BD162E1B5233BA00932BF1 /* Enemy_Arrow.m in Sources */,
 				884982F41B4EBFE800C5EBB9 /* PlayerSprite.m in Sources */,
 				884982EB1B4EBFDF00C5EBB9 /* GameControllerView.m in Sources */,
 				8895A9021B42E18D007A54CE /* main.m in Sources */,

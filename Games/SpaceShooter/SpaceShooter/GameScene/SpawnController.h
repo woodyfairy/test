@@ -16,5 +16,6 @@
 -(instancetype)initWithLevel:(int)level Scene:(GameScene *)scene;
 -(void)updateWithDelta:(NSTimeInterval)delta;
 @property (strong, nonatomic) NSMutableArray *arrayTimers;
+@property (strong, nonatomic) NSMutableArray *arrayRefreshNeed;
 
 @end

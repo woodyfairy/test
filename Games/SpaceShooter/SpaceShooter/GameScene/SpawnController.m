@@ -13,6 +13,7 @@
 #import "Enemy_Box.h"
 #import "Enemy_Circle.h"
 #import "Enemy_5Side.h"
+#import "Enemy_Arrow.h"
 
 @interface SpawnController()
 @property (assign) CFTimeInterval mainTimer;
@@ -30,6 +31,7 @@
         _maxLevel = 3;
         _currentScene = scene;
         _arrayTimers = [[NSMutableArray alloc] init];
+        _arrayRefreshNeed = [[NSMutableArray alloc] init];
         [self updateLevel];
         return self;
     }
@@ -39,6 +41,21 @@
     while (self.arrayTimers.count < self.currentLevel) {
         [self.arrayTimers addObject:[NSNumber numberWithFloat:0]];
     }
+    while (self.arrayRefreshNeed.count < self.currentLevel) {
+        [self.arrayRefreshNeed addObject:[NSNumber numberWithFloat:0]];
+        [self resetRefreshTimeForLevel:self.arrayRefreshNeed.count];
+    }
+}
+-(void) resetRefreshTimeForLevel:(NSUInteger)level{
+    float value;
+    if (level == 1) {
+        value = 1 + self.currentLevel/2;
+    }else if (level == 2){
+        value = self.currentLevel + getIntRadom(3);
+    }else if (level == 3){
+        value = 10 + _maxLevel - self.currentLevel + getIntRadom(10);
+    }
+    [self.arrayRefreshNeed replaceObjectAtIndex:level-1 withObject:[NSNumber numberWithFloat:value]];
 }
 
 -(void)updateWithDelta:(NSTimeInterval)delta{
@@ -57,33 +74,119 @@
     //每个刷新计时
     for (int i = 0; i < _currentLevel; i ++) {
         float timerValue = [[self.arrayTimers objectAtIndex:i] floatValue] + delta;
+        float freshTime = [[self.arrayRefreshNeed objectAtIndex:i] floatValue];
         if (i == 0) {
             //第一种刷新:随机刷单体
-            float freshTime = 1 + self.currentLevel/2;
             if (timerValue >= freshTime) {
                 timerValue = 0;
+                [self resetRefreshTimeForLevel:i+1];
                 [self spawnAEnemyWithType:(EnemyType)(1 + getIntRadom(3)) withPosition:[self getRandomPos]];
                 //test
                 //[self spawnAEnemyWithType:EnemyType_5Side withPosition:[self getRandomPos]];
             }
         }else if (i == 1){
             //第二种刷新:随机刷一个组
-            float freshTime = self.currentLevel;
             if (timerValue >= freshTime) {
                 timerValue = 0;
+                [self resetRefreshTimeForLevel:i+1];
                 [self spawnAGrouByType:(EnemyType)(1 + getIntRadom(2))];
             }
         }
         else if (i == 2){
-            //第二种刷新:四个角刷新大量的一种
-            float freshTime = 15;
+            //第三种刷新:四个角刷新大量的一种 //或者四个边的箭头
             if (timerValue >= freshTime) {
                 timerValue = 0;
-                
-                self.conerSpawnType = 3 + getIntRadom(1);
-                self.conerSpawnNum = 10 + self.currentLevel * 2;
-                self.conerSpawnTimer = 0;
+                [self resetRefreshTimeForLevel:i+1];
+                int random = getIntRadom(8); //0－8的随机数，奇数刷新四角、偶数刷新四边、0都刷新
+                if (random == 0 || random % 2 == 1) {
+                    //四角刷新
+                    self.conerSpawnType = 3 + getIntRadom(1);
+                    self.conerSpawnNum = 10 + self.currentLevel * 2;
+                    self.conerSpawnTimer = 0;
+                }
+                if (random % 2 == 0){
+                    //四边刷新
+                    int startEdge = getIntRadom(3); //0-3 初试边是哪个
+                    for (int i = 0; i < 4; i ++) {
+                        BOOL spawn = getIntRadom(1);//0/1这边是否刷新
+                        if (i == 0) {
+                            spawn = YES;//第1条边肯定刷新
+                        }else if (i == 1 && _currentLevel < 4) {
+                            spawn = NO;//第2条边在等级小于4时不会刷
+                        }else if (i == 2 && _currentLevel < 4) {
+                            spawn = NO;//第3条边在等级小于4时不会刷
+                        }else if (i == 3 && _currentLevel < 5) {
+                            spawn = NO;//第4条边在等级小于5时不会刷
+                        }
+                        if (spawn) {
+                            float inset = 30;
+                            float step = 50;
+                            if (startEdge == 0 || startEdge == 2) {
+                                //上下两边刷新
+                                float startX, endX, x;
+                                int rangeRand = getIntRadom(2);
+                                if (rangeRand == 0) {
+                                    startX = - self.currentScene.worldSize.width/2 + inset;
+                                    endX = self.currentScene.worldSize.width/2 - inset;
+                                }else if (rangeRand == 1){
+                                    startX = - self.currentScene.worldSize.width/2 + inset;
+                                    endX = 0;
+                                }else{
+                                    startX = 0;
+                                    endX = self.currentScene.worldSize.width/2 - inset;
+                                }
+                                x = startX;
+                                while (x <= endX) {
+                                    CGPoint pos;
+                                    float angular;
+                                    if (startEdge == 0) {
+                                        pos = CGPointMake(x, self.currentScene.worldSize.height/2 - inset);
+                                        angular = -M_PI_2;
+                                    }else{
+                                        pos = CGPointMake(x, -self.currentScene.worldSize.height/2 + inset);
+                                        angular = M_PI_2;
+                                    }
+                                    Enemy_Arrow *enemy = (Enemy_Arrow *)[self spawnAEnemyWithType:EnemyType_Arrow withPosition:pos];
+                                    [enemy setZRotation:angular];
+                                    [enemy setDirection:MoveDirection_vertical];
+                                    x += step;
+                                }
+                            }else{
+                                //左右两边刷新
+                                float startY, endY, y;
+                                int rangeRand = getIntRadom(2);
+                                if (rangeRand == 0) {
+                                    startY = - self.currentScene.worldSize.height/2 + inset;
+                                    endY = self.currentScene.worldSize.height/2 - inset;
+                                }else if (rangeRand == 1){
+                                    startY = - self.currentScene.worldSize.height/2 + inset;
+                                    endY = 0;
+                                }else{
+                                    startY = 0;
+                                    endY = self.currentScene.worldSize.height/2 - inset;
+                                }
+                                y = startY;
+                                while (y <= endY) {
+                                    CGPoint pos;
+                                    float angular;
+                                    if (startEdge == 1) {
+                                        pos = CGPointMake(-self.currentScene.worldSize.width/2 + inset, y);
+                                        angular = 0;
+                                    }else{
+                                        pos = CGPointMake(self.currentScene.worldSize.width/2 - inset, y);
+                                        angular = M_PI;
+                                    }
+                                    Enemy_Arrow *enemy = (Enemy_Arrow *)[self spawnAEnemyWithType:EnemyType_Arrow withPosition:pos];
+                                    [enemy setZRotation:angular];
+                                    [enemy setDirection:MoveDirection_horizontal];
+                                    y += step;
+                                }
+                            }
+                        }
+                    }
+                }
             }
+            //四角刷新单次计时
             if (self.conerSpawnNum > 0) {
                 self.conerSpawnTimer += delta;
                 if (self.conerSpawnTimer >= 0.1f) {
@@ -95,6 +198,8 @@
                     [self spawnAEnemyWithType:self.conerSpawnType withPosition:CGPointMake(self.currentScene.worldSize.width/2 - 80 + getRandom()*60 , self.currentScene.worldSize.height/2 - 80 + getRandom()*60)];
                 }
             }
+        }else if (i == 3) {
+            //第三种刷新：
         }
         [self.arrayTimers replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:timerValue]];
     }
@@ -106,6 +211,19 @@
     return CGPointMake(getRandom() * width - width/2, getRandom() * height - height/2);
 }
 
+//在场景创建
+-(EnemyBase *)spawnAEnemyWithType:(EnemyType)type withPosition:(CGPoint)position{
+    EnemyBase *enemy = [self createEnemyByType:type];
+    if (enemy == nil) {
+        NSLog(@"Enemy=nil!!! type:%d", type);
+        abort();
+    }
+    [enemy setZRotation:getRandom() * M_PI * 2];
+    [enemy spawnInScene:self.currentScene onPosition:position];
+    [self.currentScene.arrayEnemies addObject:enemy];
+    [self.currentScene.worldPanel addChild:enemy];
+    return enemy;
+}
 -(EnemyBase *)createEnemyByType:(EnemyType)type{
     EnemyBase *enemy = nil;
     if (type == EnemyType_Triangle) {
@@ -116,22 +234,13 @@
         enemy = [Enemy_Circle create];
     }else if (type == EnemyType_5Side){
         enemy = [Enemy_5Side create];
+    }else if (type == EnemyType_Arrow){
+        enemy = [Enemy_Arrow create];
     }
     return enemy;
 }
 
--(void)spawnAEnemyWithType:(EnemyType)type withPosition:(CGPoint)position{
-    EnemyBase *enemy = [self createEnemyByType:type];
-    if (enemy == nil) {
-        NSLog(@"Enemy=nil!!! type:%d", type);
-        abort();
-    }
-    [enemy setZRotation:getRandom() * M_PI * 2];
-    [enemy spawnInScene:self.currentScene onPosition:position];
-    [self.currentScene.arrayEnemies addObject:enemy];
-    [self.currentScene.worldPanel addChild:enemy];
-}
-
+//在组中创建
 -(void)spawnAGrouByType:(EnemyType)type{
     SKNode *node = [[SKNode alloc] init];
     int count = 3 + getIntRadom(2);

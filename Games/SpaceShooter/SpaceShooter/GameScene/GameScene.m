@@ -12,6 +12,9 @@
 #import "SpawnController.h"
 #import "EnemyBase.h"
 
+//test
+int startLevel = 1;
+
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
@@ -65,7 +68,7 @@
     [self.player.emitter setTargetNode:self.worldPanel];
     
     //敌人控制
-    self.spawnController = [[SpawnController alloc] initWithLevel:1 Scene:self];
+    self.spawnController = [[SpawnController alloc] initWithLevel:startLevel Scene:self];
     self.arrayEnemies = [[NSMutableArray alloc] init];
     self.arrayPoints = [[NSMutableArray alloc] init];
     self.arrayGolds = [[NSMutableArray alloc] init];
