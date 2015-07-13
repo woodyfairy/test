@@ -18,6 +18,7 @@ enum PhysicType{
     PhysicType_point = 1 << 4, //拾取的点，增长倍数
     PhysicType_gold = 1 << 5, //拾取金币 暂时不用
     PhysicType_blackHole = 1 << 6, //黑洞中心
+    PhysicType_bomb = 1 << 7, //炸弹
     
     PhysicType_all = UINT32_MAX,
 };
@@ -38,3 +39,5 @@ enum FieldType{
 
 float getRandom(); //0-1
 int getIntRadom(int max); //0-max
+
+float getDistanceByTwoPosition(CGPoint pos1, CGPoint pos2);

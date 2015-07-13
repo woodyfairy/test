@@ -34,6 +34,7 @@
 		881BDEDE1B52BF8D00B74D9B /* BlackHole.m in Sources */ = {isa = PBXBuildFile; fileRef = 881BDEDD1B52BF8D00B74D9B /* BlackHole.m */; };
 		881BDEE61B52CDCC00B74D9B /* BlackHole.sks in Resources */ = {isa = PBXBuildFile; fileRef = 881BDEE51B52CDCC00B74D9B /* BlackHole.sks */; };
 		881BDEE91B52F77D00B74D9B /* Enemy_Black.m in Sources */ = {isa = PBXBuildFile; fileRef = 881BDEE81B52F77D00B74D9B /* Enemy_Black.m */; };
+		881BDEEB1B54349D00B74D9B /* Bomb.png in Resources */ = {isa = PBXBuildFile; fileRef = 881BDEEA1B54349D00B74D9B /* Bomb.png */; };
 		884982EB1B4EBFDF00C5EBB9 /* GameControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884982EA1B4EBFDF00C5EBB9 /* GameControllerView.m */; };
 		884982F21B4EBFE800C5EBB9 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 884982EE1B4EBFE800C5EBB9 /* GameScene.m */; };
 		884982F31B4EBFE800C5EBB9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 884982EF1B4EBFE800C5EBB9 /* GameScene.sks */; };
@@ -92,6 +93,7 @@
 		881BDEE51B52CDCC00B74D9B /* BlackHole.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BlackHole.sks; sourceTree = "<group>"; };
 		881BDEE71B52F77D00B74D9B /* Enemy_Black.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Black.h; sourceTree = "<group>"; };
 		881BDEE81B52F77D00B74D9B /* Enemy_Black.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Black.m; sourceTree = "<group>"; };
+		881BDEEA1B54349D00B74D9B /* Bomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bomb.png; sourceTree = "<group>"; };
 		884982E91B4EBFDF00C5EBB9 /* GameControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameControllerView.h; sourceTree = "<group>"; };
 		884982EA1B4EBFDF00C5EBB9 /* GameControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameControllerView.m; sourceTree = "<group>"; };
 		884982ED1B4EBFE800C5EBB9 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -149,8 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				884982FC1B4EDA7D00C5EBB9 /* Shapes */,
-				881A171F1B45882E007AE66A /* ControllerCircle_arrowCircle.png */,
+				881BDEEA1B54349D00B74D9B /* Bomb.png */,
 				881BDEE51B52CDCC00B74D9B /* BlackHole.sks */,
+				881A171F1B45882E007AE66A /* ControllerCircle_arrowCircle.png */,
 				881A17201B45882E007AE66A /* ControllerCircle_backCircle.png */,
 				889DAE501B4797BE0041D0D7 /* playerLight.png */,
 				889DAE521B4797EF0041D0D7 /* light1.sks */,
@@ -370,6 +373,7 @@
 				889DAE511B4797BE0041D0D7 /* playerLight.png in Resources */,
 				889DAE5D1B4B063A0041D0D7 /* BulletFlash.sks in Resources */,
 				16EAD7731B50FBA60057390E /* star8.png in Resources */,
+				881BDEEB1B54349D00B74D9B /* Bomb.png in Resources */,
 				16EAD77A1B510B3A0057390E /* EnemyExplode.sks in Resources */,
 				8895A9101B42E18D007A54CE /* Main.storyboard in Resources */,
 			);
@@ -519,7 +523,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dongyang Wu (5GBX6K6X6L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dongyang Wu (5GBX6K6X6L)";
 				INFOPLIST_FILE = "$(SRCROOT)/SpaceShooter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -533,7 +537,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Dongyang Wu (4FEKPDRR85)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dongyang Wu (4FEKPDRR85)";
 				INFOPLIST_FILE = "$(SRCROOT)/SpaceShooter/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -57,7 +57,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fns-J2-UbC">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bomb.png" translatesAutoresizingMaskIntoConstraints="NO" id="fns-J2-UbC">
                                         <rect key="frame" x="522" y="5" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="5my-3R-rqo"/>
@@ -70,7 +70,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XfJ-P7-A5w">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XfJ-P7-A5w" userLabel="pauseBtn">
                                         <rect key="frame" x="279" y="10" width="42" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bPy-20-TiC"/>
@@ -80,7 +80,20 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="pauseClicked:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Obl-1w-j6b"/>
+                                            <action selector="pauseClicked:" destination="BV1-FR-VrT" eventType="touchDown" id="j3m-PH-0fw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.34999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uft-Ld-wKE" userLabel="bombBtn">
+                                        <rect key="frame" x="510" y="20" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="8zN-Kx-T4F"/>
+                                            <constraint firstAttribute="height" constant="80" id="9Cm-Fy-cW4"/>
+                                        </constraints>
+                                        <state key="normal" image="Bomb.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="useBomb:" destination="BV1-FR-VrT" eventType="touchDown" id="O02-5Y-tTe"/>
                                         </connections>
                                     </button>
                                     <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G1S-eD-dLX">
@@ -134,8 +147,10 @@
                                     <constraint firstAttribute="bottom" secondItem="nc0-AN-w4L" secondAttribute="bottom" id="i1e-UD-Q0z"/>
                                     <constraint firstItem="fns-J2-UbC" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" constant="5" id="inY-Vt-isf"/>
                                     <constraint firstAttribute="width" secondItem="ckb-jP-cZs" secondAttribute="width" multiplier="2" id="mqN-gX-Fco"/>
+                                    <constraint firstAttribute="top" secondItem="uft-Ld-wKE" secondAttribute="top" constant="-20" id="nb4-m7-tgZ"/>
                                     <constraint firstAttribute="trailing" secondItem="FlQ-Nb-1OL" secondAttribute="trailing" constant="10" id="nrb-Ef-Cge"/>
                                     <constraint firstAttribute="width" secondItem="nc0-AN-w4L" secondAttribute="width" multiplier="2" id="qjZ-KZ-5oH"/>
+                                    <constraint firstAttribute="trailing" secondItem="uft-Ld-wKE" secondAttribute="trailing" constant="10" id="r7s-Jt-jxf"/>
                                     <constraint firstAttribute="bottom" secondItem="ckb-jP-cZs" secondAttribute="bottom" id="syO-VS-irB"/>
                                     <constraint firstItem="FlQ-Nb-1OL" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" constant="10" id="t1c-ou-Aen"/>
                                     <constraint firstItem="mYn-du-aCl" firstAttribute="leading" secondItem="QeU-zd-X6Z" secondAttribute="trailing" constant="10" id="tPf-mA-T1Y"/>
@@ -160,6 +175,8 @@
                         <outlet property="LeftControllerView" destination="nc0-AN-w4L" id="thh-hD-Pc3"/>
                         <outlet property="RightControllerView" destination="ckb-jP-cZs" id="FOE-ed-4hF"/>
                         <outlet property="ViewUI" destination="XTu-w1-9c4" id="Dtw-y9-KKb"/>
+                        <outlet property="bombBtnTopConstraint" destination="nb4-m7-tgZ" id="OPL-NU-FUK"/>
+                        <outlet property="bombLabelTopConstraint" destination="t1c-ou-Aen" id="0xJ-f7-rsf"/>
                         <outlet property="bombsLabel" destination="FlQ-Nb-1OL" id="48J-d1-LLv"/>
                         <outlet property="gameView" destination="5A7-s3-FFb" id="k7N-iS-xTI"/>
                         <outlet property="homeBtn" destination="ZF4-x7-tL8" id="jpj-MH-Izv"/>
@@ -176,4 +193,7 @@
             <point key="canvasLocation" x="75" y="408"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Bomb.png" width="120" height="120"/>
+    </resources>
 </document>

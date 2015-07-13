@@ -12,6 +12,7 @@
 @class SpawnController;
 
 @interface GameScene : SKScene <GameControllerDelegate, SKPhysicsContactDelegate>
+@property (assign) BOOL playing;
 @property (assign) CFTimeInterval preTime;
 @property (assign, nonatomic) CGSize worldSize;
 //UI
@@ -28,6 +29,9 @@
 @property (assign, nonatomic) short lives;
 @property (assign, nonatomic) short bombs;
 
+@property (strong, nonatomic) SKSpriteNode *colorCover;
+-(void) flashColor:(UIColor *)color;
+
 @property (strong, nonatomic) PlayerSprite *player;
 @property (strong, nonatomic) SpawnController *spawnController;
 @property (strong, nonatomic) NSMutableArray *arrayEnemies;
@@ -36,5 +40,6 @@
 //@property (strong, nonatomic) NSMutableArray *arrayGolds;
 
 -(void) start;
+-(void)useBomb;
 
 @end

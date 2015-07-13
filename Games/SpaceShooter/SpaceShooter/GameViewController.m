@@ -8,8 +8,6 @@
 
 #import "GameViewController.h"
 #import "Common.h"
-#import "GameScene.h"
-#import "GameControllerView.h"
 
 @implementation SKScene (Unarchive)
 
@@ -46,15 +44,15 @@
     skView.ignoresSiblingOrder = YES;
     
     // Create and configure the scene.
-    GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
-    scene.scaleMode = SKSceneScaleModeAspectFit;
+    self.gameScene = [GameScene unarchiveFromFile:@"GameScene"];
+    self.gameScene.scaleMode = SKSceneScaleModeAspectFit;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        [scene setSize:CGSizeMake(1024, 768)];
+        [self.gameScene setSize:CGSizeMake(1024, 768)];
     }else{
         if ([[UIScreen mainScreen] currentMode].size.height == 960) {
-            [scene setSize:CGSizeMake(960, 640)];
+            [self.gameScene setSize:CGSizeMake(960, 640)];
         }else{
-            [scene setSize:CGSizeMake(1136, 640)];
+            [self.gameScene setSize:CGSizeMake(1136, 640)];
         }
     }
     
@@ -64,25 +62,32 @@
     [self.RightControllerView setMinRange:4];
     [self.RightControllerView setMaxRange:40];
     
+    //炸弹按钮
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [self.bombBtnTopConstraint setConstant:-300];
+        [self.bombLabelTopConstraint setConstant:290];
+    }
+    
     // Present the scene.
-    scene.leftController = self.LeftControllerView;
-    scene.rightController = self.RightControllerView;
+    self.gameScene.leftController = self.LeftControllerView;
+    self.gameScene.rightController = self.RightControllerView;
     [self.scoreLabel setFont:[UIFont fontWithName:UIFontName size:17]];
     [self.multipleLabel setFont:[UIFont fontWithName:UIFontName size:12]];
     [self.livesLabel setFont:[UIFont fontWithName:UIFontName size:17]];
     [self.bombsLabel setFont:[UIFont fontWithName:UIFontName size:17]];
-    scene.scoreLabel = self.scoreLabel;
-    scene.multipleLabel = self.multipleLabel;
-    scene.livesLabel = self.livesLabel;
-    scene.bombsLabel = self.bombsLabel;
-    [scene.leftController setDelegate:scene];
-    [scene.rightController setDelegate:scene];
-    [skView presentScene:scene];
+    self.gameScene.scoreLabel = self.scoreLabel;
+    self.gameScene.multipleLabel = self.multipleLabel;
+    self.gameScene.livesLabel = self.livesLabel;
+    self.gameScene.bombsLabel = self.bombsLabel;
+    [self.gameScene.leftController setDelegate:self.gameScene];
+    [self.gameScene.rightController setDelegate:self.gameScene];
+    [skView presentScene:self.gameScene];
     
     //打断前暂停
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pause) name:UIApplicationWillResignActiveNotification object:nil];
     
     //暂停界面
+    [self.pauseView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.2f]];
     UIView *visualEffectView = [[UIView alloc] init];
     [visualEffectView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5f]];
     //UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
@@ -99,7 +104,7 @@
                                                  toItem:self.pauseView
                                               attribute:NSLayoutAttributeLeading
                                              multiplier:1.0f
-                                               constant:50];
+                                               constant:75];
     [self.pauseView addConstraint:constraint];
     
     constraint = [NSLayoutConstraint constraintWithItem:visualEffectView
@@ -108,7 +113,7 @@
                                                  toItem:self.pauseView
                                               attribute:NSLayoutAttributeTrailing
                                              multiplier:1.0f
-                                               constant:-50];
+                                               constant:-75];
     [self.pauseView addConstraint:constraint];
     
     constraint = [NSLayoutConstraint constraintWithItem:visualEffectView
@@ -160,6 +165,10 @@
     
 //    self.gameView.scene.speed = 0.3f;
 //    self.gameView.scene.physicsWorld.speed = 0.3f;
+}
+
+- (IBAction)useBomb:(id)sender {
+    [self.gameScene useBomb];
 }
 - (IBAction)resumeClicked:(id)sender {
     [self resume];

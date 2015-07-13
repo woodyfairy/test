@@ -65,7 +65,8 @@
     //等级增长
     self.mainTimer += delta;
     //NSLog(@"timer:%f",self.timer);
-    if (self.mainTimer >= 30) {
+    int upLevelTime = 10 * _currentLevel;
+    if (self.mainTimer >= upLevelTime) {
         //NSLog(@"spawn!!!");
         self.mainTimer = 0;
         if (_currentLevel < _maxLevel) {
@@ -218,7 +219,7 @@
                 BlackHole *bh = [BlackHole create];
                 [bh spawnInScene:self.currentScene withStrength:(0.5f + getRandom()*0.5f)];
                 for (BlackHole *oldHole in self.currentScene.arrayBlackHoles) {
-                    while ( sqrtf((bh.position.x - oldHole.position.x)*(bh.position.x - oldHole.position.x) + (bh.position.y - oldHole.position.y)*(bh.position.y - oldHole.position.y)) < 300 ) {
+                    while ( getDistanceByTwoPosition(oldHole.position, bh.position) < 300 ) {
                         [bh setPosition:[bh getRandomPos]];
                     }
                 }

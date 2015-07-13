@@ -49,7 +49,7 @@
         self.physicsBody.friction = 0;
         self.physicsBody.categoryBitMask = PhysicType_blackHole;
         self.physicsBody.collisionBitMask = PhysicType_none;
-        self.physicsBody.contactTestBitMask = PhysicType_player | PhysicType_bullet | PhysicType_enermy;
+        self.physicsBody.contactTestBitMask = PhysicType_player | PhysicType_bullet | PhysicType_enermy | PhysicType_bomb;
         self.physicsBody.fieldBitMask = FieldType_none;
         
         //加一个引力吸收

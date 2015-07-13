@@ -29,7 +29,7 @@
     self.physicsBody.friction = 0;
     self.physicsBody.categoryBitMask = PhysicType_enermy;
     self.physicsBody.collisionBitMask = PhysicType_edge;
-    self.physicsBody.contactTestBitMask = PhysicType_player | PhysicType_bullet | PhysicType_blackHole;
+    self.physicsBody.contactTestBitMask = PhysicType_player | PhysicType_bullet | PhysicType_blackHole | PhysicType_bomb;
     self.physicsBody.fieldBitMask = FieldType_none;
 }
 -(void)initData{

@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "GameControllerView.h"
 #import <SpriteKit/SpriteKit.h>
+#import "GameScene.h"
 
 @interface GameViewController : UIViewController
 @property (weak, nonatomic) IBOutlet SKView *gameView;
+@property (strong, nonatomic) GameScene *gameScene;
 @property (weak, nonatomic) IBOutlet UIView *ViewUI;
 @property (weak, nonatomic) IBOutlet GameControllerView *LeftControllerView;
 @property (weak, nonatomic) IBOutlet GameControllerView *RightControllerView;
@@ -24,6 +26,9 @@
 - (IBAction)pauseClicked:(id)sender;
 -(void)pause;
 -(void)resume;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bombBtnTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bombLabelTopConstraint;
+- (IBAction)useBomb:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *pauseView;
 @property (weak, nonatomic) IBOutlet UIButton *resumeBtn;
