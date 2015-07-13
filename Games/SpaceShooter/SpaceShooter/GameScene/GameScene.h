@@ -12,7 +12,9 @@
 @class SpawnController;
 
 @interface GameScene : SKScene <GameControllerDelegate, SKPhysicsContactDelegate>
+@property (assign) CFTimeInterval preTime;
 @property (assign, nonatomic) CGSize worldSize;
+//UI
 @property (strong, nonatomic) SKShapeNode *worldPanel;
 @property (weak, nonatomic) GameControllerView *leftController;
 @property (weak, nonatomic) GameControllerView *rightController;
@@ -31,6 +33,8 @@
 @property (strong, nonatomic) NSMutableArray *arrayEnemies;
 @property (strong, nonatomic) NSMutableArray *arrayBlackHoles;
 @property (strong, nonatomic) NSMutableArray *arrayPoints;
-@property (strong, nonatomic) NSMutableArray *arrayGolds;
+//@property (strong, nonatomic) NSMutableArray *arrayGolds;
+
+-(void) start;
 
 @end

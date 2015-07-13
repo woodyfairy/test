@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		160FC6CF1B53915700C55206 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160FC6CE1B53915700C55206 /* GameKit.framework */; };
-		160FC6DD1B539BFA00C55206 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 160FC6DC1B539BFA00C55206 /* Info.plist */; };
-		160FC6E01B539CF300C55206 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 160FC6E21B539CF300C55206 /* InfoPlist.strings */; };
+		160FC6F31B53E44E00C55206 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 160FC6E21B539CF300C55206 /* InfoPlist.strings */; };
 		16BD162E1B5233BA00932BF1 /* Enemy_Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BD162D1B5233BA00932BF1 /* Enemy_Arrow.m */; };
 		16EAD7581B50FB7F0057390E /* Enemy_Box.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EAD7571B50FB7F0057390E /* Enemy_Box.m */; };
 		16EAD7671B50FBA60057390E /* 5side.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EAD7591B50FBA60057390E /* 5side.png */; };
@@ -360,10 +359,9 @@
 				889DAE571B47BB8E0041D0D7 /* fire.png in Resources */,
 				16EAD76E1B50FBA60057390E /* flower.png in Resources */,
 				16EAD76C1B50FBA60057390E /* box2.png in Resources */,
-				160FC6DD1B539BFA00C55206 /* Info.plist in Resources */,
 				889DAE541B4797EF0041D0D7 /* light1.sks in Resources */,
 				16EAD7711B50FBA60057390E /* star5R.png in Resources */,
-				160FC6E01B539CF300C55206 /* InfoPlist.strings in Resources */,
+				160FC6F31B53E44E00C55206 /* InfoPlist.strings in Resources */,
 				881A17221B45882E007AE66A /* ControllerCircle_backCircle.png in Resources */,
 				16EAD7681B50FBA60057390E /* 6side.png in Resources */,
 				16EAD76A1B50FBA60057390E /* blackHole.png in Resources */,

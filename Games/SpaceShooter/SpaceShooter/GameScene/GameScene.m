@@ -20,6 +20,28 @@ int startLevel = 1;
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
+    self.preTime = 0;
+    [self start];
+}
+-(void)start{
+    //清空所有
+    for (int i = (int)self.children.count - 1; i >= 0; i --) {
+        SKNode *node = [self.children objectAtIndex:i];
+        [node removeFromParent];
+        if (self.arrayEnemies) {
+            [self.arrayEnemies removeAllObjects];
+            self.arrayEnemies = nil;
+        }
+        if (self.arrayPoints) {
+            [self.arrayPoints removeAllObjects];
+            self.arrayPoints = nil;
+        }
+        if (self.arrayBlackHoles) {
+            [self.arrayBlackHoles removeAllObjects];
+            self.arrayBlackHoles = nil;
+        }
+    }
+    
     [self setBackgroundColor:[UIColor colorWithWhite:0.2 alpha:1]];
     self.physicsWorld.contactDelegate = self;
     self.worldSize = CGSizeMake(1500, 800);
@@ -74,9 +96,9 @@ int startLevel = 1;
     self.arrayEnemies = [[NSMutableArray alloc] init];
     self.arrayBlackHoles = [[NSMutableArray alloc] init];
     self.arrayPoints = [[NSMutableArray alloc] init];
-    self.arrayGolds = [[NSMutableArray alloc] init];
+    //self.arrayGolds = [[NSMutableArray alloc] init];
     
-    //UI
+    //读取数据，刷新UI
     self.score = 0;
     self.multiple = 1;
     self.lives = 1;
@@ -95,7 +117,6 @@ int startLevel = 1;
 -(void)GameControllerEndTouch:(GameControllerView *)controller{
 }
 
-CFTimeInterval preTime = 0;
 CFTimeInterval countTime = 0;
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
@@ -139,8 +160,20 @@ CFTimeInterval countTime = 0;
     }
     
     //间隔时间的
-    if (preTime != 0) {
-        CFTimeInterval delta = currentTime - preTime;
+    if (_preTime != 0) {
+        CFTimeInterval delta = currentTime - _preTime;
+        //加速的话action动画会有问题
+//        if (self.speed < 1) {
+//            self.speed += 0.3 * delta;
+//        }else if (self.speed > 1){
+//            self.speed = 1;
+//        }
+//        if (self.physicsWorld.speed < 1) {
+//            self.physicsWorld.speed += 0.3 * delta;
+//        }else if (self.physicsWorld.speed > 1){
+//            self.physicsWorld.speed = 1;
+//        }
+//        delta = delta * self.speed;
         //NSLog(@"time:%f", delta);
         countTime += delta;
         if (countTime >= self.player.fireInterval) {
@@ -195,7 +228,7 @@ CFTimeInterval countTime = 0;
         //NSLog(@"dataController:%@", [[DataController instance] log]);
     }
     
-    preTime = currentTime;
+    _preTime = currentTime;
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact{

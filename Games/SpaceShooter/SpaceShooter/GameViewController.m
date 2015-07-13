@@ -37,7 +37,7 @@
     [super viewDidLoad];
 
     // Configure the view.
-    SKView * skView = (SKView *)self.view;
+    SKView * skView = (SKView *)self.gameView;
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
     //skView.showsPhysics = YES;
@@ -78,7 +78,93 @@
     [scene.leftController setDelegate:scene];
     [scene.rightController setDelegate:scene];
     [skView presentScene:scene];
+    
+    //打断前暂停
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pause) name:UIApplicationWillResignActiveNotification object:nil];
+    
+    //暂停界面
+    UIView *visualEffectView = [[UIView alloc] init];
+    [visualEffectView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5f]];
+    //UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    [visualEffectView setClipsToBounds:YES];
+    [visualEffectView.layer setCornerRadius:10];
+    visualEffectView.frame = self.pauseView.bounds;
+    [self.pauseView addSubview:visualEffectView];
+    [self.pauseView sendSubviewToBack:visualEffectView];
+    visualEffectView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *constraint = nil;
+    constraint = [NSLayoutConstraint constraintWithItem:visualEffectView
+                                              attribute:NSLayoutAttributeLeading
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.pauseView
+                                              attribute:NSLayoutAttributeLeading
+                                             multiplier:1.0f
+                                               constant:50];
+    [self.pauseView addConstraint:constraint];
+    
+    constraint = [NSLayoutConstraint constraintWithItem:visualEffectView
+                                              attribute:NSLayoutAttributeTrailing
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.pauseView
+                                              attribute:NSLayoutAttributeTrailing
+                                             multiplier:1.0f
+                                               constant:-50];
+    [self.pauseView addConstraint:constraint];
+    
+    constraint = [NSLayoutConstraint constraintWithItem:visualEffectView
+                                              attribute:NSLayoutAttributeTop
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.pauseView
+                                              attribute:NSLayoutAttributeTop
+                                             multiplier:1.0f
+                                               constant:50];
+    [self.pauseView addConstraint:constraint];
+    
+    constraint = [NSLayoutConstraint constraintWithItem:visualEffectView
+                                              attribute:NSLayoutAttributeBottom
+                                              relatedBy:NSLayoutRelationEqual
+                                                 toItem:self.pauseView
+                                              attribute:NSLayoutAttributeBottom
+                                             multiplier:1.0f
+                                               constant:-50];
+    [self.pauseView addConstraint:constraint];
 }
+
+- (IBAction)pauseClicked:(id)sender {
+    [self pause];
+}
+
+-(void)pause{
+    SKView * skView = (SKView *)self.gameView;
+    [skView setPaused:YES];
+    
+    //显示暂停界面
+    self.pauseView.hidden = NO;
+    self.pauseView.alpha = 0;
+    [self.resumeBtn setEnabled:NO];
+    //[self.homeBtn setEnabled:NO];
+    [UIView animateWithDuration:1 animations:^{
+        self.pauseView.alpha = 1;
+    }completion:^(BOOL finished) {
+        [self.resumeBtn setEnabled:YES];
+        //[self.homeBtn setEnabled:YES];
+    }];
+}
+-(void)resume{
+    SKView * skView = (SKView *)self.gameView;
+    [skView setPaused:NO];
+    GameScene *scene = (GameScene *)skView.scene;
+    scene.preTime = 0;
+    //隐藏暂停界面
+    self.pauseView.hidden = YES;
+    
+//    self.gameView.scene.speed = 0.3f;
+//    self.gameView.scene.physicsWorld.speed = 0.3f;
+}
+- (IBAction)resumeClicked:(id)sender {
+    [self resume];
+}
+
 
 - (BOOL)shouldAutorotate
 {
@@ -103,5 +189,4 @@
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
-
 @end
