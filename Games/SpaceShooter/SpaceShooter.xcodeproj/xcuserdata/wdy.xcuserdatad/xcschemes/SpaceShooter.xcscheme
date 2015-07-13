@@ -34,6 +34,20 @@
                ReferencedContainer = "container:SpaceShooter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "160FC6E71B539D5600C55206"
+               BuildableName = "SpaceShooter Tests.xctest"
+               BlueprintName = "SpaceShooter Tests"
+               ReferencedContainer = "container:SpaceShooter.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -49,6 +63,16 @@
                BlueprintIdentifier = "8895A9191B42E18D007A54CE"
                BuildableName = "SpaceShooterTests.xctest"
                BlueprintName = "SpaceShooterTests"
+               ReferencedContainer = "container:SpaceShooter.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "160FC6E71B539D5600C55206"
+               BuildableName = "SpaceShooter Tests.xctest"
+               BlueprintName = "SpaceShooter Tests"
                ReferencedContainer = "container:SpaceShooter.xcodeproj">
             </BuildableReference>
          </TestableReference>

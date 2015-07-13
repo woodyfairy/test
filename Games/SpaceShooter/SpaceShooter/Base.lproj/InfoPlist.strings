@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  SpaceShooter
+
+  Created by wdy iMac on 15/7/13.
+  Copyright (c) 2015年 WuDongyang. All rights reserved.
+*/
+
+CFBundleDisplayName = "twinkle twinkle";
