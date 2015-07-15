@@ -37,8 +37,10 @@
     self.health = 1;
 }
 -(void)updateWithDelta:(NSTimeInterval)delta{
-    self.moveSpeed += 100 * delta;
-    self.moveAngular = atan2f(self.currentScene.player.position.y - self.position.y, self.currentScene.player.position.x - self.position.x);
-    self.physicsBody.velocity = CGVectorMake(cosf(self.moveAngular) * self.moveSpeed, sinf(self.moveAngular) * self.moveSpeed);
+    if (self.currentScene.player) {
+        self.moveSpeed += 100 * delta;
+        self.moveAngular = atan2f(self.currentScene.player.position.y - self.position.y, self.currentScene.player.position.x - self.position.x);
+        self.physicsBody.velocity = CGVectorMake(cosf(self.moveAngular) * self.moveSpeed, sinf(self.moveAngular) * self.moveSpeed);
+    }
 }
 @end

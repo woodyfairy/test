@@ -92,7 +92,7 @@
     [visualEffectView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.5f]];
     //UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
     [visualEffectView setClipsToBounds:YES];
-    [visualEffectView.layer setCornerRadius:10];
+    [visualEffectView.layer setCornerRadius:15];
     visualEffectView.frame = self.pauseView.bounds;
     [self.pauseView addSubview:visualEffectView];
     [self.pauseView sendSubviewToBack:visualEffectView];
@@ -133,6 +133,11 @@
                                              multiplier:1.0f
                                                constant:-50];
     [self.pauseView addConstraint:constraint];
+    
+    //gameOverView
+    [self.gameOverEffectView setClipsToBounds:YES];
+    [self.gameOverEffectView.layer setCornerRadius:15];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameOverView) name:@"GameOver" object:nil];
 }
 
 - (IBAction)pauseClicked:(id)sender {
@@ -172,6 +177,24 @@
 }
 - (IBAction)resumeClicked:(id)sender {
     [self resume];
+}
+
+-(void)showGameOverView{
+    self.gameOverView.hidden = NO;
+    [self.gameOverScoreLabel setText:[NSString stringWithFormat:@"SCORE:%ld", self.gameScene.score]];
+    if (true) {
+        [self.gameOverScoreNew setHidden:NO];
+    }else{
+        [self.gameOverScoreNew setHidden:YES];
+    }
+    [self.gameOverStarLabel setText:[NSString stringWithFormat:@"+%d", self.gameScene.multiple]];
+}
+- (IBAction)gameOverClickStart:(id)sender {
+    [self.gameScene start];
+    [self.gameOverView setHidden:YES];
+}
+
+- (IBAction)gameOverClickHome:(id)sender {
 }
 
 

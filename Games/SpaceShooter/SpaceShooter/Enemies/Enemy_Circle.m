@@ -34,7 +34,7 @@
     self.health = 1;
 }
 -(void)updateWithDelta:(NSTimeInterval)delta{
-    if (self.isActive) {
+    if (self.isActive && self.currentScene.player) {
         self.moveAngular = atan2f(self.currentScene.player.position.y - self.position.y, self.currentScene.player.position.x - self.position.x);
         float force = 3;
         [self.physicsBody applyForce:CGVectorMake(cosf(self.moveAngular) * force, sinf(self.moveAngular) * force)];

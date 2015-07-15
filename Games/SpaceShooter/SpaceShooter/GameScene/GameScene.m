@@ -133,41 +133,43 @@ CFTimeInterval countTime = 0;
     /* Called before each frame is rendered */
     //NSLog(@"time:%f", currentTime);
     
-    //玩家控制
-    self.player.zRotation = -self.leftController.arc;
-    float speed = self.leftController.value * self.player.maxSpeed;
-    self.player.physicsBody.velocity = CGVectorMake(cosf(-self.leftController.arc) * speed, sinf(-self.leftController.arc) * speed);
-    //[self.player.emitter setParticleBirthRate:(self.leftController.value * self.player.maxLight)];//这里好像还有问题
-    int shouldBirth = (int)(self.leftController.value * self.player.maxLight) / 10 * 10;
-    if (self.player.emitter.particleBirthRate != shouldBirth) {
-        [self.player.emitter setParticleBirthRate:shouldBirth];
-    }
-    //NSLog(@"brithRage:%f", self.player.emitter.particleBirthRate);
-    self.player.emitter.particleRotation = self.player.zRotation + M_PI_2;
-    self.player.emitter.emissionAngle = self.player.zRotation + M_PI;
-    //NSLog(@"speed:%f,%f", self.player.physicsBody.velocity.dx, self.player.physicsBody.velocity.dy);
-//    if (self.player.position.x < -self.worldSize.width/2) {
-//        self.player.position = CGPointMake(-self.worldSize.width/2, self.player.position.y);
-//    }else if (self.player.position.x > self.worldSize.width/2) {
-//        self.player.position = CGPointMake(self.worldSize.width/2, self.player.position.y);
-//    }
-//    if (self.player.position.y < -self.worldSize.height/2) {
-//        self.player.position = CGPointMake(self.player.position.x, -self.worldSize.height/2);
-//    }else if (self.player.position.y > self.worldSize.height/2) {
-//        self.player.position = CGPointMake(self.player.position.x, self.worldSize.height/2);
-//    }
-    
-    //镜头控制
-    CGPoint posInScreen = [self convertPoint:self.player.position fromNode:self.worldPanel];
-    if (posInScreen.x < self.size.width/3) {
-        self.worldPanel.position = CGPointMake(self.worldPanel.position.x + self.size.width/3 - posInScreen.x, self.worldPanel.position.y);
-    }else if (posInScreen.x > self.size.width/3*2){
-        self.worldPanel.position = CGPointMake(self.worldPanel.position.x + self.size.width/3*2 - posInScreen.x, self.worldPanel.position.y);
-    }
-    if (posInScreen.y < self.size.height/5*2) {
-        self.worldPanel.position = CGPointMake(self.worldPanel.position.x, self.worldPanel.position.y + self.size.height/5*2 - posInScreen.y);
-    }else if (posInScreen.y > self.size.height/5*3){
-        self.worldPanel.position = CGPointMake(self.worldPanel.position.x, self.worldPanel.position.y + self.size.height/5*3 - posInScreen.y);
+    if (self.player && self.playing) {
+        //玩家控制
+        self.player.zRotation = -self.leftController.arc;
+        float speed = self.leftController.value * self.player.maxSpeed;
+        self.player.physicsBody.velocity = CGVectorMake(cosf(-self.leftController.arc) * speed, sinf(-self.leftController.arc) * speed);
+        //[self.player.emitter setParticleBirthRate:(self.leftController.value * self.player.maxLight)];//这里好像还有问题
+        int shouldBirth = (int)(self.leftController.value * self.player.maxLight) / 10 * 10;
+        if (self.player.emitter.particleBirthRate != shouldBirth) {
+            [self.player.emitter setParticleBirthRate:shouldBirth];
+        }
+        //NSLog(@"brithRage:%f", self.player.emitter.particleBirthRate);
+        self.player.emitter.particleRotation = self.player.zRotation + M_PI_2;
+        self.player.emitter.emissionAngle = self.player.zRotation + M_PI;
+        //NSLog(@"speed:%f,%f", self.player.physicsBody.velocity.dx, self.player.physicsBody.velocity.dy);
+        //    if (self.player.position.x < -self.worldSize.width/2) {
+        //        self.player.position = CGPointMake(-self.worldSize.width/2, self.player.position.y);
+        //    }else if (self.player.position.x > self.worldSize.width/2) {
+        //        self.player.position = CGPointMake(self.worldSize.width/2, self.player.position.y);
+        //    }
+        //    if (self.player.position.y < -self.worldSize.height/2) {
+        //        self.player.position = CGPointMake(self.player.position.x, -self.worldSize.height/2);
+        //    }else if (self.player.position.y > self.worldSize.height/2) {
+        //        self.player.position = CGPointMake(self.player.position.x, self.worldSize.height/2);
+        //    }
+        
+        //镜头控制
+        CGPoint posInScreen = [self convertPoint:self.player.position fromNode:self.worldPanel];
+        if (posInScreen.x < self.size.width/3) {
+            self.worldPanel.position = CGPointMake(self.worldPanel.position.x + self.size.width/3 - posInScreen.x, self.worldPanel.position.y);
+        }else if (posInScreen.x > self.size.width/3*2){
+            self.worldPanel.position = CGPointMake(self.worldPanel.position.x + self.size.width/3*2 - posInScreen.x, self.worldPanel.position.y);
+        }
+        if (posInScreen.y < self.size.height/5*2) {
+            self.worldPanel.position = CGPointMake(self.worldPanel.position.x, self.worldPanel.position.y + self.size.height/5*2 - posInScreen.y);
+        }else if (posInScreen.y > self.size.height/5*3){
+            self.worldPanel.position = CGPointMake(self.worldPanel.position.x, self.worldPanel.position.y + self.size.height/5*3 - posInScreen.y);
+        }
     }
     
     //间隔时间的
@@ -187,7 +189,7 @@ CFTimeInterval countTime = 0;
 //        delta = delta * self.speed;
         //NSLog(@"time:%f", delta);
         countTime += delta;
-        if (countTime >= self.player.fireInterval) {
+        if (countTime >= self.player.fireInterval && self.playing) {
             countTime = 0;
             //玩家子弹
             int bulletNum = 1;
@@ -226,10 +228,11 @@ CFTimeInterval countTime = 0;
                 anguler += angRange/2;
             }
         }
-        //敌人控制
+        //刷新控制
         if (self.spawnController && self.playing) {
             [self.spawnController updateWithDelta:delta];
         }
+        //敌人控制
         for (EnemyBase *enemy in self.arrayEnemies) {
             if ([enemy respondsToSelector:@selector(updateWithDelta:)]) {
                 [enemy updateWithDelta:delta];
@@ -270,6 +273,15 @@ CFTimeInterval countTime = 0;
             //[self useBomb];
             //玩家碰撞，死掉
             [self flashColor:[UIColor redColor]];
+            if (self.lives == 0) {
+                //最后一命
+                [self gameOver];
+                [self.player removeFromParent];
+                self.player = nil;
+                return;
+            }else{
+                self.lives --;
+            }
             for (int i = (int)self.arrayEnemies.count - 1; i >= 0; i --) {
                 EnemyBase *enemy = [self.arrayEnemies objectAtIndex:i];
                 if (enemy.group) {
@@ -306,11 +318,7 @@ CFTimeInterval countTime = 0;
                 [bh destroy];
                 [self.arrayBlackHoles removeObject:bh];
             }
-            if (self.lives == 0) {
-                [self gameOver];
-            }else{
-                self.lives --;
-            }
+            
         }else if (other.categoryBitMask == PhysicType_point){
             //拾取点点
             [other.node removeFromParent];
@@ -594,7 +602,6 @@ CFTimeInterval countTime = 0;
         enemy.currentScene = self;
         [self.arrayEnemies addObject:enemy];
         [self.worldPanel addChild:enemy];
-        [enemy setPosition:blackHole.position];
         [enemy createPhysicBody];//加到场景后再加物理，否则进不来边界
         [enemy setScale:0.6f];
         //NSLog(@"enemyPos:%f,%f", enemy.position.x, enemy.position.y);
@@ -605,6 +612,8 @@ CFTimeInterval countTime = 0;
         SKAction *action = [SKAction moveBy:CGVectorMake(cosf(enemy.moveAngular) * dis, sinf(enemy.moveAngular) * dis) duration:2];
         action.timingMode = SKActionTimingEaseOut;
         [enemy runAction:action];
+        
+        [enemy setPosition:CGPointMake(blackHole.position.x + cosf(enemy.moveAngular)*20, blackHole.position.y + sinf(enemy.moveAngular) * 20)];
     }
     [blackHole destroy];
     [self.arrayBlackHoles removeObject:blackHole];
@@ -652,10 +661,10 @@ CFTimeInterval countTime = 0;
 }
 
 -(void)gameOver{
-    return;//test
+    //return;//test
     self.playing = false;
-    [self.view setPaused:YES];
     //显示页面
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"GameOver" object:nil];
     
     //记录数据
 }

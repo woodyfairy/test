@@ -36,7 +36,7 @@
     self.moveSpeed = 120;
 }
 -(void)updateWithDelta:(NSTimeInterval)delta{
-    if (self.isActive) {
+    if (self.isActive && self.currentScene.player) {
         self.moveAngular = atan2f(self.currentScene.player.position.y - self.position.y, self.currentScene.player.position.x - self.position.x);
         self.physicsBody.velocity = CGVectorMake(cosf(self.moveAngular) * self.moveSpeed, sinf(self.moveAngular) * self.moveSpeed);
     }

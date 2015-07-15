@@ -32,8 +32,18 @@
 
 @property (weak, nonatomic) IBOutlet UIView *pauseView;
 @property (weak, nonatomic) IBOutlet UIButton *resumeBtn;
-@property (weak, nonatomic) IBOutlet UIButton *homeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *pauseHomeBtn;
 - (IBAction)resumeClicked:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIView *gameOverView;
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *gameOverEffectView;
+@property (weak, nonatomic) IBOutlet UILabel *gameOverScoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *gameOverStarLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *gameOverScoreNew;
+@property (weak, nonatomic) IBOutlet UIButton *gameOverStartBtn;
+@property (weak, nonatomic) IBOutlet UIButton *gameOverHomeBtn;
+- (IBAction)gameOverClickStart:(id)sender;
+- (IBAction)gameOverClickHome:(id)sender;
 
 
 @end
