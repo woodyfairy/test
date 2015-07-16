@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F6a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -123,6 +123,9 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="pauseHomeClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="MHf-ps-s8t"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -215,11 +218,9 @@
                                                         <constraint firstItem="1Qn-2J-ANu" firstAttribute="centerY" secondItem="qoo-4n-rlz" secondAttribute="centerY" id="ouS-Xq-2tp"/>
                                                         <constraint firstItem="0AK-0l-nJb" firstAttribute="bottom" secondItem="qoo-4n-rlz" secondAttribute="top" constant="-4" id="pOW-We-g8a"/>
                                                         <constraint firstItem="1Qn-2J-ANu" firstAttribute="trailing" secondItem="qoo-4n-rlz" secondAttribute="leading" constant="-8" id="r8i-0l-LUs"/>
+                                                        <constraint firstItem="CSn-sw-5BM" firstAttribute="top" secondItem="1IX-px-GEu" secondAttribute="top" constant="20" id="why-Ro-gBH"/>
                                                     </constraints>
                                                 </view>
-                                                <constraints>
-                                                    <constraint firstItem="CSn-sw-5BM" firstAttribute="top" secondItem="TCa-iO-Yuc" secondAttribute="top" constant="20" id="D5b-Lc-4QI"/>
-                                                </constraints>
                                                 <blurEffect style="dark"/>
                                             </visualEffectView>
                                         </subviews>
@@ -229,6 +230,90 @@
                                             <constraint firstItem="TCa-iO-Yuc" firstAttribute="leading" secondItem="NJl-ZY-4Wy" secondAttribute="leading" constant="75" id="KBr-Jy-nxu"/>
                                             <constraint firstAttribute="trailing" secondItem="TCa-iO-Yuc" secondAttribute="trailing" constant="75" id="KmI-NU-Qtp"/>
                                             <constraint firstItem="TCa-iO-Yuc" firstAttribute="top" secondItem="NJl-ZY-4Wy" secondAttribute="top" constant="50" id="sw1-AZ-hZm"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4H-Pf-TZn" userLabel="homeView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <subviews>
+                                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4z-cl-HeQ">
+                                                <rect key="frame" x="75" y="50" width="450" height="500"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="z2S-DG-jR4">
+                                                    <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2L-fq-7bW">
+                                                            <rect key="frame" x="145" y="60" width="160" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="160" id="bn7-tA-0di"/>
+                                                                <constraint firstAttribute="height" constant="40" id="ddz-5Z-8eP"/>
+                                                            </constraints>
+                                                            <state key="normal" image="start.png">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="homeStartClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="GQt-BB-gd9"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Quf-sd-Hpi">
+                                                            <rect key="frame" x="145" y="102" width="160" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="IBC-OI-vig"/>
+                                                                <constraint firstAttribute="width" constant="160" id="Q65-4D-Xam"/>
+                                                            </constraints>
+                                                            <state key="normal" image="powerup.png">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="homePowerupClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="DWm-5T-eNR"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekm-gv-VSu">
+                                                            <rect key="frame" x="145" y="144" width="160" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="P3I-ki-CyO"/>
+                                                                <constraint firstAttribute="width" constant="160" id="geG-1y-rUb"/>
+                                                            </constraints>
+                                                            <state key="normal" image="shop.png">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="homeShopClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="0Hu-5K-ifm"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwl-7O-4Qt">
+                                                            <rect key="frame" x="145" y="186" width="160" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="160" id="lP1-gw-nEB"/>
+                                                                <constraint firstAttribute="height" constant="40" id="m3H-f3-1iB"/>
+                                                            </constraints>
+                                                            <state key="normal" image="ranking.png">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="homeRankingClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ZiZ-wv-1eq"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="centerX" secondItem="W2L-fq-7bW" secondAttribute="centerX" id="9mM-Up-JPj"/>
+                                                        <constraint firstItem="Quf-sd-Hpi" firstAttribute="leading" secondItem="W2L-fq-7bW" secondAttribute="leading" id="Sxn-pC-11q"/>
+                                                        <constraint firstItem="Ekm-gv-VSu" firstAttribute="leading" secondItem="Quf-sd-Hpi" secondAttribute="leading" id="YUA-JB-Zi6"/>
+                                                        <constraint firstItem="W2L-fq-7bW" firstAttribute="top" secondItem="z2S-DG-jR4" secondAttribute="top" constant="60" id="az4-Us-94j"/>
+                                                        <constraint firstItem="Quf-sd-Hpi" firstAttribute="top" secondItem="W2L-fq-7bW" secondAttribute="bottom" constant="2" id="byJ-yT-2DI"/>
+                                                        <constraint firstItem="Ekm-gv-VSu" firstAttribute="bottom" secondItem="gwl-7O-4Qt" secondAttribute="top" constant="-2" id="dxG-af-NVy"/>
+                                                        <constraint firstItem="Ekm-gv-VSu" firstAttribute="leading" secondItem="gwl-7O-4Qt" secondAttribute="leading" id="f6c-EI-7ki"/>
+                                                        <constraint firstItem="Ekm-gv-VSu" firstAttribute="top" secondItem="Quf-sd-Hpi" secondAttribute="bottom" constant="2" id="vvU-NP-b3B"/>
+                                                    </constraints>
+                                                </view>
+                                                <blurEffect style="dark"/>
+                                            </visualEffectView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="h4z-cl-HeQ" secondAttribute="bottom" constant="50" id="KOz-GD-nrl"/>
+                                            <constraint firstAttribute="trailing" secondItem="h4z-cl-HeQ" secondAttribute="trailing" constant="75" id="UAo-mw-QPH"/>
+                                            <constraint firstItem="h4z-cl-HeQ" firstAttribute="top" secondItem="m4H-Pf-TZn" secondAttribute="top" constant="50" id="WVY-qk-tp9"/>
+                                            <constraint firstItem="h4z-cl-HeQ" firstAttribute="leading" secondItem="m4H-Pf-TZn" secondAttribute="leading" constant="75" id="tSV-JG-Ys4"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -248,6 +333,7 @@
                                     <constraint firstItem="nc0-AN-w4L" firstAttribute="leading" secondItem="XTu-w1-9c4" secondAttribute="leading" id="Nu4-gN-G6W"/>
                                     <constraint firstAttribute="trailing" secondItem="G1S-eD-dLX" secondAttribute="trailing" id="VZE-aE-cjE"/>
                                     <constraint firstItem="mYn-du-aCl" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" constant="10" id="ZZZ-JF-Khm"/>
+                                    <constraint firstAttribute="trailing" secondItem="m4H-Pf-TZn" secondAttribute="trailing" id="c2F-KI-wHP"/>
                                     <constraint firstAttribute="trailing" secondItem="NJl-ZY-4Wy" secondAttribute="trailing" id="cJG-Ce-Nre"/>
                                     <constraint firstItem="ADQ-tt-W2R" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" constant="28" id="cmZ-i6-AhM"/>
                                     <constraint firstItem="gPc-FH-7wh" firstAttribute="leading" secondItem="XTu-w1-9c4" secondAttribute="leading" constant="10" id="cmi-Gx-aQi"/>
@@ -255,6 +341,8 @@
                                     <constraint firstItem="QeU-zd-X6Z" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" constant="5" id="gcB-yg-0Om"/>
                                     <constraint firstAttribute="bottom" secondItem="nc0-AN-w4L" secondAttribute="bottom" id="i1e-UD-Q0z"/>
                                     <constraint firstItem="fns-J2-UbC" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" constant="5" id="inY-Vt-isf"/>
+                                    <constraint firstAttribute="bottom" secondItem="m4H-Pf-TZn" secondAttribute="bottom" id="k22-u8-CMk"/>
+                                    <constraint firstItem="m4H-Pf-TZn" firstAttribute="leading" secondItem="XTu-w1-9c4" secondAttribute="leading" id="ltb-09-tnW"/>
                                     <constraint firstAttribute="width" secondItem="ckb-jP-cZs" secondAttribute="width" multiplier="2" id="mqN-gX-Fco"/>
                                     <constraint firstAttribute="top" secondItem="uft-Ld-wKE" secondAttribute="top" constant="-20" id="nb4-m7-tgZ"/>
                                     <constraint firstAttribute="trailing" secondItem="FlQ-Nb-1OL" secondAttribute="trailing" constant="10" id="nrb-Ef-Cge"/>
@@ -264,6 +352,7 @@
                                     <constraint firstAttribute="bottom" secondItem="ckb-jP-cZs" secondAttribute="bottom" id="syO-VS-irB"/>
                                     <constraint firstItem="FlQ-Nb-1OL" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" constant="10" id="t1c-ou-Aen"/>
                                     <constraint firstItem="mYn-du-aCl" firstAttribute="leading" secondItem="QeU-zd-X6Z" secondAttribute="trailing" constant="10" id="tPf-mA-T1Y"/>
+                                    <constraint firstItem="m4H-Pf-TZn" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" id="vKG-F5-oqa"/>
                                     <constraint firstItem="XfJ-P7-A5w" firstAttribute="top" secondItem="XTu-w1-9c4" secondAttribute="top" id="w8j-xK-bBM"/>
                                     <constraint firstItem="FlQ-Nb-1OL" firstAttribute="leading" secondItem="fns-J2-UbC" secondAttribute="trailing" constant="10" id="zTY-vn-FhV"/>
                                 </constraints>
@@ -285,6 +374,7 @@
                         <outlet property="LeftControllerView" destination="nc0-AN-w4L" id="thh-hD-Pc3"/>
                         <outlet property="RightControllerView" destination="ckb-jP-cZs" id="FOE-ed-4hF"/>
                         <outlet property="ViewUI" destination="XTu-w1-9c4" id="Dtw-y9-KKb"/>
+                        <outlet property="bombBtn" destination="uft-Ld-wKE" id="hK2-dW-Ytd"/>
                         <outlet property="bombBtnTopConstraint" destination="nb4-m7-tgZ" id="OPL-NU-FUK"/>
                         <outlet property="bombLabelTopConstraint" destination="t1c-ou-Aen" id="0xJ-f7-rsf"/>
                         <outlet property="bombsLabel" destination="FlQ-Nb-1OL" id="48J-d1-LLv"/>
@@ -296,18 +386,25 @@
                         <outlet property="gameOverStartBtn" destination="O0D-z6-kXR" id="h3E-bT-DuM"/>
                         <outlet property="gameOverView" destination="NJl-ZY-4Wy" id="xru-sQ-JHQ"/>
                         <outlet property="gameView" destination="5A7-s3-FFb" id="k7N-iS-xTI"/>
+                        <outlet property="homeEffectView" destination="h4z-cl-HeQ" id="my0-FY-w4q"/>
+                        <outlet property="homePowerupBtn" destination="Quf-sd-Hpi" id="Kve-Rl-PBi"/>
+                        <outlet property="homeRankingBtn" destination="gwl-7O-4Qt" id="5ZM-Ff-rIe"/>
+                        <outlet property="homeShopBtn" destination="Ekm-gv-VSu" id="0It-WX-kx3"/>
+                        <outlet property="homeStartBtn" destination="W2L-fq-7bW" id="vB8-H0-Pic"/>
+                        <outlet property="homeView" destination="m4H-Pf-TZn" id="Ee1-M4-nME"/>
                         <outlet property="livesLabel" destination="mYn-du-aCl" id="n0T-f3-Wcy"/>
                         <outlet property="multipleLabel" destination="ADQ-tt-W2R" id="UsU-xt-Kpr"/>
                         <outlet property="pauseBtn" destination="XfJ-P7-A5w" id="OFa-ip-Yjh"/>
                         <outlet property="pauseHomeBtn" destination="ZF4-x7-tL8" id="4k5-WQ-Wbe"/>
                         <outlet property="pauseView" destination="G1S-eD-dLX" id="7dC-qt-mAK"/>
+                        <outlet property="playerIcon" destination="QeU-zd-X6Z" id="FMt-Az-Zfh"/>
                         <outlet property="resumeBtn" destination="Tlv-Rr-CL4" id="To4-SD-zvS"/>
                         <outlet property="scoreLabel" destination="gPc-FH-7wh" id="CIk-kh-LcX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="408"/>
+            <point key="canvasLocation" x="58" y="480"/>
         </scene>
     </scenes>
     <resources>
@@ -316,7 +413,10 @@
         <image name="new.png" width="126" height="36"/>
         <image name="pauseBtn.png" width="100" height="60"/>
         <image name="playerIcon.png" width="34" height="32"/>
+        <image name="powerup.png" width="320" height="80"/>
+        <image name="ranking.png" width="320" height="80"/>
         <image name="resume.png" width="320" height="80"/>
+        <image name="shop.png" width="320" height="80"/>
         <image name="star.png" width="39" height="38"/>
         <image name="start.png" width="320" height="80"/>
     </resources>

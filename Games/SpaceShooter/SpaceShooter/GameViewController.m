@@ -77,10 +77,13 @@
     [self.bombsLabel setFont:[UIFont fontWithName:UIFontName size:17]];
     self.gameScene.scoreLabel = self.scoreLabel;
     self.gameScene.multipleLabel = self.multipleLabel;
+    self.gameScene.playerIcon = self.playerIcon;
     self.gameScene.livesLabel = self.livesLabel;
     self.gameScene.bombsLabel = self.bombsLabel;
     [self.gameScene.leftController setDelegate:self.gameScene];
     [self.gameScene.rightController setDelegate:self.gameScene];
+    self.gameScene.pauseBtn = self.pauseBtn;
+    self.gameScene.bombBtn = self.bombBtn;
     [skView presentScene:self.gameScene];
     
     //打断前暂停
@@ -138,8 +141,14 @@
     [self.gameOverEffectView setClipsToBounds:YES];
     [self.gameOverEffectView.layer setCornerRadius:15];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameOverView) name:@"GameOver" object:nil];
+    
+    //homeView
+    [self.homeEffectView setClipsToBounds:YES];
+    [self.homeEffectView.layer setCornerRadius:15];
+    [self showHome];
 }
 
+//游戏UI
 - (IBAction)pauseClicked:(id)sender {
     [self pause];
 }
@@ -160,6 +169,15 @@
         //[self.homeBtn setEnabled:YES];
     }];
 }
+
+- (IBAction)useBomb:(id)sender {
+    [self.gameScene useBomb];
+}
+
+//暂停界面
+- (IBAction)resumeClicked:(id)sender {
+    [self resume];
+}
 -(void)resume{
     SKView * skView = (SKView *)self.gameView;
     [skView setPaused:NO];
@@ -168,17 +186,15 @@
     //隐藏暂停界面
     self.pauseView.hidden = YES;
     
-//    self.gameView.scene.speed = 0.3f;
-//    self.gameView.scene.physicsWorld.speed = 0.3f;
+    //    self.gameView.scene.speed = 0.3f;
+    //    self.gameView.scene.physicsWorld.speed = 0.3f;
+}
+- (IBAction)pauseHomeClick:(id)sender {
+    [self.pauseView setHidden:YES];
+    [self showHome];
 }
 
-- (IBAction)useBomb:(id)sender {
-    [self.gameScene useBomb];
-}
-- (IBAction)resumeClicked:(id)sender {
-    [self resume];
-}
-
+//gameoverView
 -(void)showGameOverView{
     self.gameOverView.hidden = NO;
     [self.gameOverScoreLabel setText:[NSString stringWithFormat:@"SCORE:%ld", self.gameScene.score]];
@@ -195,7 +211,52 @@
 }
 
 - (IBAction)gameOverClickHome:(id)sender {
+    [self.gameOverView setHidden:YES];
+    [self showHome];
 }
+
+//主界面
+-(void) showHome{
+    [self.homeView setHidden:NO];
+    
+    //清空
+    [self.gameScene clean];
+    
+    [self.gameScene end];
+    [self.gameView setPaused:NO];
+    
+    self.homeBackEffect = [SKEmitterNode nodeWithFileNamed:@"HomeBackEffect"];
+    [self.gameScene addChild:self.homeBackEffect];
+    [self.homeBackEffect setPosition:CGPointMake(CGRectGetMidX(self.gameScene.frame), CGRectGetMidY(self.gameScene.frame))];
+    [self viewWillLayoutSubviews];
+}
+-(void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    if (self.homeBackEffect) {
+        float widthRatio = self.homeEffectView.frame.size.width/self.homeView.frame.size.width;
+        float heightRatio = self.homeEffectView.frame.size.height/self.homeView.frame.size.height;
+        [self.homeBackEffect setParticlePositionRange:CGVectorMake(self.gameScene.size.width * widthRatio, self.gameScene.size.height * heightRatio)];
+    }
+}
+-(void) hideHome{
+    [self.homeView setHidden:YES];
+    [self.homeBackEffect removeFromParent];
+    self.homeBackEffect = nil;
+}
+- (IBAction)homeStartClick:(id)sender {
+    [self hideHome];
+    [self.gameScene start];
+}
+
+- (IBAction)homePowerupClick:(id)sender {
+}
+
+- (IBAction)homeShopClick:(id)sender {
+}
+
+- (IBAction)homeRankingClick:(id)sender {
+}
+
 
 
 - (BOOL)shouldAutorotate

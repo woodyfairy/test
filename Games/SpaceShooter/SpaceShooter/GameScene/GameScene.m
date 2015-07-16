@@ -53,23 +53,12 @@ int startLevel = 1;
     [self.colorCover setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
     [self.colorCover setZPosition:3];
     
-    [self start];
+    self.playing = NO;
+    //[self start];
 }
 -(void)start{
     //清空所有
-    for (int i = (int)self.worldPanel.children.count - 1; i >= 0; i --) {
-        SKNode *node = [self.worldPanel.children objectAtIndex:i];
-        [node removeFromParent];
-        if (self.arrayEnemies) {
-            [self.arrayEnemies removeAllObjects];
-        }
-        if (self.arrayPoints) {
-            [self.arrayPoints removeAllObjects];
-        }
-        if (self.arrayBlackHoles) {
-            [self.arrayBlackHoles removeAllObjects];
-        }
-    }
+    [self clean];
     
     //网格
     CGMutablePathRef path = CGPathCreateMutable();
@@ -98,7 +87,6 @@ int startLevel = 1;
     self.player = [PlayerSprite create];
     [self.player setZPosition:0];
     [self.worldPanel addChild:self.player];
-    [self.worldPanel setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
     [self.player setPosition:CGPointZero];
     [self.player.emitter setTargetNode:self.worldPanel];
     
@@ -115,6 +103,34 @@ int startLevel = 1;
     [self updateUI];
     
     [self.view setPaused:NO];
+    
+    //UI
+    [self.scoreLabel setHidden:NO];
+    [self.multipleLabel setHidden:NO];
+    [self.pauseBtn setHidden:NO];
+    [self.bombBtn setHidden:NO];
+    [self.playerIcon setHidden:NO];
+    [self.livesLabel setHidden:NO];
+    [self.bombsLabel setHidden:NO];
+}
+-(void)end{
+    self.playing = false;
+    
+    //UI
+    [self.scoreLabel setHidden:YES];
+    [self.multipleLabel setHidden:YES];
+    [self.pauseBtn setHidden:YES];
+    [self.bombBtn setHidden:YES];
+    [self.playerIcon setHidden:YES];
+    [self.livesLabel setHidden:YES];
+    [self.bombsLabel setHidden:YES];
+}
+-(void) clean{
+    [self.worldPanel removeAllChildren];
+    [self.arrayEnemies removeAllObjects];
+    [self.arrayBlackHoles removeAllObjects];
+    [self.arrayPoints removeAllObjects];
+    [self.worldPanel setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
 }
 -(void)updateUI{
     [self.scoreLabel setText:[NSString stringWithFormat:@"Score:%ld", self.score]];
@@ -662,7 +678,7 @@ CFTimeInterval countTime = 0;
 
 -(void)gameOver{
     //return;//test
-    self.playing = false;
+    [self end];
     //显示页面
     [[NSNotificationCenter defaultCenter] postNotificationName:@"GameOver" object:nil];
     

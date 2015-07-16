@@ -21,8 +21,11 @@
 @property (weak, nonatomic) GameControllerView *rightController;
 @property (weak, nonatomic) UILabel *scoreLabel;
 @property (weak, nonatomic) UILabel *multipleLabel;
+@property (weak, nonatomic) UIImageView *playerIcon;
 @property (weak, nonatomic) UILabel *livesLabel;
 @property (weak, nonatomic) UILabel *bombsLabel;
+@property (weak, nonatomic) UIButton *pauseBtn;
+@property (weak, nonatomic) UIButton *bombBtn;
 -(void) updateUI;
 @property (assign, nonatomic) long score;
 @property (assign, nonatomic) int multiple;
@@ -40,6 +43,8 @@
 //@property (strong, nonatomic) NSMutableArray *arrayGolds;
 
 -(void) start;
+-(void) end;
+-(void) clean;
 -(void)useBomb;
 
 @end

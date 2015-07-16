@@ -45,6 +45,7 @@
 		883385351B56D07800BC5358 /* shop.png in Resources */ = {isa = PBXBuildFile; fileRef = 883385371B56D07800BC5358 /* shop.png */; };
 		883385391B56D07D00BC5358 /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 8833853B1B56D07D00BC5358 /* start.png */; };
 		8833853E1B56EAD100BC5358 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 8833853D1B56EAD100BC5358 /* star.png */; };
+		883A8C9B1B5825CC00EB49B1 /* HomeBackEffect.sks in Resources */ = {isa = PBXBuildFile; fileRef = 883A8C9A1B5825CC00EB49B1 /* HomeBackEffect.sks */; };
 		884982EB1B4EBFDF00C5EBB9 /* GameControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 884982EA1B4EBFDF00C5EBB9 /* GameControllerView.m */; };
 		884982F21B4EBFE800C5EBB9 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 884982EE1B4EBFE800C5EBB9 /* GameScene.m */; };
 		884982F31B4EBFE800C5EBB9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 884982EF1B4EBFE800C5EBB9 /* GameScene.sks */; };
@@ -120,6 +121,7 @@
 		8833853A1B56D07D00BC5358 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/start.png; sourceTree = "<group>"; };
 		8833853C1B56D07E00BC5358 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/start.png"; sourceTree = "<group>"; };
 		8833853D1B56EAD100BC5358 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		883A8C9A1B5825CC00EB49B1 /* HomeBackEffect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HomeBackEffect.sks; sourceTree = "<group>"; };
 		884982E91B4EBFDF00C5EBB9 /* GameControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameControllerView.h; sourceTree = "<group>"; };
 		884982EA1B4EBFDF00C5EBB9 /* GameControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameControllerView.m; sourceTree = "<group>"; };
 		884982ED1B4EBFE800C5EBB9 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				889DAE5C1B4B063A0041D0D7 /* spark.png */,
 				16EAD7781B510B3A0057390E /* EnemyExplode.sks */,
 				16EAD77C1B510CAE0057390E /* EnemyPiece.png */,
+				883A8C9A1B5825CC00EB49B1 /* HomeBackEffect.sks */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				883385351B56D07800BC5358 /* shop.png in Resources */,
 				889DAE511B4797BE0041D0D7 /* playerLight.png in Resources */,
 				889DAE5D1B4B063A0041D0D7 /* BulletFlash.sks in Resources */,
+				883A8C9B1B5825CC00EB49B1 /* HomeBackEffect.sks in Resources */,
 				16EAD7731B50FBA60057390E /* star8.png in Resources */,
 				881BDEEB1B54349D00B74D9B /* Bomb.png in Resources */,
 				16EAD77A1B510B3A0057390E /* EnemyExplode.sks in Resources */,
