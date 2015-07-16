@@ -281,14 +281,15 @@ CFTimeInterval countTime = 0;
             return;
         }
         if (other.categoryBitMask == PhysicType_enermy || other.node.physicsBody.categoryBitMask == PhysicType_blackHole) {
-            if (self.colorCover.alpha > 0) {
-                //屏幕闪光中，无敌
+            if (self.player.isInvincible) {
+                //无敌状态
                 return;
             }
-            //if 自动使用炸弹&&炸弹>0，使用炸弹
+            //if 自动使用炸弹&&炸弹>0，使用炸弹,记得无敌一段时间
             //[self useBomb];
             //玩家碰撞，死掉
             [self flashColor:[UIColor redColor]];
+            [self invincibleWithTime:1];
             if (self.lives == 0) {
                 //最后一命
                 [self gameOver];
@@ -673,6 +674,17 @@ CFTimeInterval countTime = 0;
     [node setAlpha:0.5f];
     [node runAction:actionBomb completion:^{
         [node removeFromParent];
+    }];
+}
+
+-(void)invincibleWithTime:(float)seconds{
+    [self.player setIsInvincible:YES];
+    SKAction *flashAction = [SKAction sequence:@[[SKAction fadeAlphaTo:0.1f duration:0.1f], [SKAction fadeAlphaTo:0.5f duration:0.1f]]];
+    [self.player runAction:[SKAction repeatActionForever:flashAction]];
+    [self.player runAction:[SKAction waitForDuration:seconds] completion:^{
+        [self.player removeAllActions];
+        [self.player setAlpha:1];
+        [self.player setIsInvincible:NO];
     }];
 }
 

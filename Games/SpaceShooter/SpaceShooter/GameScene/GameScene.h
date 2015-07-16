@@ -47,4 +47,6 @@
 -(void) clean;
 -(void)useBomb;
 
+-(void)invincibleWithTime:(float)seconds;
+
 @end

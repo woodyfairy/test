@@ -67,6 +67,7 @@
     node.fireLevel = 0;
     node.fireLevel = 1;//test
     node.fireDamage = 1;
+    node.isInvincible = NO;
     
     //加一个引力吸收
     SKFieldNode *field = [SKFieldNode radialGravityField];

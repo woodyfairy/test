@@ -18,4 +18,5 @@
 @property (assign, nonatomic) float fireInterval;
 @property (assign, nonatomic) int fireLevel;
 @property (assign, nonatomic) int fireDamage;
+@property (assign, nonatomic) BOOL isInvincible;
 @end
