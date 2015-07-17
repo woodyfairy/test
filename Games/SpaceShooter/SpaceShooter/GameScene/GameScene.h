@@ -16,6 +16,7 @@
 @property (assign) CFTimeInterval preTime;
 @property (assign, nonatomic) CGSize worldSize;
 //UI
+@property (strong, nonatomic) SKSpriteNode *backgroundNode;
 @property (strong, nonatomic) SKShapeNode *worldPanel;
 @property (weak, nonatomic) GameControllerView *leftController;
 @property (weak, nonatomic) GameControllerView *rightController;

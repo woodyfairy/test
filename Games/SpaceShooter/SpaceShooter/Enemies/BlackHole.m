@@ -66,6 +66,7 @@
         [self addChild:self.emitter];
         [self.emitter setFieldBitMask:FieldType_blackHole];
         [self.emitter setTargetNode:self.currentScene.worldPanel];
+        [self.emitter setZPosition:-100];
         //[self.emitter setScale:self.xScale];
     }];
 }

@@ -57,10 +57,18 @@
     }
     
     //controller
-    [self.LeftControllerView setMinRange:2];
-    [self.LeftControllerView setMaxRange:40];
-    [self.RightControllerView setMinRange:4];
-    [self.RightControllerView setMaxRange:40];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self.LeftControllerView setMinRange:2];
+        [self.LeftControllerView setMaxRange:40];
+        [self.RightControllerView setMinRange:4];
+        [self.RightControllerView setMaxRange:40];
+    }else{
+        [self.LeftControllerView setMinRange:3];
+        [self.LeftControllerView setMaxRange:60];
+        [self.RightControllerView setMinRange:6];
+        [self.RightControllerView setMaxRange:60];
+    }
+    
     
     //炸弹按钮
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -218,6 +226,7 @@
 //主界面
 -(void) showHome{
     [self.homeView setHidden:NO];
+    //[self.homeView setHidden:YES];
     
     //清空
     [self.gameScene clean];
@@ -225,10 +234,10 @@
     [self.gameScene end];
     [self.gameView setPaused:NO];
     
-    self.homeBackEffect = [SKEmitterNode nodeWithFileNamed:@"HomeBackEffect"];
-    [self.gameScene addChild:self.homeBackEffect];
-    [self.homeBackEffect setPosition:CGPointMake(CGRectGetMidX(self.gameScene.frame), CGRectGetMidY(self.gameScene.frame))];
-    [self viewWillLayoutSubviews];
+//    self.homeBackEffect = [SKEmitterNode nodeWithFileNamed:@"HomeBackEffect"];
+//    [self.gameScene addChild:self.homeBackEffect];
+//    [self.homeBackEffect setPosition:CGPointMake(CGRectGetMidX(self.gameScene.frame), CGRectGetMidY(self.gameScene.frame))];
+//    [self viewWillLayoutSubviews];
 }
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];

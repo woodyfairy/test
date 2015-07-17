@@ -15,7 +15,7 @@
 #import "Enemy_Black.h"
 
 //test
-int startLevel = 1;
+int startLevel = 4;
 
 @implementation GameScene
 
@@ -55,6 +55,16 @@ int startLevel = 1;
     
     self.playing = NO;
     //[self start];
+    
+    //背景
+    [self setBackgroundColor:[UIColor blackColor]];
+    self.backgroundNode = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:self.size];
+    [self addChild:self.backgroundNode];
+    [self.backgroundNode setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
+    [self.backgroundNode setZPosition:-2];
+    SKShader *shader = [SKShader shaderWithFileNamed:@"BackgroundShaer.fsh"];
+    shader.uniforms = @[ [SKUniform uniformWithName:@"size" floatVector3:GLKVector3Make(self.size.width, self.size.height, 0)], [SKUniform uniformWithName:@"offset" floatVector2:GLKVector2Make(self.worldPanel.position.x - self.size.width/2, self.worldPanel.position.y - self.size.height/2)], [SKUniform uniformWithName:@"time" float:0] ];
+    [self.backgroundNode setShader:shader];
 }
 -(void)start{
     //清空所有
@@ -77,7 +87,7 @@ int startLevel = 1;
     }
     SKShapeNode *gird = [SKShapeNode shapeNodeWithPath:path];
     [gird setLineWidth:0.5f];
-    [gird setStrokeColor:[UIColor colorWithWhite:0 alpha:0.2f]];
+    [gird setStrokeColor:[UIColor colorWithWhite:1 alpha:0.1f]];
     CGPathRelease(path);
     [self.worldPanel addChild:gird];
     [gird setZPosition:-1];
@@ -94,6 +104,10 @@ int startLevel = 1;
     self.spawnController = [[SpawnController alloc] initWithLevel:startLevel Scene:self];
     self.preTime = 0;
     self.playing = YES;
+//    if (self.backgroundNode) {
+//        SKUniform *timeUniform = [self.backgroundNode.shader.uniforms objectAtIndex:2];
+//        timeUniform.floatValue = 0;
+//    }
     
     //读取数据，刷新UI
     self.score = 0;
@@ -175,22 +189,40 @@ CFTimeInterval countTime = 0;
         //    }
         
         //镜头控制
+        BOOL cameraMoved = NO;
         CGPoint posInScreen = [self convertPoint:self.player.position fromNode:self.worldPanel];
         if (posInScreen.x < self.size.width/3) {
             self.worldPanel.position = CGPointMake(self.worldPanel.position.x + self.size.width/3 - posInScreen.x, self.worldPanel.position.y);
+            cameraMoved = YES;
         }else if (posInScreen.x > self.size.width/3*2){
             self.worldPanel.position = CGPointMake(self.worldPanel.position.x + self.size.width/3*2 - posInScreen.x, self.worldPanel.position.y);
+            cameraMoved = YES;
         }
         if (posInScreen.y < self.size.height/5*2) {
             self.worldPanel.position = CGPointMake(self.worldPanel.position.x, self.worldPanel.position.y + self.size.height/5*2 - posInScreen.y);
+            cameraMoved = YES;
         }else if (posInScreen.y > self.size.height/5*3){
             self.worldPanel.position = CGPointMake(self.worldPanel.position.x, self.worldPanel.position.y + self.size.height/5*3 - posInScreen.y);
+            cameraMoved = YES;
+        }
+        if (cameraMoved) {
+            SKUniform *uniform = [self.backgroundNode.shader.uniforms objectAtIndex:1];
+            uniform.floatVector2Value = GLKVector2Make(self.worldPanel.position.x - self.size.width/2, self.worldPanel.position.y - self.size.height/2);
         }
     }
     
     //间隔时间的
     if (_preTime != 0) {
         CFTimeInterval delta = currentTime - _preTime;
+        if (self.backgroundNode) {
+            SKUniform *timeUniform = [self.backgroundNode.shader.uniforms objectAtIndex:2];
+            timeUniform.floatValue = timeUniform.floatValue + delta;
+            //循环
+            if (timeUniform.floatValue > 72 * M_PI) {
+                timeUniform.floatValue = 0;
+                NSLog(@"time = 0");
+            }
+        }
         //加速的话action动画会有问题
 //        if (self.speed < 1) {
 //            self.speed += 0.3 * delta;
@@ -616,6 +648,9 @@ CFTimeInterval countTime = 0;
         //NSLog(@"holePos:%f,%f", blackHole.position.x, blackHole.position.y);
         //刷新黑洞产物
         Enemy_Black *enemy = [Enemy_Black create];
+        enemy.moveAngular = getRandom() * M_PI * 2;
+        enemy.moveSpeed = 0;
+        [enemy setPosition:CGPointMake(blackHole.position.x + cosf(enemy.moveAngular)*20, blackHole.position.y + sinf(enemy.moveAngular) * 20)];//要先设定坐标，否则会不对
         enemy.currentScene = self;
         [self.arrayEnemies addObject:enemy];
         [self.worldPanel addChild:enemy];
@@ -623,14 +658,13 @@ CFTimeInterval countTime = 0;
         [enemy setScale:0.6f];
         //NSLog(@"enemyPos:%f,%f", enemy.position.x, enemy.position.y);
         
-        enemy.moveAngular = getRandom() * M_PI * 2;
-        enemy.moveSpeed = 0;
+        
         int dis = 200 + getIntRadom(300);
         SKAction *action = [SKAction moveBy:CGVectorMake(cosf(enemy.moveAngular) * dis, sinf(enemy.moveAngular) * dis) duration:2];
         action.timingMode = SKActionTimingEaseOut;
         [enemy runAction:action];
         
-        [enemy setPosition:CGPointMake(blackHole.position.x + cosf(enemy.moveAngular)*20, blackHole.position.y + sinf(enemy.moveAngular) * 20)];
+        
     }
     [blackHole destroy];
     [self.arrayBlackHoles removeObject:blackHole];

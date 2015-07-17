@@ -14,7 +14,7 @@
     Enemy_Box *node = [Enemy_Box spriteNodeWithImageNamed:@"box"];
     node.type = EnemyType_Box;
     [node setColorBlendFactor:1];
-    [node setColor:[UIColor blueColor]];
+    [node setColor:[UIColor colorWithRed:0.3 green:0.3 blue:0.75 alpha:1]];
     [node setBlendMode:SKBlendModeAdd];
     return node;
 }

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		160FC6CF1B53915700C55206 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160FC6CE1B53915700C55206 /* GameKit.framework */; };
 		160FC6F31B53E44E00C55206 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 160FC6E21B539CF300C55206 /* InfoPlist.strings */; };
+		169FFCFD1B58F4F8006147B7 /* BackgroundShaer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFCFC1B58F4F8006147B7 /* BackgroundShaer.fsh */; };
+		169FFCFF1B58FFBA006147B7 /* BackgroundShaer2.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFCFE1B58FFBA006147B7 /* BackgroundShaer2.fsh */; };
+		169FFD011B595450006147B7 /* EnemyShaer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFD001B595450006147B7 /* EnemyShaer.fsh */; };
 		16BD162E1B5233BA00932BF1 /* Enemy_Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BD162D1B5233BA00932BF1 /* Enemy_Arrow.m */; };
 		16EAD7581B50FB7F0057390E /* Enemy_Box.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EAD7571B50FB7F0057390E /* Enemy_Box.m */; };
 		16EAD7671B50FBA60057390E /* 5side.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EAD7591B50FBA60057390E /* 5side.png */; };
@@ -73,6 +76,9 @@
 		160FC6DC1B539BFA00C55206 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		160FC6E11B539CF300C55206 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		160FC6E31B539CF600C55206 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		169FFCFC1B58F4F8006147B7 /* BackgroundShaer.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BackgroundShaer.fsh; sourceTree = "<group>"; };
+		169FFCFE1B58FFBA006147B7 /* BackgroundShaer2.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BackgroundShaer2.fsh; sourceTree = "<group>"; };
+		169FFD001B595450006147B7 /* EnemyShaer.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = EnemyShaer.fsh; sourceTree = "<group>"; };
 		16BD162C1B5233BA00932BF1 /* Enemy_Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Arrow.h; sourceTree = "<group>"; };
 		16BD162D1B5233BA00932BF1 /* Enemy_Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Arrow.m; sourceTree = "<group>"; };
 		16EAD7561B50FB7F0057390E /* Enemy_Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Box.h; sourceTree = "<group>"; };
@@ -192,6 +198,9 @@
 				16EAD7781B510B3A0057390E /* EnemyExplode.sks */,
 				16EAD77C1B510CAE0057390E /* EnemyPiece.png */,
 				883A8C9A1B5825CC00EB49B1 /* HomeBackEffect.sks */,
+				169FFCFC1B58F4F8006147B7 /* BackgroundShaer.fsh */,
+				169FFCFE1B58FFBA006147B7 /* BackgroundShaer2.fsh */,
+				169FFD001B595450006147B7 /* EnemyShaer.fsh */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -403,10 +412,12 @@
 				881BDEE61B52CDCC00B74D9B /* BlackHole.sks in Resources */,
 				16EAD76F1B50FBA60057390E /* star3R.png in Resources */,
 				8833852D1B56D06F00BC5358 /* ranking.png in Resources */,
+				169FFD011B595450006147B7 /* EnemyShaer.fsh in Resources */,
 				16EAD7721B50FBA60057390E /* star5S.png in Resources */,
 				8833851F1B56D02E00BC5358 /* playerIcon.png in Resources */,
 				16EAD76B1B50FBA60057390E /* box.png in Resources */,
 				8833851E1B56D02E00BC5358 /* pauseBtn.png in Resources */,
+				169FFCFF1B58FFBA006147B7 /* BackgroundShaer2.fsh in Resources */,
 				8895A9121B42E18D007A54CE /* Images.xcassets in Resources */,
 				884982F31B4EBFE800C5EBB9 /* GameScene.sks in Resources */,
 				16EAD7691B50FBA60057390E /* arrow.png in Resources */,
@@ -414,6 +425,7 @@
 				889DAE571B47BB8E0041D0D7 /* fire.png in Resources */,
 				16EAD76E1B50FBA60057390E /* flower.png in Resources */,
 				16EAD76C1B50FBA60057390E /* box2.png in Resources */,
+				169FFCFD1B58F4F8006147B7 /* BackgroundShaer.fsh in Resources */,
 				8833853E1B56EAD100BC5358 /* star.png in Resources */,
 				889DAE541B4797EF0041D0D7 /* light1.sks in Resources */,
 				16EAD7711B50FBA60057390E /* star5R.png in Resources */,

@@ -13,8 +13,9 @@
 +(instancetype)create{
     Enemy_Black *node = [Enemy_Black spriteNodeWithImageNamed:@"circle"];
     node.type = EnemyType_Black;
-    [node setColorBlendFactor:1];
-    [node setColor:[UIColor blackColor]];
+//    [node setColorBlendFactor:1];
+//    [node setColor:[UIColor orangeColor]];
+    [node setBlendMode:SKBlendModeAdd];
     
     //直接刷新
     [node initData];

@@ -223,6 +223,7 @@
                         [bh setPosition:[bh getRandomPos]];
                     }
                 }
+                [bh setZPosition:0];
                 [self.currentScene.worldPanel addChild:bh];
                 [self.currentScene.arrayBlackHoles addObject:bh];
             }

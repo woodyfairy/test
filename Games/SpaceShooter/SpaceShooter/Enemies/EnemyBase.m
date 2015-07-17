@@ -42,6 +42,7 @@
 
 
 -(void)spawn{
+    [self setShader:[SKShader shaderWithFileNamed:@"EnemyShaer.fsh"]];
     [self setAlpha:0];
     float timeInterval = 0.1f;
     float count = 5;
@@ -65,6 +66,7 @@
     float time1 = 0.5f;
     float time2 = 0.2f;
     SKSpriteNode *node = [[SKSpriteNode alloc] initWithTexture:self.texture];
+    [node setShader:self.shader];
     [node setAnchorPoint:self.anchorPoint];
     [node setColorBlendFactor:self.colorBlendFactor];
     [node setColor:self.color];
