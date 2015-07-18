@@ -147,7 +147,7 @@ int startLevel = 1;
     [self.worldPanel setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
 }
 -(void)updateUI{
-    [self.scoreLabel setText:[NSString stringWithFormat:@"Score:%ld", self.score]];
+    [self.scoreLabel setText:[NSString stringWithFormat:@"Score:%llu", self.score]];
     [self.multipleLabel setText:[NSString stringWithFormat:@"X%d", self.multiple]];
     [self.livesLabel setText:[NSString stringWithFormat:@"X%d", self.lives]];
     [self.bombsLabel setText:[NSString stringWithFormat:@"X%d", self.bombs]];
@@ -725,10 +725,30 @@ CFTimeInterval countTime = 0;
 -(void)gameOver{
     //return;//test
     [self end];
-    //显示页面
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"GameOver" object:nil];
     
     //记录数据
+    BOOL newRecord = NO;
+    UserData *userData = [[DataController instance] getUserData];
+    NSLog(@"score:%lld", self.score);
+    NSLog(@"recoredScore:%lld", userData.topScore.longLongValue);
+    if (self.score > userData.topScore.longLongValue) {
+        userData.topScore = [NSNumber numberWithLongLong:self.score];
+        newRecord = YES;
+    }
+    userData.totalStar = [NSNumber numberWithLongLong:userData.totalStar.longLongValue + self.multiple];
+    userData.currentStar = [NSNumber numberWithLongLong:userData.currentStar.intValue + self.multiple];
+    [[DataController instance] saveContext];
+    
+    //显示页面
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"GameOverNotification" object:nil userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:newRecord] forKey:@"NewRecordKey"]];
+    
+    //更新gamecenter
+    if (newRecord) {
+        //更新最高分
+        [[DataController instance] reportScore:userData.topScore.longLongValue forLeaderboardIdentifier:LeaderboardIdentifier_Score];
+    }
+    //更新总星星
+    [[DataController instance] reportScore:userData.totalStar.longLongValue forLeaderboardIdentifier:LeaderboardIdentifier_Star];
 }
 
 @end

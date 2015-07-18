@@ -1,0 +1,67 @@
+/* 
+  Localizable.strings
+  SpaceShooter
+
+  Created by wdy iMac on 15/7/18.
+  Copyright (c) 2015年 WuDongyang. All rights reserved.
+*/
+
+//界面相关
+"historyTopScore" = "历史最高分";
+
+//升级配置表
+
+//攻击升级
+"config1_name" = "武器强化";
+"config1_des0" = "升级：增加射击速度";
+"config1_des1" = "升级：增加子弹数量";
+"config1_des2" = "升级：增加射击速度";
+"config1_des3" = "升级：增加子弹数量";
+"config1_des4" = "升级：增加射速及子弹数量";
+"config1_des5" = "已达最高等级：增加射速及子弹数量";
+
+//生命成长
+"config2_name" = "生命增强";
+"config2_des0" = "升级：每局初始为2次生命";
+"config2_des1" = "升级：每局初始为3次生命";
+"config2_des2" = "升级：每局初始为4次生命";
+"config2_des3" = "已达最高等级：每局初始为4次生命";
+
+//生命恢复
+"config3_name" = "后备增援";
+"config3_des0" = "升级：在一局游戏中，每获得1000颗星时增加一命";
+"config3_des1" = "升级：在一局游戏中，每获得900颗星时增加一命";
+"config3_des2" = "升级：在一局游戏中，每获得700颗星时增加一命";
+"config3_des3" = "已达最高等级：在一局游戏中，每获得700颗星时增加一命";
+
+//炸弹成长
+"config4_name" = "炸弹增强";
+"config4_des0" = "升级：每局初始携带2枚炸弹";
+"config4_des1" = "升级：每局初始携带3枚炸弹";
+"config4_des2" = "升级：每局初始携带4枚炸弹";
+"config4_des3" = "已达最高等级：每局初始携带4枚炸弹";
+
+//炸弹恢复
+"config5_name" = "重载炸弹";
+"config5_des0" = "升级：在一局游戏中，每获得800颗星时获得一枚炸弹";
+"config5_des1" = "升级：在一局游戏中，每获得750颗星时获得一枚炸弹";
+"config5_des2" = "升级：在一局游戏中，每获得500颗星时获得一枚炸弹";
+"config5_des3" = "已达最高等级：在一局游戏中，每获得500颗星时获得一枚炸弹";
+
+//自动使用炸弹
+"config6_name" = "智能炸弹";
+"config6_des0" = "激活后，在碰撞到敌人时自动使用炸弹";
+
+//增加移动速度
+"config7_name" = "进阶引擎";
+"config7_des0" = "升级：增加飞船的移动速度";
+"config7_des1" = "升级：增加飞船的移动速度";
+"config7_des2" = "升级：增加飞船的移动速度";
+"config7_des3" = "已达最高等级：已达到最高的移动速度";
+
+//增加拾取半径
+"config8_name" = "人工引力";
+"config8_des0" = "升级：增加飞船拾取星星的范围";
+"config8_des1" = "升级：增加飞船拾取星星的范围";
+"config8_des2" = "升级：增加飞船拾取星星的范围";
+"config8_des3" = "已达最高等级：已达到最大拾取范围";

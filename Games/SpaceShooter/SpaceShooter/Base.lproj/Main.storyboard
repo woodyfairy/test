@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F6a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -158,10 +158,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new.png" translatesAutoresizingMaskIntoConstraints="NO" id="IVa-nv-bu6">
-                                                            <rect key="frame" x="258" y="69" width="63" height="18"/>
+                                                            <rect key="frame" x="258" y="69" width="52" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="SjN-h9-51n"/>
-                                                                <constraint firstAttribute="width" constant="63" id="m38-Cw-iNA"/>
+                                                                <constraint firstAttribute="width" constant="52" id="m38-Cw-iNA"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoo-4n-rlz" userLabel="star">
@@ -293,15 +293,23 @@
                                                                 <action selector="homeRankingClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ZiZ-wv-1eq"/>
                                                             </connections>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Score" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCU-Mc-PMV">
+                                                            <rect key="frame" x="50" y="471" width="78" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="centerX" secondItem="W2L-fq-7bW" secondAttribute="centerX" id="9mM-Up-JPj"/>
                                                         <constraint firstItem="Quf-sd-Hpi" firstAttribute="leading" secondItem="W2L-fq-7bW" secondAttribute="leading" id="Sxn-pC-11q"/>
                                                         <constraint firstItem="Ekm-gv-VSu" firstAttribute="leading" secondItem="Quf-sd-Hpi" secondAttribute="leading" id="YUA-JB-Zi6"/>
                                                         <constraint firstItem="W2L-fq-7bW" firstAttribute="top" secondItem="z2S-DG-jR4" secondAttribute="top" constant="60" id="az4-Us-94j"/>
+                                                        <constraint firstAttribute="bottom" secondItem="jCU-Mc-PMV" secondAttribute="bottom" constant="8" id="bRy-JH-4bG"/>
                                                         <constraint firstItem="Quf-sd-Hpi" firstAttribute="top" secondItem="W2L-fq-7bW" secondAttribute="bottom" constant="2" id="byJ-yT-2DI"/>
                                                         <constraint firstItem="Ekm-gv-VSu" firstAttribute="bottom" secondItem="gwl-7O-4Qt" secondAttribute="top" constant="-2" id="dxG-af-NVy"/>
                                                         <constraint firstItem="Ekm-gv-VSu" firstAttribute="leading" secondItem="gwl-7O-4Qt" secondAttribute="leading" id="f6c-EI-7ki"/>
+                                                        <constraint firstItem="jCU-Mc-PMV" firstAttribute="leading" secondItem="z2S-DG-jR4" secondAttribute="leading" constant="50" id="icD-4X-kJJ"/>
                                                         <constraint firstItem="Ekm-gv-VSu" firstAttribute="top" secondItem="Quf-sd-Hpi" secondAttribute="bottom" constant="2" id="vvU-NP-b3B"/>
                                                     </constraints>
                                                 </view>
@@ -386,6 +394,7 @@
                         <outlet property="gameOverStartBtn" destination="O0D-z6-kXR" id="h3E-bT-DuM"/>
                         <outlet property="gameOverView" destination="NJl-ZY-4Wy" id="xru-sQ-JHQ"/>
                         <outlet property="gameView" destination="5A7-s3-FFb" id="k7N-iS-xTI"/>
+                        <outlet property="historyScoreLabel" destination="jCU-Mc-PMV" id="dvC-vs-tvy"/>
                         <outlet property="homeEffectView" destination="h4z-cl-HeQ" id="my0-FY-w4q"/>
                         <outlet property="homePowerupBtn" destination="Quf-sd-Hpi" id="Kve-Rl-PBi"/>
                         <outlet property="homeRankingBtn" destination="gwl-7O-4Qt" id="5ZM-Ff-rIe"/>
@@ -406,11 +415,69 @@
             </objects>
             <point key="canvasLocation" x="58" y="480"/>
         </scene>
+        <!--Power Up View Controller-->
+        <scene sceneID="7fS-tk-Clf">
+            <objects>
+                <viewController storyboardIdentifier="PowerUp" id="ASz-3c-xcr" customClass="PowerUpViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FJu-Fn-WUO"/>
+                        <viewControllerLayoutGuide type="bottom" id="qfK-A3-urr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4nb-72-pM3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQY-fU-D1o">
+                                <rect key="frame" x="16" y="20" width="60" height="30"/>
+                                <state key="normal" title="back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="back:" destination="ASz-3c-xcr" eventType="touchUpInside" id="2in-h4-KX7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O1c-0F-9Di" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768" y="480"/>
+        </scene>
+        <!--Shop View Controller-->
+        <scene sceneID="iN3-0E-eMr">
+            <objects>
+                <viewController storyboardIdentifier="Shop" id="XXg-1s-6LF" customClass="ShopViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S1K-lf-lOm"/>
+                        <viewControllerLayoutGuide type="bottom" id="grK-fT-OkI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Odp-C6-nPa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cu-dM-2dP">
+                                <rect key="frame" x="16" y="20" width="34" height="30"/>
+                                <state key="normal" title="back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="back:" destination="XXg-1s-6LF" eventType="touchUpInside" id="4xv-wY-lGI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dB2-GH-tAt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1426" y="480"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Bomb.png" width="120" height="120"/>
         <image name="home.png" width="200" height="72"/>
-        <image name="new.png" width="126" height="36"/>
+        <image name="new.png" width="104" height="36"/>
         <image name="pauseBtn.png" width="100" height="60"/>
         <image name="playerIcon.png" width="34" height="32"/>
         <image name="powerup.png" width="320" height="80"/>

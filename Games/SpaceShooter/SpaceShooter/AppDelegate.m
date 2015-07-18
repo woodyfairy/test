@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "DataController.h"//test
 
 @interface AppDelegate ()
 
@@ -17,6 +18,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [DataController instance];//初始化
+    
+    //test
+//    UserData *userData = [[DataController instance] getUserData];
+//    NSLog(@"topScore:%lld", userData.topScore.longLongValue);
+//    userData.topScore = [NSNumber numberWithLongLong:0];//清空数据
+//    [[DataController instance] saveContext];
+    
+    
     return YES;
 }
 

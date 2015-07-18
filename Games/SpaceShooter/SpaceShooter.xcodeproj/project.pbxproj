@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		160FC6CF1B53915700C55206 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 160FC6CE1B53915700C55206 /* GameKit.framework */; };
 		160FC6F31B53E44E00C55206 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 160FC6E21B539CF300C55206 /* InfoPlist.strings */; };
+		1645EA821B5A26A40085091E /* DataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1645EA811B5A26A40085091E /* DataController.m */; };
+		1645EA851B5A26BF0085091E /* PowerUpConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1645EA841B5A26BF0085091E /* PowerUpConfigManager.m */; };
+		1645EA881B5A2AB00085091E /* UserModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1645EA861B5A2AB00085091E /* UserModel.xcdatamodeld */; };
+		1645EA8B1B5A30DB0085091E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1645EA8D1B5A30DB0085091E /* Localizable.strings */; };
+		1645EA911B5A412F0085091E /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1645EA901B5A412F0085091E /* UserData.m */; };
+		1645EA941B5A559F0085091E /* PowerUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1645EA931B5A559F0085091E /* PowerUpViewController.m */; };
+		1645EA971B5A57000085091E /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1645EA961B5A57000085091E /* ShopViewController.m */; };
 		169FFCFD1B58F4F8006147B7 /* BackgroundShaer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFCFC1B58F4F8006147B7 /* BackgroundShaer.fsh */; };
 		169FFCFF1B58FFBA006147B7 /* BackgroundShaer2.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFCFE1B58FFBA006147B7 /* BackgroundShaer2.fsh */; };
 		169FFD011B595450006147B7 /* EnemyShaer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFD001B595450006147B7 /* EnemyShaer.fsh */; };
@@ -56,7 +63,6 @@
 		884982F71B4EC3FD00C5EBB9 /* SpawnController.m in Sources */ = {isa = PBXBuildFile; fileRef = 884982F61B4EC3FD00C5EBB9 /* SpawnController.m */; };
 		884982FB1B4ECAA200C5EBB9 /* EnemyBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 884982FA1B4ECAA200C5EBB9 /* EnemyBase.m */; };
 		884983011B4EDAA200C5EBB9 /* Enemy_Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 884983001B4EDAA200C5EBB9 /* Enemy_Triangle.m */; };
-		884983071B4EF97D00C5EBB9 /* DataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 884983061B4EF97D00C5EBB9 /* DataController.m */; };
 		8895A9021B42E18D007A54CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8895A9011B42E18D007A54CE /* main.m */; };
 		8895A9051B42E18D007A54CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8895A9041B42E18D007A54CE /* AppDelegate.m */; };
 		8895A90D1B42E18D007A54CE /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8895A90C1B42E18D007A54CE /* GameViewController.m */; };
@@ -76,6 +82,19 @@
 		160FC6DC1B539BFA00C55206 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		160FC6E11B539CF300C55206 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		160FC6E31B539CF600C55206 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		1645EA801B5A26A40085091E /* DataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataController.h; sourceTree = "<group>"; };
+		1645EA811B5A26A40085091E /* DataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataController.m; sourceTree = "<group>"; };
+		1645EA831B5A26BF0085091E /* PowerUpConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpConfigManager.h; sourceTree = "<group>"; };
+		1645EA841B5A26BF0085091E /* PowerUpConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpConfigManager.m; sourceTree = "<group>"; };
+		1645EA871B5A2AB00085091E /* UserModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserModel.xcdatamodel; sourceTree = "<group>"; };
+		1645EA8C1B5A30DB0085091E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1645EA8E1B5A30DD0085091E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		1645EA8F1B5A412F0085091E /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		1645EA901B5A412F0085091E /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		1645EA921B5A559F0085091E /* PowerUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpViewController.h; sourceTree = "<group>"; };
+		1645EA931B5A559F0085091E /* PowerUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpViewController.m; sourceTree = "<group>"; };
+		1645EA951B5A57000085091E /* ShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopViewController.h; sourceTree = "<group>"; };
+		1645EA961B5A57000085091E /* ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopViewController.m; sourceTree = "<group>"; };
 		169FFCFC1B58F4F8006147B7 /* BackgroundShaer.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BackgroundShaer.fsh; sourceTree = "<group>"; };
 		169FFCFE1B58FFBA006147B7 /* BackgroundShaer2.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BackgroundShaer2.fsh; sourceTree = "<group>"; };
 		169FFD001B595450006147B7 /* EnemyShaer.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = EnemyShaer.fsh; sourceTree = "<group>"; };
@@ -141,8 +160,6 @@
 		884982FA1B4ECAA200C5EBB9 /* EnemyBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyBase.m; sourceTree = "<group>"; };
 		884982FF1B4EDAA200C5EBB9 /* Enemy_Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Triangle.h; sourceTree = "<group>"; };
 		884983001B4EDAA200C5EBB9 /* Enemy_Triangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Triangle.m; sourceTree = "<group>"; };
-		884983051B4EF97D00C5EBB9 /* DataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataController.h; sourceTree = "<group>"; };
-		884983061B4EF97D00C5EBB9 /* DataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataController.m; sourceTree = "<group>"; };
 		8895A8FC1B42E18D007A54CE /* SpaceShooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceShooter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8895A9011B42E18D007A54CE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8895A9031B42E18D007A54CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -179,6 +196,21 @@
 				160FC6CE1B53915700C55206 /* GameKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1645EA7F1B5A26A40085091E /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				1645EA8D1B5A30DB0085091E /* Localizable.strings */,
+				1645EA831B5A26BF0085091E /* PowerUpConfigManager.h */,
+				1645EA841B5A26BF0085091E /* PowerUpConfigManager.m */,
+				1645EA801B5A26A40085091E /* DataController.h */,
+				1645EA811B5A26A40085091E /* DataController.m */,
+				1645EA861B5A2AB00085091E /* UserModel.xcdatamodeld */,
+				1645EA8F1B5A412F0085091E /* UserData.h */,
+				1645EA901B5A412F0085091E /* UserData.m */,
+			);
+			path = DataController;
 			sourceTree = "<group>";
 		};
 		881A171E1B45882E007AE66A /* Resources */ = {
@@ -319,9 +351,12 @@
 				8895A9041B42E18D007A54CE /* AppDelegate.m */,
 				8895A90B1B42E18D007A54CE /* GameViewController.h */,
 				8895A90C1B42E18D007A54CE /* GameViewController.m */,
+				1645EA921B5A559F0085091E /* PowerUpViewController.h */,
+				1645EA931B5A559F0085091E /* PowerUpViewController.m */,
+				1645EA951B5A57000085091E /* ShopViewController.h */,
+				1645EA961B5A57000085091E /* ShopViewController.m */,
 				8895A90E1B42E18D007A54CE /* Main.storyboard */,
-				884983051B4EF97D00C5EBB9 /* DataController.h */,
-				884983061B4EF97D00C5EBB9 /* DataController.m */,
+				1645EA7F1B5A26A40085091E /* DataController */,
 				884982E81B4EBFDF00C5EBB9 /* GameControllerView */,
 				884982EC1B4EBFE800C5EBB9 /* GameScene */,
 				884982F81B4EC6B200C5EBB9 /* Enemies */,
@@ -442,6 +477,7 @@
 				889DAE511B4797BE0041D0D7 /* playerLight.png in Resources */,
 				889DAE5D1B4B063A0041D0D7 /* BulletFlash.sks in Resources */,
 				883A8C9B1B5825CC00EB49B1 /* HomeBackEffect.sks in Resources */,
+				1645EA8B1B5A30DB0085091E /* Localizable.strings in Resources */,
 				16EAD7731B50FBA60057390E /* star8.png in Resources */,
 				881BDEEB1B54349D00B74D9B /* Bomb.png in Resources */,
 				16EAD77A1B510B3A0057390E /* EnemyExplode.sks in Resources */,
@@ -462,17 +498,22 @@
 				8895A9051B42E18D007A54CE /* AppDelegate.m in Sources */,
 				16BD162E1B5233BA00932BF1 /* Enemy_Arrow.m in Sources */,
 				884982F41B4EBFE800C5EBB9 /* PlayerSprite.m in Sources */,
+				1645EA941B5A559F0085091E /* PowerUpViewController.m in Sources */,
 				884982EB1B4EBFDF00C5EBB9 /* GameControllerView.m in Sources */,
 				8895A9021B42E18D007A54CE /* main.m in Sources */,
-				884983071B4EF97D00C5EBB9 /* DataController.m in Sources */,
 				16EAD7801B5137470057390E /* Enemy_5Side.m in Sources */,
 				884982F21B4EBFE800C5EBB9 /* GameScene.m in Sources */,
 				16EAD7581B50FB7F0057390E /* Enemy_Box.m in Sources */,
 				881BDEDE1B52BF8D00B74D9B /* BlackHole.m in Sources */,
 				16EAD7771B50FD2C0057390E /* Enemy_Circle.m in Sources */,
+				1645EA971B5A57000085091E /* ShopViewController.m in Sources */,
 				889DAE5A1B4B02140041D0D7 /* Common.m in Sources */,
+				1645EA851B5A26BF0085091E /* PowerUpConfigManager.m in Sources */,
 				884983011B4EDAA200C5EBB9 /* Enemy_Triangle.m in Sources */,
 				884982FB1B4ECAA200C5EBB9 /* EnemyBase.m in Sources */,
+				1645EA821B5A26A40085091E /* DataController.m in Sources */,
+				1645EA911B5A412F0085091E /* UserData.m in Sources */,
+				1645EA881B5A2AB00085091E /* UserModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +527,15 @@
 				160FC6E31B539CF600C55206 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1645EA8D1B5A30DB0085091E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1645EA8C1B5A30DB0085091E /* Base */,
+				1645EA8E1B5A30DD0085091E /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		883385271B56D04300BC5358 /* home.png */ = {
@@ -693,6 +743,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1645EA861B5A2AB00085091E /* UserModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1645EA871B5A2AB00085091E /* UserModel.xcdatamodel */,
+			);
+			currentVersion = 1645EA871B5A2AB00085091E /* UserModel.xcdatamodel */;
+			path = UserModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8895A8F41B42E18D007A54CE /* Project object */;
 }

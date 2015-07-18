@@ -28,7 +28,7 @@
 @property (weak, nonatomic) UIButton *pauseBtn;
 @property (weak, nonatomic) UIButton *bombBtn;
 -(void) updateUI;
-@property (assign, nonatomic) long score;
+@property (assign, nonatomic) unsigned long long score;
 @property (assign, nonatomic) int multiple;
 @property (assign, nonatomic) short lives;
 @property (assign, nonatomic) short bombs;

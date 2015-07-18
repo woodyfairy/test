@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "GameControllerView.h"
 #import <SpriteKit/SpriteKit.h>
+#import <GameKit/GameKit.h>
 #import "GameScene.h"
 
-@interface GameViewController : UIViewController
+@interface GameViewController : UIViewController <GKGameCenterControllerDelegate>
 @property (weak, nonatomic) IBOutlet SKView *gameView;
 @property (strong, nonatomic) GameScene *gameScene;
 @property (weak, nonatomic) IBOutlet UIView *ViewUI;
@@ -50,6 +51,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UIView *homeView;
+@property (weak, nonatomic) IBOutlet UILabel *historyScoreLabel;
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *homeEffectView;
 @property (weak, nonatomic) IBOutlet UIButton *homeStartBtn;
 @property (weak, nonatomic) IBOutlet UIButton *homePowerupBtn;

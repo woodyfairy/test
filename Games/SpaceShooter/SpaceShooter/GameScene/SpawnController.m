@@ -17,7 +17,8 @@
 #import "Enemy_Arrow.h"
 
 @interface SpawnController()
-@property (assign) CFTimeInterval mainTimer;
+@property (assign) CFTimeInterval mainTimer; //升级计时
+@property (assign) float upLevelTime; //升级所需时间
 
 //角落刷新
 @property (assign) EnemyType conerSpawnType;
@@ -46,6 +47,18 @@
         [self.arrayRefreshNeed addObject:[NSNumber numberWithFloat:0]];
         [self resetRefreshTimeForLevel:self.arrayRefreshNeed.count];
     }
+    
+    //升下一级所需时间
+    if (_currentLevel == 1) {
+        self.upLevelTime = 10;
+    }else if (_currentLevel == 2){
+        self.upLevelTime = 20;
+    }else if (_currentLevel == 3) {
+        self.upLevelTime = 60;
+    }
+    else{
+        self.upLevelTime = 60;
+    }
 }
 -(void) resetRefreshTimeForLevel:(NSUInteger)level{
     float value;
@@ -65,8 +78,8 @@
     //等级增长
     self.mainTimer += delta;
     //NSLog(@"timer:%f",self.timer);
-    int upLevelTime = 10 * _currentLevel;
-    if (self.mainTimer >= upLevelTime) {
+    
+    if (self.mainTimer >= self.upLevelTime) {
         //NSLog(@"spawn!!!");
         self.mainTimer = 0;
         if (_currentLevel < _maxLevel) {

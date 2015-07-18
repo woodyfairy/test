@@ -8,6 +8,8 @@
 
 #import "GameViewController.h"
 #import "Common.h"
+#import "DataController.h"
+#import "PowerUpViewController.h"
 
 @implementation SKScene (Unarchive)
 
@@ -36,8 +38,8 @@
 
     // Configure the view.
     SKView * skView = (SKView *)self.gameView;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    //skView.showsFPS = YES;
+    //skView.showsNodeCount = YES;
     //skView.showsPhysics = YES;
     //skView.showsFields = YES;
     /* Sprite Kit applies additional optimizations to improve rendering performance */
@@ -148,7 +150,7 @@
     //gameOverView
     [self.gameOverEffectView setClipsToBounds:YES];
     [self.gameOverEffectView.layer setCornerRadius:15];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameOverView) name:@"GameOver" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameOverViewWithNotification:) name:@"GameOverNotification" object:nil];
     
     //homeView
     [self.homeEffectView setClipsToBounds:YES];
@@ -203,10 +205,11 @@
 }
 
 //gameoverView
--(void)showGameOverView{
+-(void)showGameOverViewWithNotification:(NSNotification *)notification{
     self.gameOverView.hidden = NO;
-    [self.gameOverScoreLabel setText:[NSString stringWithFormat:@"SCORE:%ld", self.gameScene.score]];
-    if (true) {
+    [self.gameOverScoreLabel setText:[NSString stringWithFormat:@"SCORE:%lld", self.gameScene.score]];
+    NSNumber *newRecord = [notification.userInfo objectForKey:@"NewRecordKey"];
+    if (newRecord.boolValue) {
         [self.gameOverScoreNew setHidden:NO];
     }else{
         [self.gameOverScoreNew setHidden:YES];
@@ -227,6 +230,15 @@
 -(void) showHome{
     [self.homeView setHidden:NO];
     //[self.homeView setHidden:YES];
+    
+    UserData *userData = [[DataController instance] getUserData];
+    if (userData.topScore.longLongValue == 0) {
+        [self.historyScoreLabel setHidden:YES];
+    }else{
+        [self.historyScoreLabel setText:[NSString stringWithFormat:@"%@:%lld", NSLocalizedString(@"historyTopScore", @""), userData.topScore.longLongValue]];
+        [self.historyScoreLabel setHidden:NO];
+    }
+    
     
     //清空
     [self.gameScene clean];
@@ -258,12 +270,33 @@
 }
 
 - (IBAction)homePowerupClick:(id)sender {
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PowerUpViewController *viewController = [storyBoard instantiateViewControllerWithIdentifier:@"PowerUp"];
+    
+    [self presentViewController:viewController animated:YES completion:^{
+        
+    }];
 }
 
 - (IBAction)homeShopClick:(id)sender {
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PowerUpViewController *viewController = [storyBoard instantiateViewControllerWithIdentifier:@"Shop"];
+    
+    [self presentViewController:viewController animated:YES completion:^{
+        
+    }];
 }
 
 - (IBAction)homeRankingClick:(id)sender {
+    GKGameCenterViewController *viewController = [[GKGameCenterViewController alloc] init];
+    viewController.gameCenterDelegate = self;
+    viewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+    [viewController setLeaderboardIdentifier: LeaderboardIdentifier_Score];
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
+    NSLog(@"gameCenterViewControllerDidFinish");
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 
