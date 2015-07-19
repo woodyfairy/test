@@ -117,6 +117,7 @@ static PowerUpConfigManager *instance = nil;
     [config setMaxLevel:3];
     [config setDescriptions:[[NSMutableArray alloc] init]];
     [config.descriptions addObject:NSLocalizedString(@"config6_des0", @"")];
+    [config.descriptions addObject:NSLocalizedString(@"config6_des1", @"")];
     [config setCost:[[NSMutableArray alloc] init]];
     [config.cost addObject:[NSNumber numberWithInt:7500]];
     //移动速度
