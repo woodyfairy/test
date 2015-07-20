@@ -40,7 +40,7 @@
 @property (strong, nonatomic) SpawnController *spawnController;
 @property (strong, nonatomic) NSMutableArray *arrayEnemies;
 @property (strong, nonatomic) NSMutableArray *arrayBlackHoles;
-@property (strong, nonatomic) NSMutableArray *arrayPoints;
+@property (strong, nonatomic) NSMutableArray *arrayPoints; //地图上的星星
 //@property (strong, nonatomic) NSMutableArray *arrayGolds;
 
 -(void) start;

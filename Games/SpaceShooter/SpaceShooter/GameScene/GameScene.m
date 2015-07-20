@@ -109,11 +109,12 @@ int startLevel = 1;
 //        timeUniform.floatValue = 0;
 //    }
     
+    UserData *userData = [[DataController instance] getUserData];
     //读取数据，刷新UI
     self.score = 0;
     self.multiple = 1;
-    self.lives = 1;
-    self.bombs = 1;
+    self.lives = 1 + userData.powerUp1Level.shortValue;
+    self.bombs = 2 + userData.powerUp3Level.shortValue;
     [self updateUI];
     
     [self.view setPaused:NO];
@@ -242,7 +243,10 @@ CFTimeInterval countTime = 0;
             //玩家子弹
             int bulletNum = 1;
             float angRange = 0;
-            if (self.player.fireLevel == 1) {
+            if (self.player.fireLevel >= 4) {
+                bulletNum = 5;
+                angRange = 0.05f;
+            }else if (self.player.fireLevel >= 2){
                 bulletNum = 3;
                 angRange = 0.03f;
             }
@@ -298,6 +302,7 @@ CFTimeInterval countTime = 0;
         //同时有1对n的碰撞已经删掉了
         return;
     }
+    UserData *userData = [[DataController instance] getUserData];
     if (contact.bodyA.categoryBitMask == PhysicType_player || contact.bodyB.categoryBitMask == PhysicType_player) {
         //玩家碰撞
         SKPhysicsBody *player = nil;
@@ -317,11 +322,15 @@ CFTimeInterval countTime = 0;
                 //无敌状态
                 return;
             }
-            //if 自动使用炸弹&&炸弹>0，使用炸弹,记得无敌一段时间
-            //[self useBomb];
+            [self invincibleWithTime:1];//无敌1秒
+            
+            //if 自动使用炸弹&&炸弹>0，使用炸弹
+            if (userData.powerUp5Level.shortValue > 0 && self.bombs > 0) {
+                [self useBomb];
+                return;
+            }
             //玩家碰撞，死掉
             [self flashColor:[UIColor redColor]];
-            [self invincibleWithTime:1];
             if (self.lives == 0) {
                 //最后一命
                 [self gameOver];
@@ -421,6 +430,35 @@ CFTimeInterval countTime = 0;
             }
         }
         
+        //拾取星星之后增加生命或者炸弹
+        short liveGainLevel = userData.powerUp2Level.shortValue;
+        if (liveGainLevel > 0) {
+            int gainLiveStar = 0;
+            if (liveGainLevel == 1) {
+                gainLiveStar = 1000;
+            }else if (gainLiveStar == 2){
+                gainLiveStar = 900;
+            }else if (gainLiveStar == 3){
+                gainLiveStar = 700;
+            }
+            if (self.multiple % gainLiveStar == 0) {
+                self.lives ++;
+            }
+        }
+        short bombGainLevel = userData.powerUp4Level.shortValue;
+        if (bombGainLevel > 0) {
+            int gainBombStar = 0;
+            if (bombGainLevel == 1) {
+                gainBombStar = 880;
+            }else if (bombGainLevel == 2){
+                gainBombStar = 770;
+            }else if (bombGainLevel == 3){
+                gainBombStar = 625;
+            }
+            if (self.multiple % gainBombStar == 0) {
+                self.bombs ++;
+            }
+        }
         [self updateUI];
     }else if (contact.bodyA.categoryBitMask == PhysicType_bullet || contact.bodyB.categoryBitMask == PhysicType_bullet) {
         //子弹碰撞
@@ -729,8 +767,8 @@ CFTimeInterval countTime = 0;
     //记录数据
     BOOL newRecord = NO;
     UserData *userData = [[DataController instance] getUserData];
-    NSLog(@"score:%lld", self.score);
-    NSLog(@"recoredScore:%lld", userData.topScore.longLongValue);
+//    NSLog(@"score:%lld", self.score);
+//    NSLog(@"recoredScore:%lld", userData.topScore.longLongValue);
     if (self.score > userData.topScore.longLongValue) {
         userData.topScore = [NSNumber numberWithLongLong:self.score];
         newRecord = YES;

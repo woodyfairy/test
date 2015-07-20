@@ -35,7 +35,12 @@ static DataController *instance = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:UIApplicationDidFinishLaunchingNotification object:nil];
 }
 
+static UserData *gettedData = nil;
 -(UserData *)getUserData{
+    if (gettedData != nil) {
+        return gettedData;
+    }
+    
     NSManagedObjectContext *context = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
@@ -49,11 +54,13 @@ static DataController *instance = nil;
     }
     if (fetchedObjects.count == 0) {
         UserData *userData = [NSEntityDescription insertNewObjectForEntityForName:self.tableName inManagedObjectContext:context];
+        gettedData = userData;
         [self saveContext];
         return userData;
     }
     
-    return [fetchedObjects lastObject];
+    gettedData = [fetchedObjects lastObject];
+    return gettedData;
 }
 
 
@@ -67,7 +74,8 @@ static DataController *instance = nil;
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save Data ERROR!" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
         }
     }
 }
@@ -180,6 +188,7 @@ static DataController *instance = nil;
             }
         }else{
             //上传成功
+            NSLog(@"reportScoreSuccess");
             if ([identifier isEqual:LeaderboardIdentifier_Score]) {
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:SCORE_ERROR_KEY];
             }else if ([identifier isEqual:LeaderboardIdentifier_Star]){

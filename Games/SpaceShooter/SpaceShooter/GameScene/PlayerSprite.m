@@ -8,6 +8,7 @@
 
 #import "PlayerSprite.h"
 #import "Common.h"
+#import "DataController.h"
 
 @implementation PlayerSprite
 
@@ -53,7 +54,19 @@
     node.xScale = 1.5f;
     node.yScale = 1.5f;
     
-    node.maxSpeed = 300;
+    UserData *userData = [[DataController instance] getUserData];
+    
+    int speedLevel = userData.powerUp6Level.shortValue;
+    if (speedLevel == 3) {
+        node.maxSpeed = 400;
+    }else if (speedLevel == 2){
+        node.maxSpeed = 350;
+    }else if (speedLevel == 1){
+        node.maxSpeed = 300;
+    }else{
+        node.maxSpeed = 250;
+    }
+    
     node.maxLight = 80;
     node.emitter = [SKEmitterNode nodeWithFileNamed:@"light1"];
     [node addChild:node.emitter];
@@ -63,16 +76,37 @@
     node.physicsBody.contactTestBitMask = PhysicType_enermy | PhysicType_point | PhysicType_gold | PhysicType_blackHole;
     node.physicsBody.fieldBitMask = FieldType_all - FieldType_player;
     
-    node.fireInterval = 0.1f;
-    node.fireLevel = 0;
-    node.fireLevel = 1;//test
-    node.fireDamage = 1;
+    node.fireLevel = userData.powerUp0Level.shortValue;
+    //node.fireLevel = 1;//test
+    if (node.fireLevel >= 3) {
+        node.fireInterval = 0.075f;
+    }else if (node.fireLevel >=1){
+        node.fireInterval = 0.1f;
+    }else{
+        node.fireInterval = 0.125f;
+    }
+    if (node.fireLevel >= 5) {
+        node.fireDamage = 3;
+    }else{
+        node.fireDamage = 1;
+    }
+    
     node.isInvincible = NO;
     
     //加一个引力吸收
     SKFieldNode *field = [SKFieldNode radialGravityField];
     [node addChild:field];
-    field.region = [[SKRegion alloc] initWithRadius:75];
+    int rangeLevel = userData.powerUp7Level.shortValue;
+    //rangeLevel = 3;//test
+    float range = 50;
+    if (rangeLevel == 3) {
+        range = 125;
+    }else if (rangeLevel == 2){
+        range = 100;
+    }else if (rangeLevel == 1){
+        range = 75;
+    }
+    field.region = [[SKRegion alloc] initWithRadius:range];
     field.falloff = 3;
     field.strength = 1;
     field.categoryBitMask = FieldType_player;

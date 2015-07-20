@@ -75,7 +75,7 @@ static PowerUpConfigManager *instance = nil;
     [config setCost:[[NSMutableArray alloc] init]];
     [config.cost addObject:[NSNumber numberWithInt:2000]];
     [config.cost addObject:[NSNumber numberWithInt:5000]];
-    [config.cost addObject:[NSNumber numberWithInt:10000]];
+    [config.cost addObject:[NSNumber numberWithInt:8000]];
     //炸弹成长
     config = nil;
     config = [[PowerUpConfig alloc] init];
@@ -105,8 +105,8 @@ static PowerUpConfigManager *instance = nil;
     [config.descriptions addObject:NSLocalizedString(@"config5_des2", @"")];
     [config.descriptions addObject:NSLocalizedString(@"config5_des3", @"")];
     [config setCost:[[NSMutableArray alloc] init]];
-    [config.cost addObject:[NSNumber numberWithInt:2000]];
-    [config.cost addObject:[NSNumber numberWithInt:5000]];
+    [config.cost addObject:[NSNumber numberWithInt:3000]];
+    [config.cost addObject:[NSNumber numberWithInt:6000]];
     [config.cost addObject:[NSNumber numberWithInt:10000]];
     //自动使用炸弹
     config = nil;
@@ -114,7 +114,7 @@ static PowerUpConfigManager *instance = nil;
     [self.arrayConfigs addObject:config];
     [config setIconName:@""];
     [config setName:NSLocalizedString(@"config6_name", @"")];
-    [config setMaxLevel:3];
+    [config setMaxLevel:1];
     [config setDescriptions:[[NSMutableArray alloc] init]];
     [config.descriptions addObject:NSLocalizedString(@"config6_des0", @"")];
     [config.descriptions addObject:NSLocalizedString(@"config6_des1", @"")];
