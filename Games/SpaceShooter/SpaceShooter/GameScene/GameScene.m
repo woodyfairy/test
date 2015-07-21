@@ -243,9 +243,9 @@ CFTimeInterval countTime = 0;
             //玩家子弹
             int bulletNum = 1;
             float angRange = 0;
-            if (self.player.fireLevel >= 4) {
+            if (self.player.fireLevel >= 5) {
                 bulletNum = 5;
-                angRange = 0.05f;
+                angRange = 0.035f;
             }else if (self.player.fireLevel >= 2){
                 bulletNum = 3;
                 angRange = 0.03f;
@@ -274,7 +274,13 @@ CFTimeInterval countTime = 0;
                 CGPathRelease(path);
                 bullet.zRotation = anguler;
                 bullet.position = CGPointMake(self.player.position.x + 15*cos(anguler), self.player.position.y + 15*sin(anguler));
-                float speed = 600;
+                float speed = 500;
+                if (self.player.fireLevel >= 4) {
+                    speed = 700;
+                }else if (self.player.fireLevel >= 1){
+                    speed = 600;
+                }
+                
                 bullet.physicsBody.velocity = CGVectorMake(speed*cos(anguler), speed*sin(anguler));
                 [self.worldPanel addChild:bullet];
                 anguler += angRange/2;
@@ -436,13 +442,14 @@ CFTimeInterval countTime = 0;
             int gainLiveStar = 0;
             if (liveGainLevel == 1) {
                 gainLiveStar = 1000;
-            }else if (gainLiveStar == 2){
+            }else if (liveGainLevel == 2){
                 gainLiveStar = 900;
-            }else if (gainLiveStar == 3){
+            }else if (liveGainLevel == 3){
                 gainLiveStar = 700;
             }
             if (self.multiple % gainLiveStar == 0) {
                 self.lives ++;
+                NSLog(@"liveUP");
             }
         }
         short bombGainLevel = userData.powerUp4Level.shortValue;
@@ -457,6 +464,7 @@ CFTimeInterval countTime = 0;
             }
             if (self.multiple % gainBombStar == 0) {
                 self.bombs ++;
+                NSLog(@"bombUP");
             }
         }
         [self updateUI];

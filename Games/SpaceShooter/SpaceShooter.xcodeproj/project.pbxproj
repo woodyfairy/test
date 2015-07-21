@@ -16,6 +16,11 @@
 		1645EA911B5A412F0085091E /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1645EA901B5A412F0085091E /* UserData.m */; };
 		1645EA941B5A559F0085091E /* PowerUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1645EA931B5A559F0085091E /* PowerUpViewController.m */; };
 		1645EA971B5A57000085091E /* ShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1645EA961B5A57000085091E /* ShopViewController.m */; };
+		168F66121B5E40E900703890 /* shop_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 168F660D1B5E40E900703890 /* shop_1.png */; };
+		168F66131B5E40E900703890 /* shop_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 168F660E1B5E40E900703890 /* shop_2.png */; };
+		168F66141B5E40E900703890 /* shop_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 168F660F1B5E40E900703890 /* shop_3.png */; };
+		168F66151B5E40E900703890 /* shop_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 168F66101B5E40E900703890 /* shop_4.png */; };
+		168F66161B5E40E900703890 /* shop_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 168F66111B5E40E900703890 /* shop_5.png */; };
 		169FFCFD1B58F4F8006147B7 /* BackgroundShaer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFCFC1B58F4F8006147B7 /* BackgroundShaer.fsh */; };
 		169FFCFF1B58FFBA006147B7 /* BackgroundShaer2.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFCFE1B58FFBA006147B7 /* BackgroundShaer2.fsh */; };
 		169FFD011B595450006147B7 /* EnemyShaer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFD001B595450006147B7 /* EnemyShaer.fsh */; };
@@ -114,6 +119,11 @@
 		1645EA931B5A559F0085091E /* PowerUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpViewController.m; sourceTree = "<group>"; };
 		1645EA951B5A57000085091E /* ShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopViewController.h; sourceTree = "<group>"; };
 		1645EA961B5A57000085091E /* ShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopViewController.m; sourceTree = "<group>"; };
+		168F660D1B5E40E900703890 /* shop_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_1.png; sourceTree = "<group>"; };
+		168F660E1B5E40E900703890 /* shop_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_2.png; sourceTree = "<group>"; };
+		168F660F1B5E40E900703890 /* shop_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_3.png; sourceTree = "<group>"; };
+		168F66101B5E40E900703890 /* shop_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_4.png; sourceTree = "<group>"; };
+		168F66111B5E40E900703890 /* shop_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop_5.png; sourceTree = "<group>"; };
 		169FFCFC1B58F4F8006147B7 /* BackgroundShaer.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BackgroundShaer.fsh; sourceTree = "<group>"; };
 		169FFCFE1B58FFBA006147B7 /* BackgroundShaer2.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BackgroundShaer2.fsh; sourceTree = "<group>"; };
 		169FFD001B595450006147B7 /* EnemyShaer.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = EnemyShaer.fsh; sourceTree = "<group>"; };
@@ -252,6 +262,18 @@
 			path = DataController;
 			sourceTree = "<group>";
 		};
+		168F660C1B5E40E900703890 /* ShopUI */ = {
+			isa = PBXGroup;
+			children = (
+				168F660D1B5E40E900703890 /* shop_1.png */,
+				168F660E1B5E40E900703890 /* shop_2.png */,
+				168F660F1B5E40E900703890 /* shop_3.png */,
+				168F66101B5E40E900703890 /* shop_4.png */,
+				168F66111B5E40E900703890 /* shop_5.png */,
+			);
+			path = ShopUI;
+			sourceTree = "<group>";
+		};
 		16DDC9241B5BC8B400331CC0 /* PowerUpUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				16DDC9241B5BC8B400331CC0 /* PowerUpUI */,
+				168F660C1B5E40E900703890 /* ShopUI */,
 				16E350FC1B5CF38C00FAC9DD /* closeBtn.png */,
 				8833853D1B56EAD100BC5358 /* star.png */,
 				16E350FE1B5D054400FAC9DD /* starYellow.png */,
@@ -525,6 +548,7 @@
 				16DDC9431B5BC8B400331CC0 /* powerUp8.png in Resources */,
 				16EAD76B1B50FBA60057390E /* box.png in Resources */,
 				8833851E1B56D02E00BC5358 /* pauseBtn.png in Resources */,
+				168F66131B5E40E900703890 /* shop_2.png in Resources */,
 				169FFCFF1B58FFBA006147B7 /* BackgroundShaer2.fsh in Resources */,
 				8895A9121B42E18D007A54CE /* Images.xcassets in Resources */,
 				884982F31B4EBFE800C5EBB9 /* GameScene.sks in Resources */,
@@ -538,10 +562,13 @@
 				16EAD76C1B50FBA60057390E /* box2.png in Resources */,
 				169FFCFD1B58F4F8006147B7 /* BackgroundShaer.fsh in Resources */,
 				8833853E1B56EAD100BC5358 /* star.png in Resources */,
+				168F66121B5E40E900703890 /* shop_1.png in Resources */,
+				168F66141B5E40E900703890 /* shop_3.png in Resources */,
 				16E351021B5D18B200FAC9DD /* powerUpBuy.png in Resources */,
 				889DAE541B4797EF0041D0D7 /* light1.sks in Resources */,
 				16E350FF1B5D054400FAC9DD /* starYellow.png in Resources */,
 				16DDC9351B5BC8B400331CC0 /* powerUp1.png in Resources */,
+				168F66151B5E40E900703890 /* shop_4.png in Resources */,
 				16EAD7711B50FBA60057390E /* star5R.png in Resources */,
 				160FC6F31B53E44E00C55206 /* InfoPlist.strings in Resources */,
 				883385251B56D04300BC5358 /* home.png in Resources */,
@@ -554,6 +581,7 @@
 				883385291B56D06900BC5358 /* powerup.png in Resources */,
 				16DDC9371B5BC8B400331CC0 /* powerUp2.png in Resources */,
 				16EAD77D1B510CAE0057390E /* EnemyPiece.png in Resources */,
+				168F66161B5E40E900703890 /* shop_5.png in Resources */,
 				881A17211B45882E007AE66A /* ControllerCircle_arrowCircle.png in Resources */,
 				883385351B56D07800BC5358 /* shop.png in Resources */,
 				889DAE511B4797BE0041D0D7 /* playerLight.png in Resources */,

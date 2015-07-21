@@ -15,10 +15,10 @@
 "config1_name" = "武器强化";
 "config1_des0" = "升级：增加射击速度";
 "config1_des1" = "升级：增加子弹数量";
-"config1_des2" = "升级：增加射击速度";
-"config1_des3" = "升级：增加子弹数量";
-"config1_des4" = "升级：增加子弹的伤害";
-"config1_des5" = "已达最高等级：达到最高的射速和伤害";
+"config1_des2" = "升级：增加子弹的伤害";
+"config1_des3" = "升级：增加射击速度";
+"config1_des4" = "升级：增加子弹数量";
+"config1_des5" = "已达最高等级：达到最大火力";
 
 //生命成长
 "config2_name" = "生命增强";
@@ -77,3 +77,13 @@
 "powerUp_confirmTitle" = "确认购买";
 "powerUp_confirmDes" = "升级将消耗%d颗星星";
 "powerUp_confirmYes" = "确认";
+
+//shop
+"shop_1" = "2,000 颗星 (6 RMB)";
+"shop_2" = "5,000 颗星 (12 RMB)";
+"shop_3" = "20,000 颗星 (42 RMB)";
+"shop_4" = "50,000 颗星 (90 RMB)";
+"shop_5" = "完全强化! (120 RMB)";
+"shop_resotre" = "恢复购买";
+"shop_allPowerSuccess" = "恭喜你获得了完全强化!";
+"shop_starsSuccess" = "恭喜你获得了%d颗星星!";

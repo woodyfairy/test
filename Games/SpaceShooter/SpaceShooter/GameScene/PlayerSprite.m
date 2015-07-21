@@ -78,15 +78,15 @@
     
     node.fireLevel = userData.powerUp0Level.shortValue;
     //node.fireLevel = 1;//test
-    if (node.fireLevel >= 3) {
+    if (node.fireLevel >= 4) {
         node.fireInterval = 0.075f;
     }else if (node.fireLevel >=1){
         node.fireInterval = 0.1f;
     }else{
         node.fireInterval = 0.125f;
     }
-    if (node.fireLevel >= 5) {
-        node.fireDamage = 3;
+    if (node.fireLevel >= 3) {
+        node.fireDamage = 2;
     }else{
         node.fireDamage = 1;
     }
@@ -99,16 +99,19 @@
     int rangeLevel = userData.powerUp7Level.shortValue;
     //rangeLevel = 3;//test
     float range = 50;
+    field.strength = 1;
     if (rangeLevel == 3) {
         range = 125;
+        field.strength = 2;
     }else if (rangeLevel == 2){
         range = 100;
+        field.strength = 1.5;
     }else if (rangeLevel == 1){
         range = 75;
     }
     field.region = [[SKRegion alloc] initWithRadius:range];
     field.falloff = 3;
-    field.strength = 1;
+    
     field.categoryBitMask = FieldType_player;
     
     return node;

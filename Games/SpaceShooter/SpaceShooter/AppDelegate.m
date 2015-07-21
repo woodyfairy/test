@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "DataController.h"//test
+#import "DataController.h"
+#import "ShopViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [DataController instance];//初始化
+    [[PurchaseManager instanse] start];//初始化
     
     //test
 //    UserData *userData = [[DataController instance] getUserData];

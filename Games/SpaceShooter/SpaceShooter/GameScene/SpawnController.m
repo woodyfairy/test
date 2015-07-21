@@ -57,7 +57,7 @@
         self.upLevelTime = 60;
     }
     else{
-        self.upLevelTime = 60;
+        self.upLevelTime = 45;
     }
 }
 -(void) resetRefreshTimeForLevel:(NSUInteger)level{
