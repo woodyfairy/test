@@ -40,7 +40,7 @@
 }
 -(void)initData{
     self.score = 1;
-    self.health = 1;
+    self.health = 5;
     self.physicsBody.angularVelocity = getRandom() + 1.5f;
 }
 -(void)updateWithDelta:(NSTimeInterval)delta{

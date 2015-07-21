@@ -52,7 +52,7 @@
 @property (assign) int showingIndex;
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *detailView;
 @property (weak, nonatomic) IBOutlet UIImageView *detail_iconImage;
-@property (weak, nonatomic) IBOutlet UITextView *detail_descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *detail_descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *detail_starImage;
 @property (weak, nonatomic) IBOutlet UILabel *detail_costTag;
 @property (weak, nonatomic) IBOutlet UILabel *detail_costLabel;

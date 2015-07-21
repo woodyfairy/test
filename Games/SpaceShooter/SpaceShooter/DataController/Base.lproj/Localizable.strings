@@ -12,64 +12,64 @@
 //升级配置表
 
 //攻击升级
-"config1_name" = "武器强化";
-"config1_des0" = "升级：增加射击速度";
-"config1_des1" = "升级：增加子弹数量";
-"config1_des2" = "升级：增加子弹的伤害";
-"config1_des3" = "升级：增加射击速度";
-"config1_des4" = "升级：增加子弹数量";
-"config1_des5" = "已达最高等级：达到最大火力";
+"config1_name" = "Firepower Up";
+"config1_des0" = "Upgrade: Increase firing rate";
+"config1_des1" = "Upgrade: Increase the number of bullets";
+"config1_des2" = "Upgrade: Increase the damage of bullets";
+"config1_des3" = "Upgrade: Increase firing rate";
+"config1_des4" = "Upgrade: Increase the number of bullets";
+"config1_des5" = "MAX: Highest firing rate & Most bullets & Maximum damage";
 
 //生命成长
-"config2_name" = "生命增强";
-"config2_des0" = "升级：每局初始为3次生命";
-"config2_des1" = "升级：每局初始为4次生命";
-"config2_des2" = "升级：每局初始为5次生命";
-"config2_des3" = "已达最高等级：每局初始为5次生命";
+"config2_name" = "More Ships";
+"config2_des0" = "Upgrade: Have 3 ships at the beginning";
+"config2_des1" = "Upgrade: Have 4 ships at the beginning";
+"config2_des2" = "Upgrade: Have 5 ships at the beginning";
+"config2_des3" = "MAX: Have 5 ships at the beginning";
 
 //生命恢复
-"config3_name" = "后备增援";
-"config3_des0" = "升级：在一局游戏中，每获得1000颗星时增加一命";
-"config3_des1" = "升级：在一局游戏中，每获得900颗星时增加一命";
-"config3_des2" = "升级：在一局游戏中，每获得700颗星时增加一命";
-"config3_des3" = "已达最高等级：在一局游戏中，每获得700颗星时增加一命";
+"config3_name" = "Reinforcements";
+"config3_des0" = "Upgrade: Get one more ship everytime you collect 1000 stars in one game";
+"config3_des1" = "Upgrade: Get one more ship everytime you collect 900 stars in one game";
+"config3_des2" = "Upgrade: Get one more ship everytime you collect 700 stars in one game";
+"config3_des3" = "MAX: Get one more ship everytime you collect 700 stars in one game";
 
 //炸弹成长
-"config4_name" = "炸弹增强";
-"config4_des0" = "升级：每局初始携带3枚炸弹";
-"config4_des1" = "升级：每局初始携带4枚炸弹";
-"config4_des2" = "升级：每局初始携带5枚炸弹";
-"config4_des3" = "已达最高等级：每局初始携带5枚炸弹";
+"config4_name" = "More Bombs";
+"config4_des0" = "Upgrade: Have 3 bombs at the beginning";
+"config4_des1" = "Upgrade: Have 4 bombs at the beginning";
+"config4_des2" = "Upgrade: Have 5 bombs at the beginning";
+"config4_des3" = "MAX: Have 5 bombs at the beginning";
 
 //炸弹恢复
-"config5_name" = "重载炸弹";
-"config5_des0" = "升级：在一局游戏中，每获得880颗星时获得一枚炸弹";
-"config5_des1" = "升级：在一局游戏中，每获得770颗星时获得一枚炸弹";
-"config5_des2" = "升级：在一局游戏中，每获得625颗星时获得一枚炸弹";
-"config5_des3" = "已达最高等级：在一局游戏中，每获得625颗星时获得一枚炸弹";
+"config5_name" = "Reload Bomb";
+"config5_des0" = "Upgrade: Get a bomb everytime you collect 880 stars in one game";
+"config5_des1" = "Upgrade: Get a bomb everytime you collect 770 stars in one game";
+"config5_des2" = "Upgrade: Get a bomb everytime you collect 625 stars in one game";
+"config5_des3" = "MAX: Get a bomb everytime you collect 625 stars in one game";
 
 //自动使用炸弹
-"config6_name" = "智能炸弹";
-"config6_des0" = "激活后，在碰撞到敌人时自动使用炸弹";
-"config6_des1" = "已激活：在碰撞到敌人时自动使用炸弹";
+"config6_name" = "Smart Bomb";
+"config6_des0" = "Activate: Automatic use a bomb before your ship be crashed";
+"config6_des1" = "Activated: Automatic use a bomb before your ship be crashed";
 
 //增加移动速度
-"config7_name" = "进阶引擎";
-"config7_des0" = "升级：增加飞船的移动速度";
-"config7_des1" = "升级：增加飞船的移动速度";
-"config7_des2" = "升级：增加飞船的移动速度";
-"config7_des3" = "已达最高等级：已达到最高的移动速度";
+"config7_name" = "Boost Engine";
+"config7_des0" = "Upgrade: Increase the speed of your ship";
+"config7_des1" = "Upgrade: Increase the speed of your ship";
+"config7_des2" = "Upgrade: Increase the speed of your ship";
+"config7_des3" = "MAX: Your ship has reached the top speed";
 
 //增加拾取半径
-"config8_name" = "人工引力";
-"config8_des0" = "升级：增加飞船拾取星星的范围";
-"config8_des1" = "升级：增加飞船拾取星星的范围";
-"config8_des2" = "升级：增加飞船拾取星星的范围";
-"config8_des3" = "已达最高等级：已达到最大拾取范围";
+"config8_name" = "Quasi-gravity";
+"config8_des0" = "Upgrade: Increase the collecting range for stars";
+"config8_des1" = "Upgrade: Increase the collecting range for stars";
+"config8_des2" = "Upgrade: Increase the collecting range for stars";
+"config8_des3" = "MAX: Reach the maximum collecting range for stars";
 
 //powerUp
-"config_active" = "已激活";
-"config_disable" = "未激活";
+"config_active" = "Activated";
+"config_disable" = "Not activated";
 "powerUp_cost" = "cost";
 "powerUp_notEnough" = "Stars is not enough";
 "powerUp_cancel" = "Cancel";

@@ -33,7 +33,7 @@
     self.score = 1;
     self.health = 1;
     self.physicsBody.angularVelocity = getRandom() + 1.5f;
-    self.moveSpeed = 120;
+    self.moveSpeed = 175;
 }
 -(void)updateWithDelta:(NSTimeInterval)delta{
     if (self.isActive && self.currentScene.player) {
