@@ -39,7 +39,7 @@
     CGPathRelease(path);
 }
 -(void)initData{
-    self.score = 1;
+    self.score = 3;
     self.health = 5;
     self.physicsBody.angularVelocity = getRandom() + 1.5f;
 }

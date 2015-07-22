@@ -16,8 +16,17 @@
 #import "Enemy_5Side.h"
 #import "Enemy_Arrow.h"
 #import "Enemy_3star.h"
+#import "Enemy_Sakura.h"
 
-#define TEST_ONE_SPAWN YES
+enum LevelSpawnType{
+    LevelSpawnType_one = 1, //单个刷新
+    LevelSpawnType_group = 2, //组刷新
+    LevelSpawnType_coner = 3, //四边或四角刷新
+    LevelSpawnType_blackHole = 5, //黑洞
+    LevelSpawnType_rotation = 7, //旋转发射
+};
+
+#define TEST_ONE_SPAWN NO
 #define TEST_ONE_SPAWN_LEVEL 5
 
 @interface SpawnController()
@@ -64,26 +73,30 @@
     if (_currentLevel == 1) {
         self.upLevelTime = 10;
     }else if (_currentLevel == 2){
-        self.upLevelTime = 20;
+        self.upLevelTime = 10;
     }else if (_currentLevel == 3) {
+        self.upLevelTime = 30;
+    }else if (_currentLevel == 4) {
+        self.upLevelTime = 45;
+    }else if (_currentLevel == 5) {
         self.upLevelTime = 60;
     }
     else{
-        self.upLevelTime = 45;
+        self.upLevelTime = 75;
     }
 }
 -(void) resetRefreshTimeForLevel:(NSUInteger)level{
     float value;
-    if (level == 1) {
+    if (level == LevelSpawnType_one) {
         value = 1 + self.currentLevel/2;//单体
-    }else if (level == 2){
+    }else if (level == LevelSpawnType_group){
         value = 1.f + 0.5 * (_maxLevel - self.currentLevel) + getIntRadom(3); //组
-    }else if (level == 3){
+    }else if (level == LevelSpawnType_coner){
         value = 5 + (_maxLevel - self.currentLevel)*2 + getIntRadom(8); //四角或者四边
-    }else if (level == 4){
+    }else if (level == LevelSpawnType_blackHole){
         value = 10 + _maxLevel - self.currentLevel + getIntRadom(10); //黑洞
-    }else if (level == 5){
-        value = 10;//15 + (_maxLevel - self.currentLevel)*3 + getIntRadom(15); //旋转分散
+    }else if (level == LevelSpawnType_rotation){
+        value = 15 + (_maxLevel - self.currentLevel)*3 + getIntRadom(15); //旋转发射
     }
     [self.arrayRefreshNeed replaceObjectAtIndex:level-1 withObject:[NSNumber numberWithFloat:value]];
 }
@@ -109,7 +122,7 @@
         }
         float timerValue = [[self.arrayTimers objectAtIndex:i] floatValue] + delta;
         float freshTime = [[self.arrayRefreshNeed objectAtIndex:i] floatValue];
-        if (i == 0) {
+        if (i+1 == LevelSpawnType_one) {
             //第一种刷新:随机刷单体
             if (timerValue >= freshTime) {
                 timerValue = 0;
@@ -118,7 +131,7 @@
                 //test
                 //[self spawnAEnemyWithType:EnemyType_5Side withPosition:[self getRandomPos]];
             }
-        }else if (i == 1){
+        }else if (i+1 == LevelSpawnType_group){
             //第二种刷新:随机刷一个组
             if (timerValue >= freshTime) {
                 timerValue = 0;
@@ -126,7 +139,7 @@
                 [self spawnAGrouByType:(EnemyType)(1 + getIntRadom(2))];
             }
         }
-        else if (i == 2){
+        else if (i+1 == LevelSpawnType_coner){
             //第三种刷新:四个角刷新大量的一种 //或者四个边的箭头
             if (timerValue >= freshTime) {
                 timerValue = 0;
@@ -151,9 +164,9 @@
                             spawn = YES;//第1条边肯定刷新
                         }else if (i == 1 && _currentLevel < 4) {
                             spawn = NO;//第2条边在等级小于4时不会刷
-                        }else if (i == 2 && _currentLevel < 5) {
+                        }else if (i == 2 && _currentLevel < 6) {
                             spawn = NO;//第3条边在等级小于4时不会刷
-                        }else if (i == 3 && _currentLevel < 6) {
+                        }else if (i == 3 && _currentLevel < 8) {
                             spawn = NO;//第4条边在等级小于5时不会刷
                         }
                         if (spawn) {
@@ -241,7 +254,7 @@
                     [self spawnAEnemyWithType:self.conerSpawnType withPosition:CGPointMake(self.currentScene.worldSize.width/2 - 80 + getRandom()*60 , self.currentScene.worldSize.height/2 - 80 + getRandom()*60)];
                 }
             }
-        }else if (i == 3) {
+        }else if (i+1 == LevelSpawnType_blackHole) {
             //第4种刷新：黑洞
             if (timerValue >= freshTime) {
                 timerValue = 0;
@@ -261,17 +274,17 @@
                 [self.currentScene.worldPanel addChild:bh];
                 [self.currentScene.arrayBlackHoles addObject:bh];
             }
-        }else if (i == 4){
+        }else if (i+1 == LevelSpawnType_rotation){
             //第5种，旋转
             if (timerValue >= freshTime) {
                 timerValue = 0;
-                int randType = getIntRadom(2);
+                int randType = getIntRadom(5);
                 if (randType == 0) {
-                    self.rotationSpawnType = EnemyType_5Side;
-                }else if (randType == 1){
-                    self.rotationSpawnType = EnemyType_5Side;
+                    self.rotationSpawnType = EnemyType_5Side;//0 1/6
+                }else if (randType <= 2){
+                    self.rotationSpawnType = EnemyType_3star;//1-2 2/6
                 }else{
-                    self.rotationSpawnType = EnemyType_5Side;
+                    self.rotationSpawnType = EnemyType_Sakura;//3-5 3/6
                 }
                 self.rotationSpawnTimer = 0;
                 self.rotationSpwanNum = 10 + self.currentLevel * 2;
@@ -291,6 +304,11 @@
                         EnemyBase *enemy = [self spawnAEnemyWithType:self.rotationSpawnType withPosition:pos];
                         enemy.moveAngular = ang;
                         enemy.moveSpeed = 180;
+                        if (self.rotationSpawnType == EnemyType_Sakura) {
+                            Enemy_Sakura *sakura = (Enemy_Sakura *)enemy;
+                            sakura.state = MoveState_speedDown;
+                            sakura.moveSpeed = 400;
+                        }
                     }
                 }
             }
@@ -337,6 +355,8 @@
         enemy = [Enemy_3star create];
     }else if (type == EnemyType_Arrow){
         enemy = [Enemy_Arrow create];
+    }else if (type == EnemyType_Sakura){
+        enemy = [Enemy_Sakura create];
     }
     return enemy;
 }

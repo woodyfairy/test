@@ -15,7 +15,7 @@
 #import "Enemy_Black.h"
 
 //test
-int startLevel = 5;
+int startLevel = 1;
 
 @implementation GameScene
 

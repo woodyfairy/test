@@ -39,7 +39,7 @@
     CGPathRelease(path);
 }
 -(void)initData{
-    self.score = 1;
+    self.score = 2;
     self.health = 1;
     
     self.moveSpeed = 250;
@@ -50,7 +50,7 @@
     
 }
 -(void)updateWithDelta:(NSTimeInterval)delta{
-    if (self.isActive) {
+    if (self.isActive && self.currentScene.player) {
         float angelSpeed = 1.f;
         //角度
         float desAngel = atan2f(self.currentScene.player.position.y - self.position.y, self.currentScene.player.position.x - self.position.x);

@@ -88,6 +88,7 @@
 		884982FB1B4ECAA200C5EBB9 /* EnemyBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 884982FA1B4ECAA200C5EBB9 /* EnemyBase.m */; };
 		884983011B4EDAA200C5EBB9 /* Enemy_Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 884983001B4EDAA200C5EBB9 /* Enemy_Triangle.m */; };
 		888205C01B601735006B47FA /* Enemy_3star.m in Sources */ = {isa = PBXBuildFile; fileRef = 888205BF1B601735006B47FA /* Enemy_3star.m */; };
+		888205C31B60343E006B47FA /* Enemy_Sakura.m in Sources */ = {isa = PBXBuildFile; fileRef = 888205C21B60343E006B47FA /* Enemy_Sakura.m */; };
 		8895A9021B42E18D007A54CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8895A9011B42E18D007A54CE /* main.m */; };
 		8895A9051B42E18D007A54CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8895A9041B42E18D007A54CE /* AppDelegate.m */; };
 		8895A90D1B42E18D007A54CE /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8895A90C1B42E18D007A54CE /* GameViewController.m */; };
@@ -214,6 +215,8 @@
 		884983001B4EDAA200C5EBB9 /* Enemy_Triangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Triangle.m; sourceTree = "<group>"; };
 		888205BE1B601735006B47FA /* Enemy_3star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_3star.h; sourceTree = "<group>"; };
 		888205BF1B601735006B47FA /* Enemy_3star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_3star.m; sourceTree = "<group>"; };
+		888205C11B60343E006B47FA /* Enemy_Sakura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Sakura.h; sourceTree = "<group>"; };
+		888205C21B60343E006B47FA /* Enemy_Sakura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Sakura.m; sourceTree = "<group>"; };
 		8895A8FC1B42E18D007A54CE /* SpaceShooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceShooter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8895A9011B42E18D007A54CE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8895A9031B42E18D007A54CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -396,6 +399,8 @@
 				16BD162D1B5233BA00932BF1 /* Enemy_Arrow.m */,
 				881BDEE71B52F77D00B74D9B /* Enemy_Black.h */,
 				881BDEE81B52F77D00B74D9B /* Enemy_Black.m */,
+				888205C11B60343E006B47FA /* Enemy_Sakura.h */,
+				888205C21B60343E006B47FA /* Enemy_Sakura.m */,
 			);
 			path = Enemies;
 			sourceTree = "<group>";
@@ -623,6 +628,7 @@
 				884982F71B4EC3FD00C5EBB9 /* SpawnController.m in Sources */,
 				8895A9051B42E18D007A54CE /* AppDelegate.m in Sources */,
 				16BD162E1B5233BA00932BF1 /* Enemy_Arrow.m in Sources */,
+				888205C31B60343E006B47FA /* Enemy_Sakura.m in Sources */,
 				884982F41B4EBFE800C5EBB9 /* PlayerSprite.m in Sources */,
 				1645EA941B5A559F0085091E /* PowerUpViewController.m in Sources */,
 				884982EB1B4EBFDF00C5EBB9 /* GameControllerView.m in Sources */,
