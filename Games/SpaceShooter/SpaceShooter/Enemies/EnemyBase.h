@@ -14,8 +14,9 @@ typedef enum {
     EnemyType_Box = 2, //向玩家移动
     EnemyType_Circle = 3, //向玩家加速
     EnemyType_5Side = 4, //向一个方向
-    EnemyType_Arrow = 5, //箭头，四边向内加速运动
-    EnemyType_Black = 6, //打破黑洞出来的东西
+    EnemyType_3star = 5, //3角星，速度快，角度向玩家缓慢调整
+    EnemyType_Arrow = 6, //箭头，四边向内加速运动
+    EnemyType_Black = 7, //打破黑洞出来的东西
 }EnemyType;
 
 

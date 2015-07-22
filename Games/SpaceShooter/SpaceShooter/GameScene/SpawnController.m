@@ -15,6 +15,10 @@
 #import "Enemy_Circle.h"
 #import "Enemy_5Side.h"
 #import "Enemy_Arrow.h"
+#import "Enemy_3star.h"
+
+#define TEST_ONE_SPAWN YES
+#define TEST_ONE_SPAWN_LEVEL 5
 
 @interface SpawnController()
 @property (assign) CFTimeInterval mainTimer; //升级计时
@@ -24,13 +28,21 @@
 @property (assign) EnemyType conerSpawnType;
 @property (assign) float conerSpawnTimer;
 @property (assign) int conerSpawnNum;
+
+//旋转刷新
+@property (assign) EnemyType rotationSpawnType;
+@property (assign) float rotationSpawnTimer;
+@property (assign) int rotationSpwanNum;
+@property (assign) int rotationSpwanDirectionNum;
+@property (assign) CGPoint rotationSpawnPosition;
+@property (assign) float rotaionSpawnAngular;
 @end
 
 @implementation SpawnController
 -(instancetype)initWithLevel:(int)level Scene:(GameScene *)scene{
     if ([self init]) {
         _currentLevel = level;
-        _maxLevel = 4;
+        _maxLevel = 8;
         _currentScene = scene;
         _arrayTimers = [[NSMutableArray alloc] init];
         _arrayRefreshNeed = [[NSMutableArray alloc] init];
@@ -65,11 +77,13 @@
     if (level == 1) {
         value = 1 + self.currentLevel/2;//单体
     }else if (level == 2){
-        value = self.currentLevel + getIntRadom(3); //组
+        value = 1.f + 0.5 * (_maxLevel - self.currentLevel) + getIntRadom(3); //组
     }else if (level == 3){
-        value = 10 + _maxLevel - self.currentLevel + getIntRadom(10); //四角或者四边
+        value = 5 + (_maxLevel - self.currentLevel)*2 + getIntRadom(8); //四角或者四边
     }else if (level == 4){
-        value = 10 + getIntRadom(10); //黑洞
+        value = 10 + _maxLevel - self.currentLevel + getIntRadom(10); //黑洞
+    }else if (level == 5){
+        value = 10;//15 + (_maxLevel - self.currentLevel)*3 + getIntRadom(15); //旋转分散
     }
     [self.arrayRefreshNeed replaceObjectAtIndex:level-1 withObject:[NSNumber numberWithFloat:value]];
 }
@@ -90,6 +104,9 @@
     
     //每个刷新计时
     for (int i = 0; i < _currentLevel; i ++) {
+        if (TEST_ONE_SPAWN && TEST_ONE_SPAWN_LEVEL != i+1) {
+            continue;
+        }
         float timerValue = [[self.arrayTimers objectAtIndex:i] floatValue] + delta;
         float freshTime = [[self.arrayRefreshNeed objectAtIndex:i] floatValue];
         if (i == 0) {
@@ -97,7 +114,7 @@
             if (timerValue >= freshTime) {
                 timerValue = 0;
                 [self resetRefreshTimeForLevel:i+1];
-                [self spawnAEnemyWithType:(EnemyType)(1 + getIntRadom(3)) withPosition:[self getRandomPos]];
+                [self spawnAEnemyWithType:(EnemyType)(1 + getIntRadom(4)) withPosition:[self getRandomPos]];
                 //test
                 //[self spawnAEnemyWithType:EnemyType_5Side withPosition:[self getRandomPos]];
             }
@@ -117,7 +134,11 @@
                 int random = getIntRadom(8); //0－8的随机数，奇数刷新四角、偶数刷新四边、0都刷新
                 if (random == 0 || random % 2 == 1) {
                     //四角刷新
-                    self.conerSpawnType = 3 + getIntRadom(1);
+                    if (self.currentLevel >= 6) {
+                        self.conerSpawnType = 3 + getIntRadom(2);
+                    }else{
+                        self.conerSpawnType = 3 + getIntRadom(1);
+                    }
                     self.conerSpawnNum = 10 + self.currentLevel * 2;
                     self.conerSpawnTimer = 0;
                 }
@@ -240,12 +261,50 @@
                 [self.currentScene.worldPanel addChild:bh];
                 [self.currentScene.arrayBlackHoles addObject:bh];
             }
+        }else if (i == 4){
+            //第5种，旋转
+            if (timerValue >= freshTime) {
+                timerValue = 0;
+                int randType = getIntRadom(2);
+                if (randType == 0) {
+                    self.rotationSpawnType = EnemyType_5Side;
+                }else if (randType == 1){
+                    self.rotationSpawnType = EnemyType_5Side;
+                }else{
+                    self.rotationSpawnType = EnemyType_5Side;
+                }
+                self.rotationSpawnTimer = 0;
+                self.rotationSpwanNum = 10 + self.currentLevel * 2;
+                self.rotationSpwanDirectionNum = 3 + getIntRadom(1);
+                self.rotationSpawnPosition = [self getRandomPosWithInset:200];;
+                self.rotaionSpawnAngular = getRandom() * M_PI * 2;
+            }
+            if (self.rotationSpwanNum > 0) {
+                self.rotaionSpawnAngular += 2.f * delta;
+                self.rotationSpawnTimer += delta;
+                if (self.rotationSpawnTimer >= 0.13f) {
+                    self.rotationSpawnTimer = 0;
+                    self.rotationSpwanNum --;
+                    for (int i = 0; i < self.rotationSpwanDirectionNum; i ++) {
+                        float ang = self.rotaionSpawnAngular + M_PI * 2 / self.rotationSpwanDirectionNum * i;
+                        CGPoint pos = CGPointMake(self.rotationSpawnPosition.x + cosf(ang) * 25, self.rotationSpawnPosition.y + sinf(ang) * 25);
+                        EnemyBase *enemy = [self spawnAEnemyWithType:self.rotationSpawnType withPosition:pos];
+                        enemy.moveAngular = ang;
+                        enemy.moveSpeed = 180;
+                    }
+                }
+            }
         }
         [self.arrayTimers replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:timerValue]];
     }
 }
 -(CGPoint) getRandomPos{
     float inset = 20;
+    float width = self.currentScene.worldSize.width - inset * 2;
+    float height = self.currentScene.worldSize.height - inset * 2;
+    return CGPointMake(getRandom() * width - width/2, getRandom() * height - height/2);
+}
+-(CGPoint) getRandomPosWithInset:(float)inset{
     float width = self.currentScene.worldSize.width - inset * 2;
     float height = self.currentScene.worldSize.height - inset * 2;
     return CGPointMake(getRandom() * width - width/2, getRandom() * height - height/2);
@@ -274,6 +333,8 @@
         enemy = [Enemy_Circle create];
     }else if (type == EnemyType_5Side){
         enemy = [Enemy_5Side create];
+    }else if (type == EnemyType_3star){
+        enemy = [Enemy_3star create];
     }else if (type == EnemyType_Arrow){
         enemy = [Enemy_Arrow create];
     }
