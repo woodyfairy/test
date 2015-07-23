@@ -8,6 +8,7 @@
 
 #import "GameScene.h"
 #import "Common.h"
+#import "SoundController.h"
 #import "DataController.h"
 #import "SpawnController.h"
 #import "EnemyBase.h"
@@ -132,6 +133,9 @@ int startLevel = 1;
     if ([self showLeftGuide] == NO) {
         [self showRightGuide];
     }
+    
+    //sound
+    [[SoundController instance] playBackground:@"BattleBackground"];
 }
 -(void)end{
     self.playing = false;
@@ -364,6 +368,7 @@ CFTimeInterval countTime = 0;
                 return;
             }
             //玩家碰撞，死掉
+            [[SoundController instance] playSound:@"die"];
             [self flashColor:[UIColor redColor]];
             if (self.lives == 0) {
                 //最后一命
@@ -783,6 +788,8 @@ CFTimeInterval countTime = 0;
     [node runAction:actionBomb completion:^{
         [node removeFromParent];
     }];
+    
+    [[SoundController instance] playSound:@"bomb"];
 }
 
 -(void)invincibleWithTime:(float)seconds{

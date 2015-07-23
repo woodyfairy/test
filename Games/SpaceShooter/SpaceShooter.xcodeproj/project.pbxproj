@@ -90,6 +90,13 @@
 		884983011B4EDAA200C5EBB9 /* Enemy_Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 884983001B4EDAA200C5EBB9 /* Enemy_Triangle.m */; };
 		888205C01B601735006B47FA /* Enemy_3star.m in Sources */ = {isa = PBXBuildFile; fileRef = 888205BF1B601735006B47FA /* Enemy_3star.m */; };
 		888205C31B60343E006B47FA /* Enemy_Sakura.m in Sources */ = {isa = PBXBuildFile; fileRef = 888205C21B60343E006B47FA /* Enemy_Sakura.m */; };
+		88949ADD1B61368B005179E5 /* SoundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88949ADC1B61368B005179E5 /* SoundController.m */; };
+		88949AE01B614262005179E5 /* HomeBackground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88949ADF1B614262005179E5 /* HomeBackground.mp3 */; };
+		88949AE21B6146D9005179E5 /* BattleBackground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88949AE11B6146D9005179E5 /* BattleBackground.mp3 */; };
+		88949AE51B614B99005179E5 /* soundBtn_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 88949AE31B614B99005179E5 /* soundBtn_off.png */; };
+		88949AE61B614B99005179E5 /* soundBtn_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 88949AE41B614B99005179E5 /* soundBtn_on.png */; };
+		88949AEA1B6155E2005179E5 /* bomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88949AE91B6155E2005179E5 /* bomb.wav */; };
+		88949AEC1B615876005179E5 /* die.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88949AEB1B615876005179E5 /* die.wav */; };
 		8895A9021B42E18D007A54CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8895A9011B42E18D007A54CE /* main.m */; };
 		8895A9051B42E18D007A54CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8895A9041B42E18D007A54CE /* AppDelegate.m */; };
 		8895A90D1B42E18D007A54CE /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8895A90C1B42E18D007A54CE /* GameViewController.m */; };
@@ -219,6 +226,14 @@
 		888205BF1B601735006B47FA /* Enemy_3star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_3star.m; sourceTree = "<group>"; };
 		888205C11B60343E006B47FA /* Enemy_Sakura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Sakura.h; sourceTree = "<group>"; };
 		888205C21B60343E006B47FA /* Enemy_Sakura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Sakura.m; sourceTree = "<group>"; };
+		88949ADB1B61368B005179E5 /* SoundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundController.h; sourceTree = "<group>"; };
+		88949ADC1B61368B005179E5 /* SoundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundController.m; sourceTree = "<group>"; };
+		88949ADF1B614262005179E5 /* HomeBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HomeBackground.mp3; sourceTree = "<group>"; };
+		88949AE11B6146D9005179E5 /* BattleBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BattleBackground.mp3; sourceTree = "<group>"; };
+		88949AE31B614B99005179E5 /* soundBtn_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soundBtn_off.png; sourceTree = "<group>"; };
+		88949AE41B614B99005179E5 /* soundBtn_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soundBtn_on.png; sourceTree = "<group>"; };
+		88949AE91B6155E2005179E5 /* bomb.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bomb.wav; sourceTree = "<group>"; };
+		88949AEB1B615876005179E5 /* die.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = die.wav; sourceTree = "<group>"; };
 		8895A8FC1B42E18D007A54CE /* SpaceShooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceShooter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8895A9011B42E18D007A54CE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8895A9031B42E18D007A54CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -353,6 +368,8 @@
 				883385331B56D07300BC5358 /* resume.png */,
 				883385371B56D07800BC5358 /* shop.png */,
 				8833853B1B56D07D00BC5358 /* start.png */,
+				88949AE31B614B99005179E5 /* soundBtn_off.png */,
+				88949AE41B614B99005179E5 /* soundBtn_on.png */,
 				16E351001B5D18B200FAC9DD /* powerUpBuy.png */,
 			);
 			path = UI;
@@ -377,6 +394,8 @@
 				884982F61B4EC3FD00C5EBB9 /* SpawnController.m */,
 				884982F01B4EBFE800C5EBB9 /* PlayerSprite.h */,
 				884982F11B4EBFE800C5EBB9 /* PlayerSprite.m */,
+				88949ADB1B61368B005179E5 /* SoundController.h */,
+				88949ADC1B61368B005179E5 /* SoundController.m */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
@@ -429,10 +448,22 @@
 			path = Shapes;
 			sourceTree = "<group>";
 		};
+		88949ADE1B614262005179E5 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				88949AEB1B615876005179E5 /* die.wav */,
+				88949AE91B6155E2005179E5 /* bomb.wav */,
+				88949AE11B6146D9005179E5 /* BattleBackground.mp3 */,
+				88949ADF1B614262005179E5 /* HomeBackground.mp3 */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		8895A8F31B42E18D007A54CE = {
 			isa = PBXGroup;
 			children = (
 				881A171E1B45882E007AE66A /* Resources */,
+				88949ADE1B614262005179E5 /* Sound */,
 				8895A8FE1B42E18D007A54CE /* SpaceShooter */,
 				160FC6D01B53917200C55206 /* Frameworks */,
 				8895A8FD1B42E18D007A54CE /* Products */,
@@ -547,6 +578,7 @@
 			files = (
 				889DAE5E1B4B063A0041D0D7 /* spark.png in Resources */,
 				8895A9151B42E18D007A54CE /* LaunchScreen.xib in Resources */,
+				88949AEA1B6155E2005179E5 /* bomb.wav in Resources */,
 				16EAD7701B50FBA60057390E /* star5E.png in Resources */,
 				16DDC9381B5BC8B400331CC0 /* powerUp2_n.png in Resources */,
 				16EAD7671B50FBA60057390E /* 5side.png in Resources */,
@@ -587,6 +619,7 @@
 				168F66141B5E40E900703890 /* shop_3.png in Resources */,
 				16E351021B5D18B200FAC9DD /* powerUpBuy.png in Resources */,
 				889DAE541B4797EF0041D0D7 /* light1.sks in Resources */,
+				88949AE51B614B99005179E5 /* soundBtn_off.png in Resources */,
 				16E350FF1B5D054400FAC9DD /* starYellow.png in Resources */,
 				16DDC9351B5BC8B400331CC0 /* powerUp1.png in Resources */,
 				168F66151B5E40E900703890 /* shop_4.png in Resources */,
@@ -594,6 +627,7 @@
 				160FC6F31B53E44E00C55206 /* InfoPlist.strings in Resources */,
 				883385251B56D04300BC5358 /* home.png in Resources */,
 				883385391B56D07D00BC5358 /* start.png in Resources */,
+				88949AEC1B615876005179E5 /* die.wav in Resources */,
 				16DDC9421B5BC8B400331CC0 /* powerUp7_n.png in Resources */,
 				16DDC9411B5BC8B400331CC0 /* powerUp7.png in Resources */,
 				881A17221B45882E007AE66A /* ControllerCircle_backCircle.png in Resources */,
@@ -607,16 +641,19 @@
 				881A17211B45882E007AE66A /* ControllerCircle_arrowCircle.png in Resources */,
 				883385351B56D07800BC5358 /* shop.png in Resources */,
 				889DAE511B4797BE0041D0D7 /* playerLight.png in Resources */,
+				88949AE01B614262005179E5 /* HomeBackground.mp3 in Resources */,
 				889DAE5D1B4B063A0041D0D7 /* BulletFlash.sks in Resources */,
 				883A8C9B1B5825CC00EB49B1 /* HomeBackEffect.sks in Resources */,
 				1645EA8B1B5A30DB0085091E /* Localizable.strings in Resources */,
 				16EAD7731B50FBA60057390E /* star8.png in Resources */,
 				16DDC9361B5BC8B400331CC0 /* powerUp1_n.png in Resources */,
+				88949AE21B6146D9005179E5 /* BattleBackground.mp3 in Resources */,
 				881BDEEB1B54349D00B74D9B /* Bomb.png in Resources */,
 				16DDC93A1B5BC8B400331CC0 /* powerUp3_n.png in Resources */,
 				16DDC93B1B5BC8B400331CC0 /* powerUp4.png in Resources */,
 				16EAD77A1B510B3A0057390E /* EnemyExplode.sks in Resources */,
 				8895A9101B42E18D007A54CE /* Main.storyboard in Resources */,
+				88949AE61B614B99005179E5 /* soundBtn_on.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +667,7 @@
 				881BDEE91B52F77D00B74D9B /* Enemy_Black.m in Sources */,
 				8895A90D1B42E18D007A54CE /* GameViewController.m in Sources */,
 				884982F71B4EC3FD00C5EBB9 /* SpawnController.m in Sources */,
+				88949ADD1B61368B005179E5 /* SoundController.m in Sources */,
 				8895A9051B42E18D007A54CE /* AppDelegate.m in Sources */,
 				16BD162E1B5233BA00932BF1 /* Enemy_Arrow.m in Sources */,
 				888205C31B60343E006B47FA /* Enemy_Sakura.m in Sources */,

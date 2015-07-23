@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F6a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -127,12 +127,27 @@
                                                     <action selector="pauseHomeClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="MHf-ps-s8t"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vM-HL-WMJ">
+                                                <rect key="frame" x="430" y="480" width="90" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="90" id="bdx-nY-uK0"/>
+                                                    <constraint firstAttribute="height" constant="60" id="ppS-CZ-7p5"/>
+                                                </constraints>
+                                                <state key="normal" image="soundBtn_on.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="pauseSoundBtnClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Zc8-4a-VmL"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="centerX" secondItem="Tlv-Rr-CL4" secondAttribute="centerX" constant="-10" id="8wo-6L-eGQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="3vM-HL-WMJ" secondAttribute="trailing" constant="80" id="Bvc-fh-5oT"/>
                                             <constraint firstItem="ZF4-x7-tL8" firstAttribute="top" secondItem="G1S-eD-dLX" secondAttribute="top" constant="60" id="I0z-dd-uDo"/>
                                             <constraint firstAttribute="centerY" secondItem="Tlv-Rr-CL4" secondAttribute="centerY" id="NP7-gN-fv9"/>
+                                            <constraint firstAttribute="bottom" secondItem="3vM-HL-WMJ" secondAttribute="bottom" constant="60" id="O6D-DT-cYi"/>
                                             <constraint firstItem="ZF4-x7-tL8" firstAttribute="leading" secondItem="G1S-eD-dLX" secondAttribute="leading" constant="100" id="dEm-ri-tGg"/>
                                         </constraints>
                                     </view>
@@ -299,11 +314,26 @@
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb8-fL-O24" userLabel="soundBtn">
+                                                            <rect key="frame" x="360" y="440" width="90" height="60"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="90" id="c64-2P-Hz7"/>
+                                                                <constraint firstAttribute="height" constant="60" id="edi-g7-d6H"/>
+                                                            </constraints>
+                                                            <state key="normal" image="soundBtn_on.png">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="homeSoundBtnClick:" destination="BV1-FR-VrT" eventType="touchUpInside" id="s1O-1E-skF"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="nb8-fL-O24" secondAttribute="trailing" id="038-7d-BRA"/>
                                                         <constraint firstAttribute="centerX" secondItem="W2L-fq-7bW" secondAttribute="centerX" id="9mM-Up-JPj"/>
                                                         <constraint firstItem="Quf-sd-Hpi" firstAttribute="leading" secondItem="W2L-fq-7bW" secondAttribute="leading" id="Sxn-pC-11q"/>
                                                         <constraint firstItem="Ekm-gv-VSu" firstAttribute="leading" secondItem="Quf-sd-Hpi" secondAttribute="leading" id="YUA-JB-Zi6"/>
+                                                        <constraint firstAttribute="bottom" secondItem="nb8-fL-O24" secondAttribute="bottom" id="ZFa-sK-jpW"/>
                                                         <constraint firstItem="W2L-fq-7bW" firstAttribute="top" secondItem="z2S-DG-jR4" secondAttribute="top" constant="30" id="az4-Us-94j"/>
                                                         <constraint firstAttribute="bottom" secondItem="jCU-Mc-PMV" secondAttribute="bottom" constant="8" id="bRy-JH-4bG"/>
                                                         <constraint firstItem="Quf-sd-Hpi" firstAttribute="top" secondItem="W2L-fq-7bW" secondAttribute="bottom" constant="2" id="byJ-yT-2DI"/>
@@ -399,12 +429,14 @@
                         <outlet property="homePowerupBtn" destination="Quf-sd-Hpi" id="Kve-Rl-PBi"/>
                         <outlet property="homeRankingBtn" destination="gwl-7O-4Qt" id="5ZM-Ff-rIe"/>
                         <outlet property="homeShopBtn" destination="Ekm-gv-VSu" id="0It-WX-kx3"/>
+                        <outlet property="homeSoundBtn" destination="nb8-fL-O24" id="17a-Li-e1x"/>
                         <outlet property="homeStartBtn" destination="W2L-fq-7bW" id="vB8-H0-Pic"/>
                         <outlet property="homeView" destination="m4H-Pf-TZn" id="Ee1-M4-nME"/>
                         <outlet property="livesLabel" destination="mYn-du-aCl" id="n0T-f3-Wcy"/>
                         <outlet property="multipleLabel" destination="ADQ-tt-W2R" id="UsU-xt-Kpr"/>
                         <outlet property="pauseBtn" destination="XfJ-P7-A5w" id="OFa-ip-Yjh"/>
                         <outlet property="pauseHomeBtn" destination="ZF4-x7-tL8" id="4k5-WQ-Wbe"/>
+                        <outlet property="pauseSoundBtn" destination="3vM-HL-WMJ" id="bNn-64-GDE"/>
                         <outlet property="pauseView" destination="G1S-eD-dLX" id="7dC-qt-mAK"/>
                         <outlet property="playerIcon" destination="QeU-zd-X6Z" id="FMt-Az-Zfh"/>
                         <outlet property="resumeBtn" destination="Tlv-Rr-CL4" id="To4-SD-zvS"/>
@@ -1053,6 +1085,7 @@
         <image name="shop_3.png" width="244" height="221"/>
         <image name="shop_4.png" width="268" height="219"/>
         <image name="shop_5.png" width="209" height="209"/>
+        <image name="soundBtn_on.png" width="180" height="120"/>
         <image name="star.png" width="39" height="38"/>
         <image name="starYellow.png" width="43" height="43"/>
         <image name="start.png" width="320" height="80"/>

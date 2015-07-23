@@ -10,6 +10,7 @@
 #import "Common.h"
 #import "DataController.h"
 #import "PowerUpViewController.h"
+#import "SoundController.h"
 
 @implementation SKScene (Unarchive)
 
@@ -97,7 +98,8 @@
     [skView presentScene:self.gameScene];
     
     //打断前暂停
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pause) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     //暂停界面
     [self.pauseView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.2f]];
@@ -157,6 +159,13 @@
     [self.homeEffectView.layer setCornerRadius:15];
     [self showHome];
 }
+-(void)willResignActive{
+    [self pause];
+    [[SoundController instance] pauseBackground];
+}
+-(void)didBecomeActive{
+    [[SoundController instance] resumeBackground];
+}
 
 //游戏UI
 - (IBAction)pauseClicked:(id)sender {
@@ -178,6 +187,12 @@
         [self.resumeBtn setEnabled:YES];
         //[self.homeBtn setEnabled:YES];
     }];
+    
+    if ([[SoundController instance] soundIsON]) {
+        [self.pauseSoundBtn setImage:[UIImage imageNamed:@"soundBtn_on"] forState:UIControlStateNormal];
+    }else{
+        [self.pauseSoundBtn setImage:[UIImage imageNamed:@"soundBtn_off"] forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)useBomb:(id)sender {
@@ -202,6 +217,18 @@
 - (IBAction)pauseHomeClick:(id)sender {
     [self.pauseView setHidden:YES];
     [self showHome];
+}
+
+- (IBAction)pauseSoundBtnClick:(id)sender {
+    BOOL on = ! [[SoundController instance] soundIsON];
+    [[SoundController instance] setSoungON: on];
+    if (on) {
+        [self.pauseSoundBtn setImage:[UIImage imageNamed:@"soundBtn_on"] forState:UIControlStateNormal];
+        [[SoundController instance] playBackground:@"BattleBackground"];
+    }else{
+        [self.pauseSoundBtn setImage:[UIImage imageNamed:@"soundBtn_off"] forState:UIControlStateNormal];
+        [[SoundController instance] stopBackground];
+    }
 }
 
 //gameoverView
@@ -245,6 +272,14 @@
     
     [self.gameScene end];
     [self.gameView setPaused:NO];
+    
+    //bgm
+    [[SoundController instance] playBackground:@"HomeBackground"];
+    if ([[SoundController instance] soundIsON]) {
+        [self.homeSoundBtn setImage:[UIImage imageNamed:@"soundBtn_on"] forState:UIControlStateNormal];
+    }else{
+        [self.homeSoundBtn setImage:[UIImage imageNamed:@"soundBtn_off"] forState:UIControlStateNormal];
+    }
     
 //    self.homeBackEffect = [SKEmitterNode nodeWithFileNamed:@"HomeBackEffect"];
 //    [self.gameScene addChild:self.homeBackEffect];
@@ -293,6 +328,18 @@
     viewController.viewState = GKGameCenterViewControllerStateLeaderboards;
     [viewController setLeaderboardIdentifier: LeaderboardIdentifier_Score];
     [self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (IBAction)homeSoundBtnClick:(id)sender {
+    BOOL on = ! [[SoundController instance] soundIsON];
+    [[SoundController instance] setSoungON: on];
+    if (on) {
+        [self.homeSoundBtn setImage:[UIImage imageNamed:@"soundBtn_on"] forState:UIControlStateNormal];
+        [[SoundController instance] playBackground:@"HomeBackground"];
+    }else{
+        [self.homeSoundBtn setImage:[UIImage imageNamed:@"soundBtn_off"] forState:UIControlStateNormal];
+        [[SoundController instance] stopBackground];
+    }
 }
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
     NSLog(@"gameCenterViewControllerDidFinish");

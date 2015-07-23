@@ -36,8 +36,10 @@
 @property (weak, nonatomic) IBOutlet UIView *pauseView;
 @property (weak, nonatomic) IBOutlet UIButton *resumeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *pauseHomeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *pauseSoundBtn;
 - (IBAction)resumeClicked:(id)sender;
 - (IBAction)pauseHomeClick:(id)sender;
+- (IBAction)pauseSoundBtnClick:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *gameOverView;
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *gameOverEffectView;
@@ -57,10 +59,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *homePowerupBtn;
 @property (weak, nonatomic) IBOutlet UIButton *homeShopBtn;
 @property (weak, nonatomic) IBOutlet UIButton *homeRankingBtn;
+@property (weak, nonatomic) IBOutlet UIButton *homeSoundBtn;
 - (IBAction)homeStartClick:(id)sender;
 - (IBAction)homePowerupClick:(id)sender;
 - (IBAction)homeShopClick:(id)sender;
 - (IBAction)homeRankingClick:(id)sender;
+- (IBAction)homeSoundBtnClick:(id)sender;
 @property (strong, nonatomic) SKEmitterNode *homeBackEffect;
 
 
