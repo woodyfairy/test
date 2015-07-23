@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F6a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -242,7 +242,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2L-fq-7bW">
-                                                            <rect key="frame" x="145" y="60" width="160" height="40"/>
+                                                            <rect key="frame" x="145" y="30" width="160" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="160" id="bn7-tA-0di"/>
                                                                 <constraint firstAttribute="height" constant="40" id="ddz-5Z-8eP"/>
@@ -255,7 +255,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Quf-sd-Hpi">
-                                                            <rect key="frame" x="145" y="102" width="160" height="40"/>
+                                                            <rect key="frame" x="145" y="72" width="160" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="IBC-OI-vig"/>
                                                                 <constraint firstAttribute="width" constant="160" id="Q65-4D-Xam"/>
@@ -268,7 +268,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekm-gv-VSu">
-                                                            <rect key="frame" x="145" y="144" width="160" height="40"/>
+                                                            <rect key="frame" x="145" y="114" width="160" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="P3I-ki-CyO"/>
                                                                 <constraint firstAttribute="width" constant="160" id="geG-1y-rUb"/>
@@ -281,7 +281,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwl-7O-4Qt">
-                                                            <rect key="frame" x="145" y="186" width="160" height="40"/>
+                                                            <rect key="frame" x="145" y="156" width="160" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="160" id="lP1-gw-nEB"/>
                                                                 <constraint firstAttribute="height" constant="40" id="m3H-f3-1iB"/>
@@ -304,7 +304,7 @@
                                                         <constraint firstAttribute="centerX" secondItem="W2L-fq-7bW" secondAttribute="centerX" id="9mM-Up-JPj"/>
                                                         <constraint firstItem="Quf-sd-Hpi" firstAttribute="leading" secondItem="W2L-fq-7bW" secondAttribute="leading" id="Sxn-pC-11q"/>
                                                         <constraint firstItem="Ekm-gv-VSu" firstAttribute="leading" secondItem="Quf-sd-Hpi" secondAttribute="leading" id="YUA-JB-Zi6"/>
-                                                        <constraint firstItem="W2L-fq-7bW" firstAttribute="top" secondItem="z2S-DG-jR4" secondAttribute="top" constant="60" id="az4-Us-94j"/>
+                                                        <constraint firstItem="W2L-fq-7bW" firstAttribute="top" secondItem="z2S-DG-jR4" secondAttribute="top" constant="30" id="az4-Us-94j"/>
                                                         <constraint firstAttribute="bottom" secondItem="jCU-Mc-PMV" secondAttribute="bottom" constant="8" id="bRy-JH-4bG"/>
                                                         <constraint firstItem="Quf-sd-Hpi" firstAttribute="top" secondItem="W2L-fq-7bW" secondAttribute="bottom" constant="2" id="byJ-yT-2DI"/>
                                                         <constraint firstItem="Ekm-gv-VSu" firstAttribute="bottom" secondItem="gwl-7O-4Qt" secondAttribute="top" constant="-2" id="dxG-af-NVy"/>

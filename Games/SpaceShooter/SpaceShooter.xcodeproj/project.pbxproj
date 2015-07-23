@@ -24,7 +24,7 @@
 		169FFCFD1B58F4F8006147B7 /* BackgroundShaer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFCFC1B58F4F8006147B7 /* BackgroundShaer.fsh */; };
 		169FFCFF1B58FFBA006147B7 /* BackgroundShaer2.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFCFE1B58FFBA006147B7 /* BackgroundShaer2.fsh */; };
 		169FFD011B595450006147B7 /* EnemyShaer.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 169FFD001B595450006147B7 /* EnemyShaer.fsh */; };
-		16BCF4F31B60CE9F00B3CB36 /* GuideHand.png in Resources */ = {isa = PBXBuildFile; fileRef = 16BCF4F21B60CE9F00B3CB36 /* GuideHand.png */; };
+		16BCF4F51B60E5AF00B3CB36 /* GuideHand.png in Resources */ = {isa = PBXBuildFile; fileRef = 16BCF4F41B60E5AF00B3CB36 /* GuideHand.png */; };
 		16BD162E1B5233BA00932BF1 /* Enemy_Arrow.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BD162D1B5233BA00932BF1 /* Enemy_Arrow.m */; };
 		16DDC9351B5BC8B400331CC0 /* powerUp1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16DDC9251B5BC8B400331CC0 /* powerUp1.png */; };
 		16DDC9361B5BC8B400331CC0 /* powerUp1_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 16DDC9261B5BC8B400331CC0 /* powerUp1_n.png */; };
@@ -132,7 +132,7 @@
 		169FFCFC1B58F4F8006147B7 /* BackgroundShaer.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BackgroundShaer.fsh; sourceTree = "<group>"; };
 		169FFCFE1B58FFBA006147B7 /* BackgroundShaer2.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BackgroundShaer2.fsh; sourceTree = "<group>"; };
 		169FFD001B595450006147B7 /* EnemyShaer.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = EnemyShaer.fsh; sourceTree = "<group>"; };
-		16BCF4F21B60CE9F00B3CB36 /* GuideHand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GuideHand.png; path = ../../../../../GuideHand.png; sourceTree = "<group>"; };
+		16BCF4F41B60E5AF00B3CB36 /* GuideHand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GuideHand.png; sourceTree = "<group>"; };
 		16BD162C1B5233BA00932BF1 /* Enemy_Arrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Arrow.h; sourceTree = "<group>"; };
 		16BD162D1B5233BA00932BF1 /* Enemy_Arrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Arrow.m; sourceTree = "<group>"; };
 		16DDC9251B5BC8B400331CC0 /* powerUp1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = powerUp1.png; sourceTree = "<group>"; };
@@ -316,7 +316,7 @@
 				884982FC1B4EDA7D00C5EBB9 /* Shapes */,
 				88CE0BD81B5EB4DD001CE3E4 /* designedImage.png */,
 				88CE0BD91B5EB4DD001CE3E4 /* fairyImage.png */,
-				16BCF4F21B60CE9F00B3CB36 /* GuideHand.png */,
+				16BCF4F41B60E5AF00B3CB36 /* GuideHand.png */,
 				881BDEEA1B54349D00B74D9B /* Bomb.png */,
 				881BDEE51B52CDCC00B74D9B /* BlackHole.sks */,
 				881A171F1B45882E007AE66A /* ControllerCircle_arrowCircle.png */,
@@ -594,13 +594,13 @@
 				160FC6F31B53E44E00C55206 /* InfoPlist.strings in Resources */,
 				883385251B56D04300BC5358 /* home.png in Resources */,
 				883385391B56D07D00BC5358 /* start.png in Resources */,
-				16BCF4F31B60CE9F00B3CB36 /* GuideHand.png in Resources */,
 				16DDC9421B5BC8B400331CC0 /* powerUp7_n.png in Resources */,
 				16DDC9411B5BC8B400331CC0 /* powerUp7.png in Resources */,
 				881A17221B45882E007AE66A /* ControllerCircle_backCircle.png in Resources */,
 				16EAD7681B50FBA60057390E /* 6side.png in Resources */,
 				16EAD76A1B50FBA60057390E /* blackHole.png in Resources */,
 				883385291B56D06900BC5358 /* powerup.png in Resources */,
+				16BCF4F51B60E5AF00B3CB36 /* GuideHand.png in Resources */,
 				16DDC9371B5BC8B400331CC0 /* powerUp2.png in Resources */,
 				16EAD77D1B510CAE0057390E /* EnemyPiece.png in Resources */,
 				168F66161B5E40E900703890 /* shop_5.png in Resources */,
