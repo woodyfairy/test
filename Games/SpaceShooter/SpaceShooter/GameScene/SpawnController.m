@@ -293,7 +293,7 @@ enum LevelSpawnType{
                 self.rotaionSpawnAngular = getRandom() * M_PI * 2;
             }
             if (self.rotationSpwanNum > 0) {
-                self.rotaionSpawnAngular += 2.f * delta;
+                self.rotaionSpawnAngular += 1.25f * delta;
                 self.rotationSpawnTimer += delta;
                 if (self.rotationSpawnTimer >= 0.13f) {
                     self.rotationSpawnTimer = 0;

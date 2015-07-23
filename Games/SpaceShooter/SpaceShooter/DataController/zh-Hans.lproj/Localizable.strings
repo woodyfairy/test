@@ -87,3 +87,7 @@
 "shop_resotre" = "恢复购买";
 "shop_allPowerSuccess" = "恭喜你获得了完全强化!";
 "shop_starsSuccess" = "恭喜你获得了%d颗星星!";
+
+//guide
+"guide_left" = "屏幕左侧控制移动";
+"guide_right" = "屏幕右侧控制射击";

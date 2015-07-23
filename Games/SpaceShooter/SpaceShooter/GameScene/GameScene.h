@@ -50,4 +50,13 @@
 
 -(void)invincibleWithTime:(float)seconds;
 
+
+//新手指引
+@property (assign) BOOL showingLeftGuide;
+@property (assign) BOOL showingRightGuide;
+@property (strong) SKSpriteNode *leftHand;
+@property (strong) SKLabelNode *leftLabel;
+@property (strong) SKSpriteNode *rightHand;
+@property (strong) SKLabelNode *rightLabel;
+
 @end

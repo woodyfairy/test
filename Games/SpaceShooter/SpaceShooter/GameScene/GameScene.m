@@ -127,6 +127,11 @@ int startLevel = 1;
     [self.playerIcon setHidden:NO];
     [self.livesLabel setHidden:NO];
     [self.bombsLabel setHidden:NO];
+    
+    //新手引导
+    if ([self showLeftGuide] == NO) {
+        [self showRightGuide];
+    }
 }
 -(void)end{
     self.playing = false;
@@ -146,6 +151,24 @@ int startLevel = 1;
     [self.arrayBlackHoles removeAllObjects];
     [self.arrayPoints removeAllObjects];
     [self.worldPanel setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
+    if (self.leftHand) {
+        [self.leftHand removeFromParent];
+        self.leftHand = nil;
+    }
+    if (self.leftLabel) {
+        [self.leftLabel removeFromParent];
+        self.leftLabel = nil;
+    }
+    if (self.rightHand) {
+        [self.rightHand removeFromParent];
+        self.rightHand = nil;
+    }
+    if (self.rightLabel) {
+        [self.rightLabel removeFromParent];
+        self.rightLabel = nil;
+    }
+    self.showingLeftGuide = NO;
+    self.showingRightGuide = NO;
 }
 -(void)updateUI{
     [self.scoreLabel setText:[NSString stringWithFormat:@"Score:%llu", self.score]];
@@ -155,6 +178,11 @@ int startLevel = 1;
 }
 
 -(void)GameControllerBeginTouch:(GameControllerView *)controller{
+    if (controller == self.leftController) {
+        [self finishLeftGuide];
+    }else if (controller == self.rightController) {
+        [self finishRightGuide];
+    }
 }
 -(void)GameControllerEndTouch:(GameControllerView *)controller{
 }
@@ -797,4 +825,122 @@ CFTimeInterval countTime = 0;
     [[DataController instance] reportScore:userData.totalStar.longLongValue forLeaderboardIdentifier:LeaderboardIdentifier_Star];
 }
 
+#pragma mark - 新手指引
+-(BOOL)showLeftGuide{
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"LeftGuideFinish"] && [[[NSUserDefaults standardUserDefaults] objectForKey:@"LeftGuideFinish"] boolValue]) {
+        self.showingLeftGuide = NO;
+        return NO;
+    }
+    
+    if (self.showingLeftGuide == NO) {
+        self.leftHand = [SKSpriteNode spriteNodeWithImageNamed:@"GuideHand"];
+        [self.leftHand setAnchorPoint:CGPointMake(0.6f, 0.78f)];
+        [self.leftHand setPosition:CGPointMake(self.size.width/4, self.size.height/3)];
+        [self.leftHand setScale:2];
+        [self.leftHand setAlpha:0];
+        SKAction *pushAction = [SKAction group:@[ [SKAction fadeAlphaTo:1 duration:0.35f], [SKAction scaleTo:1 duration:0.35f] ]];
+        SKAction *moveAction = [SKAction group:@[ [SKAction moveBy:CGVectorMake(100, 0) duration:0.75f], [SKAction fadeAlphaTo:0 duration:0.75f] ]];
+        SKAction *resetAction = [SKAction group:@[ [SKAction scaleTo:2 duration:0.1f], [SKAction moveBy:CGVectorMake(-100, 0) duration:0.1f] ]];
+        SKAction *seqAction = [SKAction sequence:@[ pushAction, [SKAction waitForDuration:0.3f], moveAction, resetAction] ];
+        [self.leftHand runAction:[SKAction repeatActionForever:seqAction]];
+        [self addChild:self.leftHand];
+        
+        self.leftLabel = [SKLabelNode labelNodeWithText:NSLocalizedString(@"guide_left", @"")];
+        [self.leftLabel setFontSize:30];
+        [self.leftLabel setFontColor:[UIColor whiteColor]];
+        [self.leftLabel setPosition:CGPointMake(self.size.width/4, self.size.height/5*3)];
+        SKAction *flash = [SKAction sequence:@[ [SKAction fadeAlphaTo:0.3f duration:0.35f], [SKAction fadeAlphaTo:1 duration:0.35f] ]];
+        [self.leftLabel runAction:[SKAction repeatActionForever:flash]];
+        [self addChild:self.leftLabel];
+    }
+    
+    self.showingLeftGuide = YES;
+    return YES;
+}
+-(BOOL)showRightGuide{
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"RightGuideFinish"] && [[[NSUserDefaults standardUserDefaults] objectForKey:@"RightGuideFinish"] boolValue]) {
+        self.showingRightGuide = NO;
+        return NO;
+    }
+    
+    if (self.showingRightGuide == NO) {
+        self.rightHand = [SKSpriteNode spriteNodeWithImageNamed:@"GuideHand"];
+        [self.rightHand setAnchorPoint:CGPointMake(0.6f, 0.78f)];
+        [self.rightHand setPosition:CGPointMake(self.size.width/4 * 3, self.size.height/3)];
+        [self.rightHand setXScale:-2];
+        [self.rightHand setYScale:2];
+        [self.rightHand setAlpha:0];
+        SKAction *pushAction = [SKAction group:@[ [SKAction fadeAlphaTo:1 duration:0.35f], [SKAction scaleXTo:-1 y:1 duration:0.35f] ]];
+        SKAction *moveAction = [SKAction group:@[ [SKAction moveBy:CGVectorMake(-100, 0) duration:0.75f], [SKAction fadeAlphaTo:0 duration:0.75f] ]];
+        SKAction *resetAction = [SKAction group:@[ [SKAction scaleXTo:-2 y:2 duration:0.1f], [SKAction moveBy:CGVectorMake(100, 0) duration:0.1f] ]];
+        SKAction *seqAction = [SKAction sequence:@[ pushAction, [SKAction waitForDuration:0.3f], moveAction, resetAction] ];
+        [self.rightHand runAction:[SKAction repeatActionForever:seqAction]];
+        [self addChild:self.rightHand];
+        
+        self.rightLabel = [SKLabelNode labelNodeWithText:NSLocalizedString(@"guide_right", @"")];
+        [self.rightLabel setFontSize:30];
+        [self.rightLabel setFontColor:[UIColor whiteColor]];
+        [self.rightLabel setPosition:CGPointMake(self.size.width/4*3, self.size.height/5*3)];
+        SKAction *flash = [SKAction sequence:@[ [SKAction fadeAlphaTo:0.3f duration:0.35f], [SKAction fadeAlphaTo:1 duration:0.35f] ]];
+        [self.rightLabel runAction:[SKAction repeatActionForever:flash]];
+        [self addChild:self.rightLabel];
+    }
+    
+    self.showingRightGuide = YES;
+    return YES;
+}
+-(void)finishLeftGuide{
+    if (self.showingLeftGuide) {
+        self.showingLeftGuide = NO;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"LeftGuideFinish"];
+        [self.leftHand removeFromParent];
+        [self.leftLabel runAction:[SKAction waitForDuration:1.5f] completion:^{
+            [self.leftLabel removeAllActions];
+            [self.leftLabel setAlpha:1];
+            [self.leftLabel runAction:[SKAction fadeAlphaTo:0 duration:0.5f] completion:^{
+                [self.leftLabel removeFromParent];
+                [self showRightGuide];
+            }];
+        }];
+    }
+}
+-(void)finishRightGuide{
+    if (self.showingRightGuide) {
+        self.showingRightGuide = NO;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"RightGuideFinish"];
+        [self.rightHand removeFromParent];
+        [self.rightLabel runAction:[SKAction waitForDuration:1.5f] completion:^{
+            [self.rightLabel removeAllActions];
+            [self.rightLabel setAlpha:1];
+            [self.rightLabel runAction:[SKAction fadeAlphaTo:0 duration:0.5f] completion:^{
+                [self.rightLabel removeFromParent];
+            }];
+        }];
+    }
+}
+
+
+
+
+
+
+
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -87,3 +87,7 @@
 "shop_resotre" = "Restore";
 "shop_allPowerSuccess" = "Congratulations! You got all power!";
 "shop_starsSuccess" = "Congratulations! You got %d stars!";
+
+//guide
+"guide_left" = "Control movement on the left";
+"guide_right" = "Control shooting on the right";
