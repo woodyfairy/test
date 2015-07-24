@@ -60,7 +60,7 @@ static SoundController *instance = nil;
     self.BGMPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&err];
     //self.BGMPlayer.delegate = self;
     self.BGMPlayer.numberOfLoops = -1;
-    self.BGMPlayer.volume = 0.3f;
+    self.BGMPlayer.volume = 0.5f;
     if (err) {
         NSLog(@"play sound ERROR:%@",[err localizedDescription]);
     }
@@ -100,7 +100,7 @@ static SoundController *instance = nil;
     NSURL *url = [[NSBundle mainBundle] URLForResource:name withExtension:@"wav"];
     NSError *err = nil;
     AVAudioPlayer *player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&err];
-    player.volume = 0.5f;
+    player.volume = 0.75f;
     [self.arrSoundPlayers addObject:player];
     player.delegate = self;
     if (err) {

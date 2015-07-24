@@ -60,7 +60,6 @@
             self.physicsBody.fieldBitMask = FieldType_none;
         }
     }];
-    
 }
 -(void)newSprite{
     float time1 = 0.5f;

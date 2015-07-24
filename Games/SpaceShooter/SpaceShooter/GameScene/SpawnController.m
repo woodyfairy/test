@@ -8,6 +8,7 @@
 
 #import "SpawnController.h"
 #import "Common.h"
+#import "SoundController.h"
 #import "BlackHole.h"
 #import "EnemyBase.h"
 #import "Enemy_Triangle.h"
@@ -157,6 +158,7 @@ enum LevelSpawnType{
                 }
                 if (random % 2 == 0){
                     //四边刷新
+                    [[SoundController instance] playSound:@"spawn"];
                     int freshEdge = getIntRadom(3); //0-3 出现的边是哪个
                     for (int i = 0; i < 4; i ++) {
                         BOOL spawn = getIntRadom(1);//0/1这边是否刷新

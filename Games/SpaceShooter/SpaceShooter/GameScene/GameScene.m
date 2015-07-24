@@ -361,7 +361,7 @@ CFTimeInterval countTime = 0;
                 //无敌状态
                 return;
             }
-            [self invincibleWithTime:1];//无敌1秒
+            [self invincibleWithTime:2.f];//无敌2秒
             
             //if 自动使用炸弹&&炸弹>0，使用炸弹
             if (userData.powerUp5Level.shortValue > 0 && self.bombs > 0) {
