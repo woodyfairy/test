@@ -173,25 +173,27 @@
 }
 
 -(void)pause{
-    SKView * skView = (SKView *)self.gameView;
-    [skView setPaused:YES];
-    
-    //显示暂停界面
-    self.pauseView.hidden = NO;
-    self.pauseView.alpha = 0;
-    [self.resumeBtn setEnabled:NO];
-    //[self.homeBtn setEnabled:NO];
-    [UIView animateWithDuration:1 animations:^{
-        self.pauseView.alpha = 1;
-    }completion:^(BOOL finished) {
-        [self.resumeBtn setEnabled:YES];
-        //[self.homeBtn setEnabled:YES];
-    }];
-    
-    if ([[SoundController instance] soundIsON]) {
-        [self.pauseSoundBtn setImage:[UIImage imageNamed:@"soundBtn_on"] forState:UIControlStateNormal];
-    }else{
-        [self.pauseSoundBtn setImage:[UIImage imageNamed:@"soundBtn_off"] forState:UIControlStateNormal];
+    if (self.gameScene.playing) {
+        SKView * skView = (SKView *)self.gameView;
+        [skView setPaused:YES];
+        
+        //显示暂停界面
+        self.pauseView.hidden = NO;
+        self.pauseView.alpha = 0;
+        [self.resumeBtn setEnabled:NO];
+        //[self.homeBtn setEnabled:NO];
+        [UIView animateWithDuration:1 animations:^{
+            self.pauseView.alpha = 1;
+        }completion:^(BOOL finished) {
+            [self.resumeBtn setEnabled:YES];
+            //[self.homeBtn setEnabled:YES];
+        }];
+        
+        if ([[SoundController instance] soundIsON]) {
+            [self.pauseSoundBtn setImage:[UIImage imageNamed:@"soundBtn_on"] forState:UIControlStateNormal];
+        }else{
+            [self.pauseSoundBtn setImage:[UIImage imageNamed:@"soundBtn_off"] forState:UIControlStateNormal];
+        }
     }
 }
 

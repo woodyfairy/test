@@ -102,6 +102,7 @@ int startLevel = 1;
     [self.player.emitter setTargetNode:self.worldPanel];
     
     //重新刷新
+    self.spawnController = nil;
     self.spawnController = [[SpawnController alloc] initWithLevel:startLevel Scene:self];
     self.preTime = 0;
     self.playing = YES;
