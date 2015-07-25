@@ -25,5 +25,6 @@
 -(BOOL)isPlayingBackground;
 
 -(void)playSound:(NSString *)name;
+-(void)playSound:(NSString *)name WithPlayTimes:(int)times;//播放几次
 
 @end

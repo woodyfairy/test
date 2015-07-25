@@ -155,6 +155,13 @@ enum LevelSpawnType{
                     }
                     self.conerSpawnNum = 10 + self.currentLevel * 2;
                     self.conerSpawnTimer = 0;
+                    //声音
+                    float allTime = self.conerSpawnNum * 0.1f + 1.f;
+                    int times = allTime / 0.26f;
+                    if (times < 1) {
+                        times = 1;
+                    }
+                    [[SoundController instance] playSound:@"spawnLoop" WithPlayTimes:times];
                 }
                 if (random % 2 == 0){
                     //四边刷新
@@ -259,6 +266,7 @@ enum LevelSpawnType{
         }else if (i+1 == LevelSpawnType_blackHole) {
             //第4种刷新：黑洞
             if (timerValue >= freshTime) {
+                [[SoundController instance] playSound:@"spawnBlackHole"];
                 timerValue = 0;
                 [self resetRefreshTimeForLevel:i+1];
                 int maxCount = MIN(self.currentLevel - 2, 6);
@@ -293,6 +301,13 @@ enum LevelSpawnType{
                 self.rotationSpwanDirectionNum = 3 + getIntRadom(1);
                 self.rotationSpawnPosition = [self getRandomPosWithInset:200];;
                 self.rotaionSpawnAngular = getRandom() * M_PI * 2;
+                //声音
+                float allTime = self.rotationSpwanNum * 0.13f + 1.f;
+                int times = allTime / 0.26f;
+                if (times < 1) {
+                    times = 1;
+                }
+                [[SoundController instance] playSound:@"spawnLoop" WithPlayTimes:times];
             }
             if (self.rotationSpwanNum > 0) {
                 self.rotaionSpawnAngular += 1.25f * delta;

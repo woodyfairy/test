@@ -100,7 +100,7 @@ static SoundController *instance = nil;
     NSURL *url = [[NSBundle mainBundle] URLForResource:name withExtension:@"wav"];
     NSError *err = nil;
     AVAudioPlayer *player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&err];
-    player.volume = 0.75f;
+    player.volume = 0.7f;
     [self.arrSoundPlayers addObject:player];
     player.delegate = self;
     if (err) {
@@ -118,6 +118,26 @@ static SoundController *instance = nil;
     }else {
         [self.arrSoundPlayers removeObject:player];
     }
+}
+-(void)playSound:(NSString *)name WithPlayTimes:(int)times{
+    if ([self SoundON] == NO) {
+        return;
+    }
+    
+    NSURL *url = [[NSBundle mainBundle] URLForResource:name withExtension:@"wav"];
+    NSError *err = nil;
+    AVAudioPlayer *player = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&err];
+    player.volume = 0.7f;
+    player.numberOfLoops = times - 1;
+    [self.arrSoundPlayers addObject:player];
+    player.delegate = self;
+    if (err) {
+        NSLog(@"play sound ERROR:%@",[err localizedDescription]);
+    }
+    
+    [player prepareToPlay];
+    player.meteringEnabled = NO;
+    [player play];
 }
 
 @end
