@@ -64,7 +64,12 @@ int startLevel = 1;
     [self.backgroundNode setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
     [self.backgroundNode setZPosition:-2];
     SKShader *shader = [SKShader shaderWithFileNamed:@"BackgroundShaer.fsh"];
-    shader.uniforms = @[ [SKUniform uniformWithName:@"size" floatVector3:GLKVector3Make(self.size.width, self.size.height, 0)], [SKUniform uniformWithName:@"offset" floatVector2:GLKVector2Make(self.worldPanel.position.x - self.size.width/2, self.worldPanel.position.y - self.size.height/2)], [SKUniform uniformWithName:@"time" float:0] ];
+    shader.uniforms = @[ [SKUniform uniformWithName:@"size" floatVector3:GLKVector3Make(self.size.width, self.size.height, 0)],
+                         [SKUniform uniformWithName:@"offset" floatVector2:GLKVector2Make(self.worldPanel.position.x - self.size.width/2, self.worldPanel.position.y - self.size.height/2)],
+                         [SKUniform uniformWithName:@"time" float:0],
+                         [SKUniform uniformWithName:@"sinTime12" float:0],
+                         [SKUniform uniformWithName:@"sinTime18" float:0],
+                         [SKUniform uniformWithName:@"sinTime36" float:0] ];
     [self.backgroundNode setShader:shader];
 }
 -(void)start{
@@ -256,6 +261,15 @@ CFTimeInterval countTime = 0;
                 timeUniform.floatValue = 0;
                 NSLog(@"time = 0");
             }
+            float sinTime12 = sinf(timeUniform.floatValue/12.f);
+            float sinTime18 = sinf(timeUniform.floatValue/18.f);
+            float sinTime36 = sinf(timeUniform.floatValue/36.f);
+            SKUniform *sinT12Uniform = [self.backgroundNode.shader.uniforms objectAtIndex:3];
+            SKUniform *sinT18Uniform = [self.backgroundNode.shader.uniforms objectAtIndex:4];
+            SKUniform *sinT36Uniform = [self.backgroundNode.shader.uniforms objectAtIndex:5];
+            sinT12Uniform.floatValue = sinTime12;
+            sinT18Uniform.floatValue = sinTime18;
+            sinT36Uniform.floatValue = sinTime36;
         }
         //加速的话action动画会有问题
 //        if (self.speed < 1) {

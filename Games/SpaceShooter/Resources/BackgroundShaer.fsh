@@ -16,9 +16,10 @@ void main( void )
     float time18 = time9/2.;
     float time36 = time18/2.;
     
-    float sinTime12 = sin(time12);
-    float sinTime18 = sin(time18);
-    float sinTime36 = sin(time36);
+    //放到外面的uniforms了
+//    float sinTime12 = sin(time12);
+//    float sinTime18 = sin(time18);
+//    float sinTime36 = sin(time36);
     
     vec2 uv0 = gl_FragCoord.xy / size.xy;
     vec2 uv = 2. * uv0 - 1.;

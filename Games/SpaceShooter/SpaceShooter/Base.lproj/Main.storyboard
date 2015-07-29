@@ -343,7 +343,10 @@
                                                         <constraint firstItem="Ekm-gv-VSu" firstAttribute="top" secondItem="Quf-sd-Hpi" secondAttribute="bottom" constant="2" id="vvU-NP-b3B"/>
                                                     </constraints>
                                                 </view>
-                                                <blurEffect style="dark"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <vibrancyEffect>
+                                                    <blurEffect style="dark"/>
+                                                </vibrancyEffect>
                                             </visualEffectView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
