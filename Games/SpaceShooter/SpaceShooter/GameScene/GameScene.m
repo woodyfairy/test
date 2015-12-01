@@ -59,18 +59,18 @@ int startLevel = 1;
     
     //背景
     [self setBackgroundColor:[UIColor blackColor]];
-    self.backgroundNode = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:self.size];
+    self.backgroundNode = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size: self.size];
     [self addChild:self.backgroundNode];
     [self.backgroundNode setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
     [self.backgroundNode setZPosition:-2];
-    SKShader *shader = [SKShader shaderWithFileNamed:@"BackgroundShaer.fsh"];
-    shader.uniforms = @[ [SKUniform uniformWithName:@"size" floatVector3:GLKVector3Make(self.size.width, self.size.height, 0)],
-                         [SKUniform uniformWithName:@"offset" floatVector2:GLKVector2Make(self.worldPanel.position.x - self.size.width/2, self.worldPanel.position.y - self.size.height/2)],
-                         [SKUniform uniformWithName:@"time" float:0],
-                         [SKUniform uniformWithName:@"sinTime12" float:0],
-                         [SKUniform uniformWithName:@"sinTime18" float:0],
-                         [SKUniform uniformWithName:@"sinTime36" float:0] ];
-    [self.backgroundNode setShader:shader];
+//    SKShader *shader = [SKShader shaderWithFileNamed:@"BackgroundShaer.fsh"];
+//    shader.uniforms = @[ [SKUniform uniformWithName:@"size" floatVector3:GLKVector3Make(self.size.width, self.size.height, 0)],
+//                         [SKUniform uniformWithName:@"offset" floatVector2:GLKVector2Make(self.worldPanel.position.x - self.size.width/2, self.worldPanel.position.y - self.size.height/2)],
+//                         [SKUniform uniformWithName:@"time" float:0],
+//                         [SKUniform uniformWithName:@"sinTime12" float:0],
+//                         [SKUniform uniformWithName:@"sinTime18" float:0],
+//                         [SKUniform uniformWithName:@"sinTime36" float:0] ];
+//    [self.backgroundNode setShader:shader];
 }
 -(void)start{
     //清空所有
@@ -111,10 +111,6 @@ int startLevel = 1;
     self.spawnController = [[SpawnController alloc] initWithLevel:startLevel Scene:self];
     self.preTime = 0;
     self.playing = YES;
-//    if (self.backgroundNode) {
-//        SKUniform *timeUniform = [self.backgroundNode.shader.uniforms objectAtIndex:2];
-//        timeUniform.floatValue = 0;
-//    }
     
     UserData *userData = [[DataController instance] getUserData];
     //读取数据，刷新UI
@@ -244,33 +240,33 @@ CFTimeInterval countTime = 0;
             self.worldPanel.position = CGPointMake(self.worldPanel.position.x, self.worldPanel.position.y + self.size.height/5*3 - posInScreen.y);
             cameraMoved = YES;
         }
-        if (cameraMoved) {
-            SKUniform *uniform = [self.backgroundNode.shader.uniforms objectAtIndex:1];
-            uniform.floatVector2Value = GLKVector2Make(self.worldPanel.position.x - self.size.width/2, self.worldPanel.position.y - self.size.height/2);
-        }
+//        if (cameraMoved) {
+//            SKUniform *uniform = [self.backgroundNode.shader.uniforms objectAtIndex:1];
+//            uniform.floatVector2Value = GLKVector2Make(self.worldPanel.position.x - self.size.width/2, self.worldPanel.position.y - self.size.height/2);
+//        }
     }
     
     //间隔时间的
     if (_preTime != 0) {
         CFTimeInterval delta = currentTime - _preTime;
-        if (self.backgroundNode) {
-            SKUniform *timeUniform = [self.backgroundNode.shader.uniforms objectAtIndex:2];
-            timeUniform.floatValue = timeUniform.floatValue + delta;
-            //循环
-            if (timeUniform.floatValue > 72 * M_PI) {
-                timeUniform.floatValue = 0;
-                NSLog(@"time = 0");
-            }
-            float sinTime12 = sinf(timeUniform.floatValue/12.f);
-            float sinTime18 = sinf(timeUniform.floatValue/18.f);
-            float sinTime36 = sinf(timeUniform.floatValue/36.f);
-            SKUniform *sinT12Uniform = [self.backgroundNode.shader.uniforms objectAtIndex:3];
-            SKUniform *sinT18Uniform = [self.backgroundNode.shader.uniforms objectAtIndex:4];
-            SKUniform *sinT36Uniform = [self.backgroundNode.shader.uniforms objectAtIndex:5];
-            sinT12Uniform.floatValue = sinTime12;
-            sinT18Uniform.floatValue = sinTime18;
-            sinT36Uniform.floatValue = sinTime36;
-        }
+//        if (self.backgroundNode) {
+//            SKUniform *timeUniform = [self.backgroundNode.shader.uniforms objectAtIndex:2];
+//            timeUniform.floatValue = timeUniform.floatValue + delta;
+//            //循环
+//            if (timeUniform.floatValue > 72 * M_PI) {
+//                timeUniform.floatValue = 0;
+//                NSLog(@"time = 0");
+//            }
+//            float sinTime12 = sinf(timeUniform.floatValue/12.f);
+//            float sinTime18 = sinf(timeUniform.floatValue/18.f);
+//            float sinTime36 = sinf(timeUniform.floatValue/36.f);
+//            SKUniform *sinT12Uniform = [self.backgroundNode.shader.uniforms objectAtIndex:3];
+//            SKUniform *sinT18Uniform = [self.backgroundNode.shader.uniforms objectAtIndex:4];
+//            SKUniform *sinT36Uniform = [self.backgroundNode.shader.uniforms objectAtIndex:5];
+//            sinT12Uniform.floatValue = sinTime12;
+//            sinT18Uniform.floatValue = sinTime18;
+//            sinT36Uniform.floatValue = sinTime36;
+//        }
         //加速的话action动画会有问题
 //        if (self.speed < 1) {
 //            self.speed += 0.3 * delta;

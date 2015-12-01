@@ -25,24 +25,26 @@
     [self spawn];
 }
 -(void)breakInGroup:(SKNode *)group toScene:(GameScene *)scene{
-    CGPoint pos = [self.group convertPoint:self.position toNode:scene];
-    CGPoint toPos = [self.group convertPoint:CGPointMake(self.position.x * 12, self.position.y * 12) toNode:scene];
-    self.group = nil;
     self.currentScene = scene;
+    CGPoint pos = [self.parent convertPoint:self.position toNode: self.currentScene.worldPanel];
+    NSLog(@"pos1:%@", NSStringFromCGPoint(pos));
+    CGPoint toPos = [self.parent convertPoint:CGPointMake(self.position.x * 12, self.position.y * 12) toNode: self.currentScene.worldPanel];
+    self.group = nil;
     [self removeFromParent];
+    [self setPosition: pos];//必须先设定位置，再addChild...
     [self.currentScene.worldPanel addChild:self];
-    [self setPosition:pos];
     _isActive = YES;
     [self initData];
     self.physicsBody.fieldBitMask = FieldType_all - FieldType_player;
     SKAction *action = [SKAction moveBy:CGVectorMake(toPos.x - pos.x, toPos.y - pos.y) duration:0.8f];
     action.timingMode = SKActionTimingEaseOut;
     [self runAction:action];
+    NSLog(@"pos2:%@", NSStringFromCGPoint(self.position));
 }
 
 
 -(void)spawn{
-    [self setShader:[SKShader shaderWithFileNamed:@"EnemyShaer.fsh"]];
+    //[self setShader:[SKShader shaderWithFileNamed:@"EnemyShaer.fsh"]];
     [self setAlpha:0];
     float timeInterval = 0.1f;
     float count = 5;
